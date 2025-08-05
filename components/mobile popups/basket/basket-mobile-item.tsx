@@ -17,7 +17,7 @@ export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) 
     >
       <div className="flex flex-col w-[9.375rem] gap-2 items-center pt-3">
         <div>
-          <Image src={img} alt="Продукт" className="w-[42px]" />
+          <Image src={img} width={42} height={80} alt="Продукт" className="w-[42px]" />
         </div>
         <div className="flex self-start flex-col gap-[5px] pl-2">
           <p className="tracking-[2px] text-[1rem] leading-cssnormal text-white font-medium">

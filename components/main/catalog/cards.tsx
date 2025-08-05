@@ -24,7 +24,7 @@ export function Cards() {
   }, [])
 
   return (
-    <div className="flex flex-wrap justify-center max-md:gap-y-[18px] max-md:gap-x-[30px] gap-y-[73px] gap-x-[118px]">
+    <div className="flex flex-wrap justify-center max-md:gap-y-[18px] max-md:gap-x-[30px] gap-y-[73px] gap-x-[118px] pb-[106px]">
       {
         items.map((item) => (
           <Card

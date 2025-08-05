@@ -2,11 +2,13 @@ import { useContext, useState, useEffect, use } from "react";
 import { StateContext, StatesType } from "../../uikit/state-context";
 import { productName1, productName2, productName3, productName4, productName5, productName6, productPrice1,
   productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, productImg1, productImg2,
-  productImg3, productImg4, productImg5, productImg6 } from "../../constants/constants";
+  productImg3, productImg4, productImg5, productImg6, 
+  urlClient} from "../../constants/constants";
 
 import { Handjet } from "next/font/google";
 import { BasketMobileItem } from "./basket-mobile-item";
 import { controlBasketTotal, controlButtonActive, mobileResize } from "../../constants/functions-global-logic";
+import { cardProps } from "../../constants/interfaces";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -16,6 +18,22 @@ export function BasketMobilePopup() {
   const [basketTotal, setBasketTotal] = useState<number>(0);
   const [buttonActive, setButtonActive] = useState<boolean>(false);
   const states: StatesType = useContext(StateContext);
+
+  const [items, setItems] = useState<cardProps[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${urlClient}/products/`);
+        const data = await res.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      }
+    };
+
+    fetchData();
+  }, [])
 
 //   Mobile
   useEffect(() => mobileResize(setIsMobile), []);
@@ -40,7 +58,17 @@ export function BasketMobilePopup() {
             Корзина
           </h1>
           <div className="w-[19.5rem] h-[24.25rem] mt-6 border-b-2 border-b-[#494949] flex flex-wrap overflow-y-auto overflow-x-hidden">
-            <BasketMobileItem
+            {items.map((item) => (
+              <BasketMobileItem
+                key={item.id}
+                img={item.img}
+                name={item.name}
+                price={item.price}
+                id={item.id}
+              />
+            ))}
+
+            {/* <BasketMobileItem
               img={productImg1}
               name={productName1}
               price={productPrice1}
@@ -75,7 +103,7 @@ export function BasketMobilePopup() {
               name={productName6}
               price={productPrice6}
               id='6'
-            />
+            /> */}
           </div>
           <div className="flex justify-between pt-10">
             <div

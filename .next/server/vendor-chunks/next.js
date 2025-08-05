@@ -41,6 +41,16 @@ eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'Handjet', 
 
 /***/ }),
 
+/***/ "./node_modules/next/font/google/target.css?{\"path\":\"components\\\\main\\\\catalog\\\\catalog-header.tsx\",\"import\":\"Handjet\",\"arguments\":[{\"subsets\":[\"latin\",\"cyrillic\"]}],\"variableName\":\"handjet\"}":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/font/google/target.css?{"path":"components\\main\\catalog\\catalog-header.tsx","import":"Handjet","arguments":[{"subsets":["latin","cyrillic"]}],"variableName":"handjet"} ***!
+  \******************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'Handjet', 'Handjet Fallback'\",\"fontStyle\":\"normal\"},\n\t\"className\": \"__className_061335\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcImNvbXBvbmVudHNcXFxcbWFpblxcXFxjYXRhbG9nXFxcXGNhdGFsb2ctaGVhZGVyLnRzeFwiLFwiaW1wb3J0XCI6XCJIYW5kamV0XCIsXCJhcmd1bWVudHNcIjpbe1wic3Vic2V0c1wiOltcImxhdGluXCIsXCJjeXJpbGxpY1wiXX1dLFwidmFyaWFibGVOYW1lXCI6XCJoYW5kamV0XCJ9IiwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQSxXQUFXLGtFQUFrRTtBQUM3RTtBQUNBIiwic291cmNlcyI6WyJDOlxcVXNlcnNcXGRzY2R3XFxPbmVEcml2ZVxc0KDQsNCx0L7Rh9C40Lkg0YHRgtC+0LtcXERldmVsb3BcXEZyb250ZW5kXFxSZWFjdFxcU3VwcEh1Ylxcbm9kZV9tb2R1bGVzXFxuZXh0XFxmb250XFxnb29nbGVcXHRhcmdldC5jc3M/e1wicGF0aFwiOlwiY29tcG9uZW50c1xcbWFpblxcY2F0YWxvZ1xcY2F0YWxvZy1oZWFkZXIudHN4XCIsXCJpbXBvcnRcIjpcIkhhbmRqZXRcIixcImFyZ3VtZW50c1wiOlt7XCJzdWJzZXRzXCI6W1wibGF0aW5cIixcImN5cmlsbGljXCJdfV0sXCJ2YXJpYWJsZU5hbWVcIjpcImhhbmRqZXRcIn0iXSwic291cmNlc0NvbnRlbnQiOlsiLy8gRXhwb3J0c1xubW9kdWxlLmV4cG9ydHMgPSB7XG5cdFwic3R5bGVcIjoge1wiZm9udEZhbWlseVwiOlwiJ0hhbmRqZXQnLCAnSGFuZGpldCBGYWxsYmFjaydcIixcImZvbnRTdHlsZVwiOlwibm9ybWFsXCJ9LFxuXHRcImNsYXNzTmFtZVwiOiBcIl9fY2xhc3NOYW1lXzA2MTMzNVwiXG59O1xuIl0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6WzBdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/next/font/google/target.css?{\"path\":\"components\\\\main\\\\catalog\\\\catalog-header.tsx\",\"import\":\"Handjet\",\"arguments\":[{\"subsets\":[\"latin\",\"cyrillic\"]}],\"variableName\":\"handjet\"}\n");
+
+/***/ }),
+
 /***/ "./node_modules/next/font/google/target.css?{\"path\":\"components\\\\mobile popups\\\\about\\\\about-mobile-popup.tsx\",\"import\":\"Handjet\",\"arguments\":[{\"subsets\":[\"latin\",\"cyrillic\"]}],\"variableName\":\"handjet\"}":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/next/font/google/target.css?{"path":"components\\mobile popups\\about\\about-mobile-popup.tsx","import":"Handjet","arguments":[{"subsets":["latin","cyrillic"]}],"variableName":"handjet"} ***!
