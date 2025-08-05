@@ -1,6 +1,8 @@
 import product from "./images/product.png";
 import { StaticImageData } from "next/image";
 
+export const urlClient: string = "http://127.0.0.1:8000";
+
 export const productName1: string = 'L-тирозин';
 export const productName2: string = 'L-тирозин';
 export const productName3: string = 'L-тирозин';

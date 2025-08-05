@@ -1,4 +1,9 @@
+import { useContext, useRef } from "react"
+import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
+
 export function FormContacts() {
+    const states: StatesConfirmType = useContext(StateContextConfirm);
+
     return (
         <div className="flex flex-col">
             <h2 className="leading-cssnormal text-white tracking-[2.24px] text-[2rem] font-semibold">
@@ -12,6 +17,7 @@ export function FormContacts() {
                             Ім’я*
                         </label>
                         <input type="text"
+                            ref={states.inputNameRef}
                             id="inputName" 
                             className="w-[12.5rem] h-[2.75rem] rounded-[5px] bg-[#494949] pl-[11px] text-white
                                 text-[1.25rem]/[20px] tracking-[1.4px] border-0 outline-none font-medium" />
@@ -22,6 +28,7 @@ export function FormContacts() {
                             Прізвище*
                         </label>
                         <input type="text"
+                            ref={states.inputVornameRef}
                             id="inputVorname" 
                             className="w-[17.1875rem] h-[2.75rem] rounded-[5px] bg-[#494949] pl-[11px] text-white
                                 text-[1.25rem]/[20px] tracking-[1.4px] border-0 outline-none font-medium" />
@@ -33,6 +40,7 @@ export function FormContacts() {
                         Номер телефону*
                     </label>
                     <input type="tel"
+                        ref={states.inputTelRef}
                         id="inputTel" 
                         className="w-[31.125rem] h-[2.75rem] rounded-[5px] bg-[#494949] pl-[11px] text-white
                             text-[1.25rem]/[20px] tracking-[1.4px] border-0 outline-none font-medium" />

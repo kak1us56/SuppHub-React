@@ -2,11 +2,86 @@ import { Handjet } from "next/font/google";
 import { ConfirmForm } from "./confirm-form";
 import { ConfirmTotal } from "./confirm-total";
 
+import React, { useRef, useState } from 'react';
+import { urlClient } from "../constants/constants";
+import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
+import Select from "react-select/dist/declarations/src/Select";
+import { SelectInstance } from "react-select";
+import { OptionType } from "./form-place";
+
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
 
 export function MainConfirm() {
+    const inputNameRef = useRef<HTMLInputElement>(null);
+    const inputVornameRef = useRef<HTMLInputElement>(null);
+    const inputTelRef = useRef<HTMLInputElement>(null);
+    const regionSelectRef = useRef<SelectInstance<OptionType>>(null);
+    const citySelectRef = useRef<SelectInstance<OptionType>>(null);
+    const warehouseSelectRef = useRef<SelectInstance<OptionType>>(null);
+    const textareaCommentRef = useRef<HTMLTextAreaElement>(null);
+    const checkboxCallMeRef = useRef<HTMLInputElement>(null);
+
+    const statesConfirm: StatesConfirmType = {
+        inputNameRef,
+        inputVornameRef,
+        inputTelRef,
+        regionSelectRef,
+        citySelectRef,
+        warehouseSelectRef,
+        textareaCommentRef,
+        checkboxCallMeRef
+    };
+
+    const sendData = async () => {
+        const inputNameValue = inputNameRef.current?.value || '';
+        const inputVornameValue = inputVornameRef.current?.value || '';
+        const inputTelValue = inputTelRef.current?.value || '';
+        const regionSelectValue = regionSelectRef.current?.getValue()[0]?.label || '';
+        const citySelectValue = citySelectRef.current?.getValue()[0]?.label || '';
+        const warehouseSelectValue = warehouseSelectRef.current?.getValue()[0]?.label || '';
+        const textareaCommentValue = textareaCommentRef.current?.value || '';
+        const checkboxCallMeValue = checkboxCallMeRef.current?.checked
+            ? 'Не дзвонити мені'
+            : 'Передзвоніть мені';
+
+        const fullSummMsg = localStorage.getItem('fullSumm');
+
+        const productText = Array.from({ length: 6 }, (_, i) => {
+        const amount = Number(localStorage.getItem(`itemAmount${i + 1}`));
+        return amount !== 0 ? `L-тирозин ${amount} шт.\n` : '';
+        }).join('');
+
+        const body = {
+        inputNameValue,
+        inputVornameValue,
+        inputTelValue,
+        regionSelectValue,
+        citySelectValue,
+        warehouseSelectValue,
+        textareaCommentValue,
+        checkboxCallMeValue,
+        fullSummMsg,
+        orderText: productText,
+        };
+
+        try {
+        const response = await fetch(`${urlClient}/submit/`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        });
+
+        const result = await response.text();
+        console.log('Відповідь сервера:', result);
+        } catch (error) {
+        console.error('Помилка:', error);
+        }
+    };
+
     return (
         <div className="min-h-[1311px] bg-[#1F1F1F] mt-20 bg-repeat bg-pill bg-[length:250px]">
             <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
@@ -17,8 +92,10 @@ export function MainConfirm() {
                     </h1>
                 </div>
                 <div className="min-h-[1064px]">
-                    <ConfirmForm />
-                    <ConfirmTotal />
+                    <StateContextConfirm.Provider value={statesConfirm}>
+                        <ConfirmForm />
+                        <ConfirmTotal sendData={sendData} />                        
+                    </StateContextConfirm.Provider>
                 </div>
             </div>
         </div>

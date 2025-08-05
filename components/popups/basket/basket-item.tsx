@@ -20,7 +20,7 @@ export const BasketItem: React.FC<cardProps> = ({ img, name, price, id }) => {
     >
       <div className="flex gap-[38px] items-end pl-[42px]">
         <div>
-          <Image src={img} alt="Продукт" width={53} />
+          <Image src={img} alt="Продукт" width={53} height={100} />
         </div>
         <div className="flex flex-col gap-[10px]">
           <p className="font-medium text-white leading-cssnormal tracking-[2.56px] text-[2rem]">

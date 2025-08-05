@@ -5,13 +5,30 @@ import { BasketItem } from "./basket-item";
 import Link from "next/link";
 import { productName1, productName2, productName3, productName4, productName5, productName6, productPrice1,
   productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, productImg1, productImg2,
-  productImg3, productImg4, productImg5, productImg6 } from "../../constants/constants";
+  productImg3, productImg4, productImg5, productImg6, 
+  urlClient} from "../../constants/constants";
 import { controlBasketTotal, controlButtonActive } from "../../constants/functions-global-logic";
+import { cardProps } from "../../constants/interfaces";
 
 export function BasketPopup() {
   const [basketTotal, setBasketTotal] = useState<number>(0);
   const [buttonActive, setButtonActive] = useState<boolean>(false);
   const states: StatesType = useContext(StateContext);
+  const [items, setItems] = useState<cardProps[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${urlClient}/products/`);
+        const data = await res.json();
+        setItems(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      }
+    };
+
+    fetchData();
+  }, [])
 
   useEffect(() => controlBasketTotal(setBasketTotal), []);
 
@@ -28,7 +45,17 @@ export function BasketPopup() {
     >
       <div>
         <div className="w-[63.75rem] h-[33.875rem] border-b-2 border-b-[#494949] border-solid overflow-y-auto overflow-x-hidden">
-          <BasketItem
+          {items.map((item) => (
+            <BasketItem
+              img={item.img}
+              name={item.name}
+              price={item.price}
+              id={item.id}
+              key={item.id}
+            />
+          ))}
+          
+          {/* <BasketItem
             img={productImg1}
             name={productName1}
             price={productPrice1}
@@ -63,7 +90,7 @@ export function BasketPopup() {
             name={productName6}
             price={productPrice6}
             id='6'
-          />
+          /> */}
         </div>
         <div className="flex justify-between pt-[35px] px-[40px]">
           <Link href={`${buttonActive ? '/confirm' : '/'}`}>

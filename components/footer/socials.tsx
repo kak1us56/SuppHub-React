@@ -23,7 +23,7 @@ export function Socials() {
             href="#"
             className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem]"
           >
-            instagram.com/supphub
+            instagram.com/supphub.shop
           </Link>
         )}
       </div>

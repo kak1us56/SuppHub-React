@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
+
 export function FormExtra() {
+        const states: StatesConfirmType = useContext(StateContextConfirm);
+
     return (
         <div className="flex flex-col">
             <h2 className="leading-cssnormal text-white tracking-[2.24px] text-[2rem] font-semibold">
@@ -9,6 +14,7 @@ export function FormExtra() {
                     Коментарій
                 </p>
                 <textarea name="comment"
+                    ref={states.textareaCommentRef}
                     className="w-[26.4375rem] h-[6.0625rem] rounded-[5px] bg-[#494949] pl-[11px] pt-2 text-[1.25rem]/[20px]
                         tracking-[1.4px] text-white outline-none resize-y">
 
@@ -16,6 +22,7 @@ export function FormExtra() {
             </div>
             <div className="pt-[43px] pl-[23px]">
                 <input type="checkbox" id="checkbox"
+                    ref={states.checkboxCallMeRef}
                     className="hidden confirm__checkbox" />
                 <label htmlFor="checkbox" className="confirm__label-callme text-white">
                     <span>

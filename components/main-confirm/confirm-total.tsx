@@ -3,15 +3,37 @@ import { ConfirmTotalItem } from "./confirm-total-item";
 import { Handjet } from "next/font/google";
 import { productName1, productName2, productName3, productName4, productName5, productName6, productPrice1,
     productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, productImg1, productImg2,
-    productImg3, productImg4, productImg5, productImg6 } from "../constants/constants";
+    productImg3, productImg4, productImg5, productImg6, 
+    urlClient} from "../constants/constants";
 import { controlBasketTotal } from "../constants/functions-global-logic";
+import { cardProps } from "../constants/interfaces";
 
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
+  display: 'swap',
 });
 
-export function ConfirmTotal() {
+type ConfirmTotalProps = {
+  sendData: () => void;
+};
+
+export function ConfirmTotal({ sendData }: ConfirmTotalProps) {
     const [totalSum, setTotalSum] = useState<number>(0);
+    const [items, setItems] = useState<cardProps[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const res = await fetch(`${urlClient}/products/`);
+            const data = await res.json();
+            setItems(data);
+        } catch (error) {
+            console.error("Ошибка при загрузке данных:", error);
+        }
+        };
+
+        fetchData();
+    }, [])
 
     useEffect(() => controlBasketTotal(setTotalSum), []);
 
@@ -22,12 +44,16 @@ export function ConfirmTotal() {
                 РАЗОМ
             </h2>
             <div className="flex flex-col gap-[22px] pb-[47px] ">
-                <ConfirmTotalItem name={productName1} id="1" />
+                {items.map((item) => (
+                    <ConfirmTotalItem key={item.id} name={item.name} id={item.id} />
+                ))}
+
+                {/* <ConfirmTotalItem name={productName1} id="1" />
                 <ConfirmTotalItem name={productName2} id="2" />
                 <ConfirmTotalItem name={productName3} id="3" />
                 <ConfirmTotalItem name={productName4} id="4" />
                 <ConfirmTotalItem name={productName5} id="5" />
-                <ConfirmTotalItem name={productName6} id="6" />
+                <ConfirmTotalItem name={productName6} id="6" /> */}
             </div>
             <div className="w-[32.5rem] h-[1px] bg-[#343434]"></div>
             <div className="flex justify-between pt-4 pb-[30px]">
@@ -39,15 +65,22 @@ export function ConfirmTotal() {
                         Вартість доставки:
                     </p>
                 </div>
-                <div className={`${handjet.className} text-[2.25rem] leading-cssnormal tracking-[2.52px] flex flex-col gap-2`}>
-                    <p className="text-white font-medium">
+                <div className={`text-[2.25rem] leading-cssnormal tracking-[2.52px] flex flex-col gap-2`}>
+                    <p className={`${handjet.className} text-white font-medium`}>
                         <span>{totalSum}</span> грн
                     </p>
-                    <p className="text-white font-medium">
+                    <p className={`${handjet.className} text-white font-medium`}>
                         За тарифами<br /> перевізника
                     </p>
                 </div>
             </div>
+            <button 
+                onClick={sendData}
+                className="w-[15.375rem] h-[3.25rem] bg-[#F90] rounded-[4px] flex items-center justify-center cursor-pointer self-center outline-none border-none">
+                <p className="leading-cssnormal text-black text-[1.25rem] tracking-[1.6px]">
+                    Підтвердити
+                </p>
+            </button>
         </div>
     )
 }

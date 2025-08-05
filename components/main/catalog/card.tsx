@@ -21,15 +21,15 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
         max-md:rounded-t-[12px] w-[20rem] h-[15.875rem] rounded-t-[20px] bg-[#494949]"
       >
         <div
-          className={`absolute max-md:top-[2px] max-md:left-0 top-[5px] left-[2px] ${hitBool ? "hidden" : "block"}`}
+          className={`absolute max-md:top-[2px] max-md:left-0 top-[5px] left-[2px] ${hitBool ? "block" : "hidden"}`}
         >
           <Image src={hit} alt="Хіт" className="max-md:w-[2.125rem]" />
         </div>
         <div className="max-md:pt-[14px] pt-[42px]">
-          <Image src={img} alt="Товар" className="max-md:w-[2.625rem]" />
+          <Image src={img} width={100} height={100} alt="Товар" className="max-md:w-[2.625rem]" />
         </div>
         <div
-          className={`absolute max-md:top-[5px] max-md:right-[9px] top-[18px] right-[21px] ${veganBool ? "hidden" : "block"}`}
+          className={`absolute max-md:top-[5px] max-md:right-[9px] top-[18px] right-[21px] ${veganBool ? "block" : "hidden"}`}
         >
           <Image src={vegan} alt="Веганське" className="max-md:w-[1.1875rem]" />
         </div>

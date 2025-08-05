@@ -1,45 +1,185 @@
+'use client';
+
+import React, { useContext, useEffect, useState } from 'react';
+import Select from 'react-select';
+import { customSelectStyles } from './custom-styles';
+import { StateContextConfirm, StatesConfirmType } from '../uikit/state-context';
+
+const apiKey = '308896669a0391031c472060b6d6055e';
+
+type Region = {
+  Description: string;
+  Ref: string;
+};
+
+type City = {
+  Description: string;
+  Ref: string;
+};
+
+type Warehouse = {
+  Description: string;
+  Ref: string;
+};
+
+export type OptionType = {
+  value: string;
+  label: string;
+};
+
 export function FormPlace() {
-    return (
-        <div className="flex flex-col">
-            <h2 className="leading-cssnormal tracking-[2.24px] text-[2rem] text-white font-semibold">
-                2. Дані для доставки
-            </h2>
-            <div className="flex flex-col pt-7 gap-[21px]">
-                <div className="flex justify-between items-center">
-                    <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">
-                        Область*
-                    </p>
-                    <select name="region"
-                        className="rounded-[5px] bg-[#494949] w-[17.1875rem] h-[2.75rem] border-0 text-white
-                            text-[1.25rem]/[20px] tracking-[1.4px] pl-[11px] outline-none cursor-pointer">
+  const [regions, setRegions] = useState<Region[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
 
-                    </select>
-                </div>
-                <div className="flex justify-between items-center">
-                    <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">
-                        Місто*
-                    </p>
-                    <select name="town"
-                        className="rounded-[5px] bg-[#494949] w-[17.1875rem] h-[2.75rem] border-0 text-white
-                            text-[1.25rem]/[20px] tracking-[1.4px] pl-[11px] outline-none cursor-pointer">
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [selectedWarehouse, setSelectedWarehouse] = useState<string | null>(null);
 
-                    </select>
-                </div>
-                <div className="flex justify-between items-center">
-                    <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">
-                        Відділення НП*
-                    </p>
-                    <select name="post"
-                        className="rounded-[5px] bg-[#494949] w-[17.1875rem] h-[2.75rem] border-0 text-white
-                            text-[1.25rem]/[20px] tracking-[1.4px] pl-[11px] outline-none cursor-pointer">
+  const states: StatesConfirmType = useContext(StateContextConfirm);
 
-                    </select>
-                </div>
-            </div>
-            <p className="text-[1rem] leading-cssnormal pt-[23px] pl-[11px] text-white font-normal">
-                Доставка відбувається виключно Новою Поштою <br />
-                та накладеним платежем!
-            </p>
+  useEffect(() => {
+    fetch('https://api.novaposhta.ua/v2.0/json/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apiKey: apiKey,
+        modelName: 'Address',
+        calledMethod: 'getAreas',
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setRegions(data.data);
+        }
+      });
+  }, []);
+
+  // Fetch cities when region changes
+  useEffect(() => {
+    if (!selectedRegion) return;
+
+    fetch('https://api.novaposhta.ua/v2.0/json/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apiKey: apiKey,
+        modelName: 'Address',
+        calledMethod: 'getCities',
+        methodProperties: {
+          AreaRef: selectedRegion,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setCities(data.data);
+        }
+      });
+  }, [selectedRegion]);
+
+  // Fetch warehouses when city changes
+  useEffect(() => {
+    if (!selectedCity) return;
+
+    fetch('https://api.novaposhta.ua/v2.0/json/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apiKey: apiKey,
+        modelName: 'Address',
+        calledMethod: 'getWarehouses',
+        methodProperties: {
+          CityRef: selectedCity,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setWarehouses(data.data);
+        }
+      });
+  }, [selectedCity]);
+
+  return (
+    <div className="flex flex-col">
+      <h2 className="leading-cssnormal tracking-[2.24px] text-[2rem] text-white font-semibold">
+        2. Дані для доставки
+      </h2>
+      <div className="flex flex-col pt-7 gap-[21px]">
+        <div className="flex justify-between items-center">
+          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Область*</p>
+          <div className="w-[17.1875rem]">
+            <Select<OptionType>
+                ref={states.regionSelectRef}
+              options={regions.map((r) => ({ value: r.Ref, label: r.Description }))}
+              isClearable
+              placeholder="Оберіть область"
+              styles={customSelectStyles}
+              onChange={(option) => {
+                setSelectedRegion(option?.value || null);
+                setSelectedCity(null);
+                setSelectedWarehouse(null);
+                setCities([]);
+                setWarehouses([]);
+              }}
+              value={regions.find((r) => r.Ref === selectedRegion)
+                ? { value: selectedRegion, label: regions.find((r) => r.Ref === selectedRegion)?.Description || '' }
+                : null}
+            />
+          </div>
         </div>
-    )
+        <div className="flex justify-between items-center">
+          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Місто*</p>
+          <div className="w-[17.1875rem]">
+            <Select<OptionType>
+            ref={states.citySelectRef}
+              options={cities.map((c) => ({ value: c.Ref, label: c.Description }))}
+              isClearable
+              placeholder="Оберіть місто"
+              styles={customSelectStyles}
+              onChange={(option) => {
+                setSelectedCity(option?.value || null);
+                setSelectedWarehouse(null);
+                setWarehouses([]);
+              }}
+              isDisabled={!selectedRegion}
+              value={cities.find((c) => c.Ref === selectedCity)
+                ? { value: selectedCity, label: cities.find((c) => c.Ref === selectedCity)?.Description || '' }
+                : null}
+            />
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Відділення НП*</p>
+          <div className="w-[17.1875rem]">
+            <Select<OptionType>
+            ref={states.warehouseSelectRef}
+              options={warehouses.map((w) => ({ value: w.Ref, label: w.Description }))}
+              isClearable
+              placeholder="Оберіть відділення"
+              styles={customSelectStyles}
+              onChange={(option) => {
+                setSelectedWarehouse(option?.value || null);
+              }}
+              isDisabled={!selectedCity}
+              value={warehouses.find((w) => w.Ref === selectedWarehouse)
+                ? {
+                    value: selectedWarehouse,
+                    label: warehouses.find((w) => w.Ref === selectedWarehouse)?.Description || '',
+                  }
+                : null}
+            />
+          </div>
+        </div>
+      </div>
+      <p className="text-[1rem] leading-cssnormal pt-[23px] pl-[11px] text-white font-normal">
+        Доставка відбувається виключно Новою Поштою <br />
+        та накладеним платежем!
+      </p>
+    </div>
+  );
 }
