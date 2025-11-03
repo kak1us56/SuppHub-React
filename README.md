@@ -9,9 +9,9 @@ Copy the default file:
     cd SuppHubBackend/supphub/
     cp .env.default .env
 
-- Create Frontend `.env` file: Create `.env` in `frontend/`
+Create Frontend `.env` file: Create `.env` in `frontend/`
 
-- Copy the default file:
+Copy the default file:
 
     cd frontend/
     cp .env.default .env
