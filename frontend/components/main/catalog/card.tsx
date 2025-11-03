@@ -34,14 +34,14 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
           <Image src={vegan} alt="Веганське" className="max-md:w-[1.1875rem]" />
         </div>
       </div>
-      <div className="flex flex-col pl-[18px] max-md:pl-2">
+      <div className="flex flex-col max-md:pl-2">
         <p
-          className="max-md:pt-[6px] max-md:text-[1rem]/[16px] max-md:tracking-[1.64px]
+          className="max-md:pt-[6px] max-md:text-[1rem]/[16px] max-md:tracking-[1.64px] pl-[18px]
           pt-[14px] text-[1.75rem]/[35px] text-[#F90] tracking-[3.64px] font-semibold"
         >
           {name}
         </p>
-        <p className="max-md:text-[0.875rem] max-md:tracking-[1px] text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium">
+        <p className="max-md:text-[0.875rem] max-md:tracking-[1px] text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
           {price} ₴
         </p>
         <div className="max-md:py-[6px] max-md:gap-2 py-[14px] flex self-center gap-[14px] items-center">

@@ -1,3 +1,6 @@
+import { urlClient } from "../../constants/constants";
+import { cardProps } from "../../constants/interfaces";
+
 // Card Counter
 export function cardCounterIn(cardCounter: number, setCardCounter: (count: number) => void) {
     if (cardCounter < 10) {
@@ -13,16 +16,22 @@ export function cardCounterDe(cardCounter: number, setCardCounter: (count: numbe
 }
 
 // Push count
-export function handlePushCount(id: string, cardCounter: number) {
+export async function handlePushCount(id: string, cardCounter: number) {
     localStorage.setItem(`itemAmount${id}`, cardCounter.toString());
 
-    const basketSummVar =
-        Number(localStorage.getItem("itemAmount1")) +
-        Number(localStorage.getItem("itemAmount2")) +
-        Number(localStorage.getItem("itemAmount3")) +
-        Number(localStorage.getItem("itemAmount4")) +
-        Number(localStorage.getItem("itemAmount5")) +
-        Number(localStorage.getItem("itemAmount6"));
+    let basketSummVar = 0;
+
+    try {
+        const res = await fetch(`${urlClient}/products/`);
+        const data = await res.json();
+
+        data.forEach((item: cardProps) => {
+            basketSummVar += Number(localStorage.getItem(`itemAmount${item.id}`))
+        });
+    } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+    }
+
     localStorage.setItem("itemAmountSumm", basketSummVar.toString());
     window.dispatchEvent(new Event("storage"));
 }

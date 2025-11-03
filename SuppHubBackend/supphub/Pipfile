@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "~=5.2.3"  # web framework
+djangorestframework = "~=3.16.0"  # REST batteries
+drf-spectacular = "*"
+psycopg2-binary = "~=2.9.10"  # PostgreSQL adapter
+gunicorn = "~=20.1.0"  # WSGI server for deployment
+dotenv = "~=0.9.9"  # environment variables
+django-cors-headers = "*"
+requests = "*"
+
+[dev-packages]
+black="~=25.1.0"  # formatter
+flake8="~=7.3.0"  # code quality
+ipdb="~=0.13.13"  # debugger
+isort="~=6.0.1"   # sorting imports
+mypy="~=1.15.0"   # types checking
+pytest-django = "*"
+pytest = "*"
+django-stubs = { version = "~=5.2.1", extras=["compatible-mypy"] }
+djangorestframework-stubs = { version = "~=3.16.0", extras=["compatible-mypy"] }
+
+[requires]
+python_version = "3.12"

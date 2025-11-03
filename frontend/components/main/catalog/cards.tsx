@@ -1,8 +1,5 @@
 import { Card } from "./card";
-import { productName1, productName2, productName3, productName4, productName5, productName6, productPrice1,
-    productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, productImg1, productImg2,
-    productImg3, productImg4, productImg5, productImg6, 
-    urlClient} from "../../constants/constants";
+import { urlClient} from "../../constants/constants";
 import { useEffect, useState } from "react";
 import { cardProps } from "../../constants/interfaces";
 
@@ -36,7 +33,7 @@ export function Cards() {
             id={item.id}
             key={item.id}
           />
-        ))
+        )) || 'Наразі немає товару в наявності'
       }
     </div>
   );

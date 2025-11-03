@@ -3,10 +3,7 @@ import { UiPopup } from "../../uikit/ui-popup";
 import { StateContext, StatesType } from "../../uikit/state-context";
 import { BasketItem } from "./basket-item";
 import Link from "next/link";
-import { productName1, productName2, productName3, productName4, productName5, productName6, productPrice1,
-  productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, productImg1, productImg2,
-  productImg3, productImg4, productImg5, productImg6, 
-  urlClient} from "../../constants/constants";
+import { urlClient} from "../../constants/constants";
 import { controlBasketTotal, controlButtonActive } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
 

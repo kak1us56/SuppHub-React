@@ -1,4 +1,4 @@
-import { productPrice1, productPrice2, productPrice3, productPrice4, productPrice5, productPrice6, urlClient } from "./constants";
+import { urlClient } from "./constants";
 import { cardProps } from "./interfaces";
 
 // Mobile size

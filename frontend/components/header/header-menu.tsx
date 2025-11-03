@@ -1,4 +1,5 @@
-import Link from "next/link";
+// import Link from "next/link";
+import { Link, animateScroll as scroll } from "react-scroll";
 import { useContext, useEffect, useState } from "react";
 import { StateContext, StatesType } from "../uikit/state-context";
 import { controlBasketSum, mobileResize } from "../constants/functions-global-logic";
@@ -57,8 +58,14 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
         >
           <li>
             <Link
-              href="#catalog"
+              // href="#catalog"
               className="cursor-pointer"
+              to="catalog"
+              activeClass="active"
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
               onClick={() => {
                 setIsMenuOpen(false);
                 states.setAboutActive(false);

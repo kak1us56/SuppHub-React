@@ -1,10 +1,11 @@
 from django.db import models
 
+
 # Create your models here.
 class Product(models.Model):
     class Meta:
         db_table = "products"
-    
+
     name = models.CharField(max_length=50, null=False)
     price = models.PositiveIntegerField(null=False)
     hitBool = models.BooleanField(default=False)

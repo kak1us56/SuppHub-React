@@ -1,0 +1,13 @@
+# Exclude development files
+.dockerignore
+.env
+.git
+.gitignore
+README.md
+
+# Exclude build artifacts
+.next
+out
+
+# Exclude dependencies
+node_modules

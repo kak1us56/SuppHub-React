@@ -1,4 +1,5 @@
-import Link from "next/link";
+// import Link from "next/link";
+import { Link, animateScroll as scroll } from "react-scroll";
 import { useContext } from "react";
 import { StateContext, StatesType } from "../uikit/state-context";
 
@@ -15,7 +16,13 @@ export function Menu() {
           Про нас
         </p>
         <Link
-          href="#catalog"
+          // href="#catalog"
+          activeClass="active"
+          to="catalog"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
           className="text-white max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] font-semibold cursor-pointer text-[1.25rem]/[20px] tracking-[1.4px]"
         >
           Каталог

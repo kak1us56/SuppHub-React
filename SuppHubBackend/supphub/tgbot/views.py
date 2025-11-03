@@ -1,9 +1,9 @@
-import os
+import json
+
 import requests
+from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
-from django.conf import settings
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}"
 
@@ -27,13 +27,12 @@ def submit_order(request):
                 f"Сума: {data.get('fullSummMsg')} грн"
             )
 
-            res1 = requests.post(f"{TELEGRAM_API_URL}/sendMessage", data={
-                'chat_id': settings.CHAT_ID1,
-                'text': message
-            })
+            res1 = requests.post(
+                f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID1, "text": message}
+            )
 
-            return JsonResponse({'success': True, 'telegram_response': res1.json()})
+            return JsonResponse({"success": True, "telegram_response": res1.json()})
         except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+            return JsonResponse({"error": str(e)}, status=500)
 
-    return JsonResponse({'error': 'Only POST allowed'}, status=405)
+    return JsonResponse({"error": "Only POST allowed"}, status=405)

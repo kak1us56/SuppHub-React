@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { customSelectStyles } from './custom-styles';
 import { StateContextConfirm, StatesConfirmType } from '../uikit/state-context';
 
-const apiKey = process.env.API_NOVAPOST;
+const apiKey = process.env.API_NOVA_POST;
 
 type Region = {
   Description: string;

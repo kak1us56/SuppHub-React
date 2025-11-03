@@ -16,7 +16,7 @@ export function AboutPopup() {
       heigth="min-h-[50rem]"
     >
       <div className="text-justify pt-[70px] px-[93px] pb-[50px]">
-        <p className="leading-cssnormal tracking-[2.52px] text-[1.75rem] text-white font-normal">
+        <p className="leading-cssnormal tracking-[2.52px] text-[1.75rem] text-white font-normal max-2xl:text-[1rem]">
           Привіт! Ми - SuppHub, і ми створені, щоб допомогти тобі бути у чудовій
           формі. Ми розуміємо, як важливо почуватися бадьоро та енергійно,
           особливо коли в тебе так багато справ – навчання, спорт, активне

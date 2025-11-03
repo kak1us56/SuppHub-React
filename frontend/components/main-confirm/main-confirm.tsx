@@ -54,6 +54,14 @@ export function MainConfirm() {
 
         const fullSummMsg = basketTotal;
 
+        function isValidPhoneNumber(phone) {
+        //   const regex = /^(\+380\d{9}|0\d{9})$/;
+        //   return regex.test(phone);
+
+            const digitsOnly = phone.replace(/\D/g, '');
+            return digitsOnly.length >= 9;
+        }
+
         try {
             const res = await fetch(`${urlClient}/products/`);
             const data = await res.json();
@@ -65,6 +73,17 @@ export function MainConfirm() {
                     productText += `${item.name} ${localStorage.getItem(`itemAmount${item.id}`)} шт. \n`
                 }
             })
+
+            if (productText === '') {
+                alert("Ви не обрали жодного товару для замовлення");
+                return
+            } else if (!isValidPhoneNumber(inputTelValue)) {
+                alert("Некоректно введений номер телефону");
+                return
+            } else if (inputNameValue === '' || inputVornameValue === '' || regionSelectValue === '' || citySelectValue === '' || warehouseSelectValue === '') {
+                alert("Заповніть усі необхідні поля");
+                return
+            }
 
             const body = {
                 inputNameValue,

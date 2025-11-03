@@ -20,7 +20,8 @@ export function Socials() {
           ""
         ) : (
           <Link
-            href="#"
+            href="https://www.instagram.com/supphub.shop"
+            target="_blank"
             className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem]"
           >
             instagram.com/supphub.shop
@@ -35,7 +36,8 @@ export function Socials() {
           ""
         ) : (
           <Link
-            href="#"
+            href="https://t.me/supphub_manager"
+            target="_blank"
             className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem]"
           >
             t.me/supphub_manager
