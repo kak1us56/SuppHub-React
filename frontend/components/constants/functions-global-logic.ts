@@ -1,4 +1,3 @@
-import { urlClient } from "./constants";
 import { cardProps } from "./interfaces";
 
 // Mobile size
@@ -29,7 +28,7 @@ export function controlBasketSum(setBasketSum: (sum: number) => void) {
 // Delete function
 export async function handleDeleteItem(id: string, setItemActive: (active: boolean) => void) {
     try {
-        const res = await fetch(`${urlClient}/products/`);
+        const res = await fetch("/api/products/");
         const data = await res.json();
 
         let basketSummVar = 0;
@@ -54,7 +53,7 @@ export async function handleDeleteItem(id: string, setItemActive: (active: boole
 export function controlBasketTotal(setBasketTotal: (amount: number) => void) {
     async function updateBasketTotal() {
         try {
-            const res = await fetch(`${urlClient}/products/`);
+            const res = await fetch("/api/products/");
             const data = await res.json();
 
             let fullSummPrice = 0

@@ -1,4 +1,3 @@
-import { urlClient } from "../../constants/constants";
 import { cardProps } from "../../constants/interfaces";
 
 // Card Counter
@@ -22,7 +21,7 @@ export async function handlePushCount(id: string, cardCounter: number) {
     let basketSummVar = 0;
 
     try {
-        const res = await fetch(`${urlClient}/products/`);
+        const res = await fetch("/api/products/");
         const data = await res.json();
 
         data.forEach((item: cardProps) => {

@@ -21,7 +21,7 @@ export function ConfirmTotal({ sendData }: ConfirmTotalProps) {
     useEffect(() => {
         const fetchData = async () => {
         try {
-            const res = await fetch(`${urlClient}/products/`);
+            const res = await fetch("/api/products/");
             const data = await res.json();
             setItems(data);
         } catch (error) {

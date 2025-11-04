@@ -2,11 +2,9 @@ import csv
 import io
 from django.shortcuts import redirect
 from rest_framework import routers, serializers, viewsets
-from rest_framework.decorators import permission_classes
 
 from .models import Product
 
-from rest_framework.request import Request
 from rest_framework.response import Response
 
 

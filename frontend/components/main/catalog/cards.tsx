@@ -1,5 +1,4 @@
 import { Card } from "./card";
-import { urlClient} from "../../constants/constants";
 import { useEffect, useState } from "react";
 import { cardProps } from "../../constants/interfaces";
 
@@ -9,7 +8,7 @@ export function Cards() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${urlClient}/products/`);
+        const res = await fetch("/api/products/");
         const data = await res.json();
         setItems(data);
       } catch (error) {

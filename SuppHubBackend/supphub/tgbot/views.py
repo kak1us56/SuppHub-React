@@ -31,7 +31,7 @@ def submit_order(request):
                 f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID1, "text": message}
             )
 
-            return JsonResponse({"success": True, "telegram_response": res1.json()})
+            return JsonResponse({"success": True, "telegram_response": res1.json()}, status=200)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
 

@@ -1,7 +1,6 @@
 import { Handjet } from "next/font/google";
 import { useEffect, useState } from "react";
 import { cardProps } from "../../constants/interfaces";
-import { urlClient } from "../../constants/constants";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -12,7 +11,7 @@ export function CatalogHeader() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${urlClient}/products/`);
+        const res = await fetch("/api/products/");
         const data = await res.json();
         setItems(data);
       } catch (error) {

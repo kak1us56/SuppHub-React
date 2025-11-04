@@ -1,9 +1,9 @@
 import { Handjet } from "next/font/google";
 import { ConfirmForm } from "./confirm-form";
 import { ConfirmTotal } from "./confirm-total";
+import { PhoneConfirmation } from "./phone-confirmation";
 
 import React, { useEffect, useRef, useState } from 'react';
-import { urlClient } from "../constants/constants";
 import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
 import Select from "react-select/dist/declarations/src/Select";
 import { SelectInstance } from "react-select";
@@ -26,6 +26,7 @@ export function MainConfirm() {
     const checkboxCallMeRef = useRef<HTMLInputElement>(null);
 
     const [basketTotal, setBasketTotal] = useState<number>(0)
+    const [isPhoneConfirmationActive, setIsPhoneConfirmationActive] = useState<boolean>(false);
 
     useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
 
@@ -39,6 +40,11 @@ export function MainConfirm() {
         textareaCommentRef,
         checkboxCallMeRef
     };
+
+    const phoneConfirmation = () => {
+        setIsPhoneConfirmationActive(true);
+    }
+
 
     const sendData = async () => {
         const inputNameValue = inputNameRef.current?.value || '';
@@ -63,7 +69,7 @@ export function MainConfirm() {
         }
 
         try {
-            const res = await fetch(`${urlClient}/products/`);
+            const res = await fetch("/api/products/");
             const data = await res.json();
 
             let productText = '';
@@ -99,7 +105,7 @@ export function MainConfirm() {
             };
 
             try {
-                const response = await fetch(`${urlClient}/submit/`, {
+                const response = await fetch("/api/submit/", {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',
