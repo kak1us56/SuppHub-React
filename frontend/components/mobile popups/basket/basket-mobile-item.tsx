@@ -4,6 +4,7 @@ import { cardProps } from "../../constants/interfaces";
 import { controlMobileBasketItems } from "./basket-mobile-logic";
 import { handleDeleteItem } from "../../constants/functions-global-logic";
 
+
 export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) => {
   const [productAmount, setProductAmount] = useState<number>(0);
   const [itemActive, setItemActive] = useState<boolean>(false);
@@ -13,7 +14,7 @@ export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) 
 
   return (
     <div
-      className={`${itemActive ? "flex" : "hidden"} flex-col justify-start items-start gap-3 w-[9.75rem] h-[11.25rem] border-2 border-[#494949] border-t-0`}
+      className={`${itemActive ? "flex" : "hidden"} flex-col justify-start items-start gap-3 w-[9.75rem] min-h-[11.25rem] border-2 border-[#494949] border-t-0`}
     >
       <div className="flex flex-col w-[9.375rem] gap-2 items-center pt-3">
         <div>
@@ -32,7 +33,7 @@ export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) 
           </p>
         </div>
       </div>
-      <div className="flex items-center pl-2">
+      <div className="flex items-center pl-2 pb-[.5rem]">
         <p onClick={() => handleDeleteItem(id, setItemActive)} className="text-[#D9D9D9] cursor-pointer leading-cssnormal font-medium text-[0.775rem] tracking-[1px] underline">
           Видалити
         </p>

@@ -14,7 +14,13 @@ export function Socials() {
     <div className="flex flex-col max-md:gap-[6px] gap-[11px]">
       <div className="flex gap-3 items-center">
         <div>
-          <Image src={instIcon} alt="Інстаграм" className="max-md:w-5" />
+          {
+            isMobile ? (
+              <Link href="https://www.instagram.com/supphub.shop" target="_blank">
+                <Image src={instIcon} alt="Інстаграм" className="max-md:w-5" />
+              </Link>
+            ) : <Image src={instIcon} alt="Інстаграм" />
+          }
         </div>
         {isMobile ? (
           ""
@@ -30,7 +36,13 @@ export function Socials() {
       </div>
       <div className="flex gap-3 items-center">
         <div>
-          <Image src={tgIcon} alt="Інстаграм" className="max-md:w-5" />
+          {
+            isMobile ? (
+              <Link href="https://t.me/supphub_manager" target="_blank">
+                <Image src={tgIcon} alt="Телеграм" className="max-md:w-5" />
+              </Link>
+            ) : <Image src={tgIcon} alt="Телеграм" />
+          }
         </div>
         {isMobile ? (
           ""

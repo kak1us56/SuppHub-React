@@ -45,7 +45,8 @@ export function ContactsMobilePopup() {
             <Image className="h-5 w-5" src={tgIcon} alt="Телеграм" />
           </div>
           <Link
-            href="#"
+            href="https://t.me/supphub_manager"
+            target="_blank"
             className="leading-cssnormal tracking-[1.2px] text-[1rem] text-white font-medium"
           >
             t.me/supphub_manager

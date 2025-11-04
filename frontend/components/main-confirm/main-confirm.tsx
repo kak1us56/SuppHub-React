@@ -41,10 +41,6 @@ export function MainConfirm() {
         checkboxCallMeRef
     };
 
-    const phoneConfirmation = () => {
-        setIsPhoneConfirmationActive(true);
-    }
-
 
     const sendData = async () => {
         const inputNameValue = inputNameRef.current?.value || '';
@@ -91,6 +87,8 @@ export function MainConfirm() {
                 return
             }
 
+            setIsPhoneConfirmationActive(true);
+
             const body = {
                 inputNameValue,
                 inputVornameValue,
@@ -134,6 +132,7 @@ export function MainConfirm() {
 
     return (
         <div className="min-h-[1311px] bg-[#1F1F1F] mt-20 bg-repeat bg-pill bg-[length:250px]">
+            <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} />
             <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
                 <div>
                     <h1 className={`${handjet.className}
