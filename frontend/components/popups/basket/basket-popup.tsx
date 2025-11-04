@@ -3,7 +3,6 @@ import { UiPopup } from "../../uikit/ui-popup";
 import { StateContext, StatesType } from "../../uikit/state-context";
 import { BasketItem } from "./basket-item";
 import Link from "next/link";
-import { urlClient} from "../../constants/constants";
 import { controlBasketTotal, controlButtonActive } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
 

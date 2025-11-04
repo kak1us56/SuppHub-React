@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect, use } from "react";
 import { StateContext, StatesType } from "../../uikit/state-context";
-import { urlClient} from "../../constants/constants";
 
 import { Handjet } from "next/font/google";
 import { BasketMobileItem } from "./basket-mobile-item";

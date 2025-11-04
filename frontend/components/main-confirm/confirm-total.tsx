@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ConfirmTotalItem } from "./confirm-total-item";
 import { Handjet } from "next/font/google";
-import { urlClient} from "../constants/constants";
 import { controlBasketTotal } from "../constants/functions-global-logic";
 import { cardProps } from "../constants/interfaces";
 
