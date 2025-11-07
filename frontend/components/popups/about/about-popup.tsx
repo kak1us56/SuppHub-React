@@ -2,10 +2,14 @@ import Image from "next/image";
 import logoImg from "./images/logo-img.png";
 import { StateContext, StatesType } from "../../uikit/state-context";
 import { UiPopup } from "../../uikit/ui-popup";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { laptopResize } from "../../constants/functions-global-logic";
 
 export function AboutPopup() {
   const states: StatesType = useContext(StateContext);
+  const [isLaptop, setIsLaptop] = useState<boolean>(false);
+
+  useEffect(() => laptopResize(setIsLaptop), []);  
 
   return (
     <UiPopup
@@ -13,10 +17,10 @@ export function AboutPopup() {
       active={states.aboutActive}
       setActive={states.setAboutActive}
       width="w-[60rem]"
-      heigth="min-h-[50rem]"
+      heigth={isLaptop ? "min-h-[39.5rem]" : "min-h-[50rem]"}
     >
-      <div className="text-justify pt-[70px] px-[93px] pb-[50px]">
-        <p className="leading-cssnormal tracking-[2.52px] text-[1.75rem] text-white font-normal max-2xl:text-[1rem]">
+      <div className={`text-justify ${isLaptop ? "pt-[30px] pb-[20px]" : "pt-[70px] pb-[50px]"} px-[93px]`}>
+        <p className={`leading-cssnormal ${isLaptop ? "tracking-[2px] text-[1.55rem]" : "tracking-[2.52px] text-[1.75rem]"} text-white font-normal`}>
           Привіт! Ми - SuppHub, і ми створені, щоб допомогти тобі бути у чудовій
           формі. Ми розуміємо, як важливо почуватися бадьоро та енергійно,
           особливо коли в тебе так багато справ – навчання, спорт, активне

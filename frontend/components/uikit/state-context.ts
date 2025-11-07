@@ -25,6 +25,14 @@ export interface StatesConfirmType {
   warehouseSelectRef: RefObject<SelectInstance<OptionType>>;
   textareaCommentRef: RefObject<HTMLTextAreaElement>;
   checkboxCallMeRef: RefObject<HTMLInputElement>;
+
+  isRequiredNameActive: boolean;
+  isRequiredVornameActive: boolean;
+  isRequiredTelActive: boolean;
+  isIncorrectTelActive: boolean;
+  isRequiredRegionActive: boolean;
+  isRequiredCityActive: boolean;
+  isRequiredWarehouseActive: boolean;
 }
 
 export const StateContextConfirm = createContext<StatesConfirmType | null>(null);

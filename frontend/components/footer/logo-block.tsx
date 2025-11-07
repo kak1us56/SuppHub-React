@@ -22,7 +22,7 @@ export function LogoBlock() {
             SuppHub
           </p>
           <Link
-            href="#"
+            href="https://supphub.shop/"
             className="text-white font-medium leading-cssnormal tracking-[1.2px] text-[1.25rem]"
           >
             supphub.shop

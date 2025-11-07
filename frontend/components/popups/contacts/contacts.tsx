@@ -23,7 +23,7 @@ export function ContactsPopup() {
             <Image src={convert} alt="Конверт" />
           </div>
           <Link
-            href="#"
+            href="mailto:contact.supphub@gmail.com"
             className="text-white font-medium leading-cssnormal tracking-[1.8px] text-[1.25rem]"
           >
             contact.supphub@gmail.com
@@ -34,7 +34,7 @@ export function ContactsPopup() {
             <Image src={tgIcon} alt="Telegram" />
           </div>
           <Link
-            href="#"
+            href="https://t.me/supphub_manager"
             className="text-white font-medium leading-cssnormal tracking-[1.8px] text-[1.25rem]"
           >
             t.me/supphub_manager

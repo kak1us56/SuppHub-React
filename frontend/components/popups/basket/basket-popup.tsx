@@ -3,7 +3,7 @@ import { UiPopup } from "../../uikit/ui-popup";
 import { StateContext, StatesType } from "../../uikit/state-context";
 import { BasketItem } from "./basket-item";
 import Link from "next/link";
-import { controlBasketTotal, controlButtonActive } from "../../constants/functions-global-logic";
+import { controlBasketTotal, controlButtonActive, laptopResize } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
 
 export function BasketPopup() {
@@ -11,6 +11,9 @@ export function BasketPopup() {
   const [buttonActive, setButtonActive] = useState<boolean>(false);
   const states: StatesType = useContext(StateContext);
   const [items, setItems] = useState<cardProps[]>([])
+  const [isLaptop, setIsLaptop] = useState<boolean>(false);
+
+  useEffect(() => laptopResize(setIsLaptop), []);  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,13 +37,13 @@ export function BasketPopup() {
   return (
     <UiPopup
       width="w-[71.25rem]"
-      heigth="min-h-[45.5rem]"
+      heigth={isLaptop ? "min-h-[39.625rem]" : "min-h-[45.5rem]"}
       header="Корзина"
       active={states.basketActive}
       setActive={states.setBasketActive}
     >
       <div>
-        <div className="w-[63.75rem] h-[33.875rem] border-b-2 border-b-[#494949] border-solid overflow-y-auto overflow-x-hidden">
+        <div className={`w-[63.75rem] ${isLaptop ? "h-[28rem]" : "h-[33.875rem]"} border-b-2 border-b-[#494949] border-solid overflow-y-auto overflow-x-hidden`}>
           {items.map((item) => (
             <BasketItem
               img={item.img}

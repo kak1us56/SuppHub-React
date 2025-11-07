@@ -110,71 +110,81 @@ export function FormPlace() {
         2. Дані для доставки
       </h2>
       <div className="flex flex-col pt-7 gap-[21px]">
-        <div className="flex justify-between items-center">
-          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Область*</p>
-          <div className="w-[17.1875rem]">
-            <Select<OptionType>
-                ref={states.regionSelectRef}
-              options={regions.map((r) => ({ value: r.Ref, label: r.Description }))}
-              isClearable
-              placeholder="Оберіть область"
-              styles={customSelectStyles}
-              onChange={(option) => {
-                setSelectedRegion(option?.value || null);
-                setSelectedCity(null);
-                setSelectedWarehouse(null);
-                setCities([]);
-                setWarehouses([]);
-              }}
-              value={regions.find((r) => r.Ref === selectedRegion)
-                ? { value: selectedRegion, label: regions.find((r) => r.Ref === selectedRegion)?.Description || '' }
-                : null}
-            />
+        <div>
+          <div className="flex justify-between items-center">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Область*</p>
+            <div className="w-[17.1875rem]">
+              <Select<OptionType>
+                  ref={states.regionSelectRef}
+                options={regions.map((r) => ({ value: r.Ref, label: r.Description }))}
+                isClearable
+                placeholder="Оберіть область"
+                styles={customSelectStyles}
+                onChange={(option) => {
+                  setSelectedRegion(option?.value || null);
+                  setSelectedCity(null);
+                  setSelectedWarehouse(null);
+                  setCities([]);
+                  setWarehouses([]);
+                }}
+                value={regions.find((r) => r.Ref === selectedRegion)
+                  ? { value: selectedRegion, label: regions.find((r) => r.Ref === selectedRegion)?.Description || '' }
+                  : null}
+              />
+            </div>
           </div>
+          <p className={`${states.isRequiredRegionActive ? "block" : "hidden"} text-red-500 text-[0.775rem] pl-2`}>Це поле обов'язкове*</p>          
         </div>
-        <div className="flex justify-between items-center">
-          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Місто*</p>
-          <div className="w-[17.1875rem]">
-            <Select<OptionType>
-            ref={states.citySelectRef}
-              options={cities.map((c) => ({ value: c.Ref, label: c.Description }))}
-              isClearable
-              placeholder="Оберіть місто"
-              styles={customSelectStyles}
-              onChange={(option) => {
-                setSelectedCity(option?.value || null);
-                setSelectedWarehouse(null);
-                setWarehouses([]);
-              }}
-              isDisabled={!selectedRegion}
-              value={cities.find((c) => c.Ref === selectedCity)
-                ? { value: selectedCity, label: cities.find((c) => c.Ref === selectedCity)?.Description || '' }
-                : null}
-            />
+        <div>
+          <div className="flex justify-between items-center">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Місто*</p>
+            <div className="w-[17.1875rem]">
+              <Select<OptionType>
+              ref={states.citySelectRef}
+                options={cities.map((c) => ({ value: c.Ref, label: c.Description }))}
+                isClearable
+                placeholder="Оберіть місто"
+                styles={customSelectStyles}
+                onChange={(option) => {
+                  setSelectedCity(option?.value || null);
+                  setSelectedWarehouse(null);
+                  setWarehouses([]);
+                }}
+                isDisabled={!selectedRegion}
+                value={cities.find((c) => c.Ref === selectedCity)
+                  ? { value: selectedCity, label: cities.find((c) => c.Ref === selectedCity)?.Description || '' }
+                  : null}
+              />
+            </div>
           </div>
+          <p className={`${states.isRequiredCityActive ? "block" : "hidden"} text-red-500 text-[0.775rem] pl-2`}>Це поле обов'язкове*</p>          
         </div>
-        <div className="flex justify-between items-center">
-          <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Відділення НП*</p>
-          <div className="w-[17.1875rem]">
-            <Select<OptionType>
-            ref={states.warehouseSelectRef}
-              options={warehouses.map((w) => ({ value: w.Ref, label: w.Description }))}
-              isClearable
-              placeholder="Оберіть відділення"
-              styles={customSelectStyles}
-              onChange={(option) => {
-                setSelectedWarehouse(option?.value || null);
-              }}
-              isDisabled={!selectedCity}
-              value={warehouses.find((w) => w.Ref === selectedWarehouse)
-                ? {
-                    value: selectedWarehouse,
-                    label: warehouses.find((w) => w.Ref === selectedWarehouse)?.Description || '',
-                  }
-                : null}
-            />
+        <div>
+          <div className="flex justify-between items-center">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Відділення НП*</p>
+            <div className="w-[17.1875rem]">
+              <Select<OptionType>
+              ref={states.warehouseSelectRef}
+                options={warehouses.map((w) => ({ value: w.Ref, label: w.Description }))}
+                isClearable
+                placeholder="Оберіть відділення"
+                styles={customSelectStyles}
+                onChange={(option) => {
+                  setSelectedWarehouse(option?.value || null);
+                }}
+                isDisabled={!selectedCity}
+                value={warehouses.find((w) => w.Ref === selectedWarehouse)
+                  ? {
+                      value: selectedWarehouse,
+                      label: warehouses.find((w) => w.Ref === selectedWarehouse)?.Description || '',
+                    }
+                  : null}
+              />
+            </div>
           </div>
+          <p className={`${states.isRequiredWarehouseActive ? "block" : "hidden"} text-red-500 text-[0.775rem] pl-2`}>Це поле обов'язкове*</p>          
         </div>
+
       </div>
       <p className="text-[1rem] leading-cssnormal pt-[23px] pl-[11px] text-white font-normal">
         Доставка відбувається виключно Новою Поштою <br />

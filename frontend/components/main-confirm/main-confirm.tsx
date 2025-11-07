@@ -25,6 +25,13 @@ export function MainConfirm() {
     const textareaCommentRef = useRef<HTMLTextAreaElement>(null);
     const checkboxCallMeRef = useRef<HTMLInputElement>(null);
 
+    const [isRequiredNameActive, setIsRequiredNameActive] = useState<boolean>(false);
+    const [isRequiredVornameActive, setIsRequiredVornameActive] = useState<boolean>(false);
+    const [isRequiredTelActive, setIsRequiredTelActive] = useState<boolean>(false);
+    const [isIncorrectTelActive, setIsIncorrectTelActive] = useState<boolean>(false);
+    const [isRequiredRegionActive, setIsRequiredRegionActive] = useState<boolean>(false);
+    const [isRequiredCityActive, setIsRequiredCityActive] = useState<boolean>(false);
+    const [isRequiredWarehouseActive, setIsRequiredWarehouseActive] = useState<boolean>(false);
     const [basketTotal, setBasketTotal] = useState<number>(0)
     const [isPhoneConfirmationActive, setIsPhoneConfirmationActive] = useState<boolean>(false);
 
@@ -38,7 +45,16 @@ export function MainConfirm() {
         citySelectRef,
         warehouseSelectRef,
         textareaCommentRef,
-        checkboxCallMeRef
+        checkboxCallMeRef,
+
+        // Validation states
+        isRequiredNameActive,
+        isRequiredVornameActive,
+        isRequiredTelActive,
+        isIncorrectTelActive,
+        isRequiredRegionActive,
+        isRequiredCityActive,
+        isRequiredWarehouseActive,
     };
 
 
@@ -57,11 +73,11 @@ export function MainConfirm() {
         const fullSummMsg = basketTotal;
 
         function isValidPhoneNumber(phone) {
-        //   const regex = /^(\+380\d{9}|0\d{9})$/;
-        //   return regex.test(phone);
+          const regex = /^(\+380\d{9}|0\d{9})$/;
+          return regex.test(phone);
 
-            const digitsOnly = phone.replace(/\D/g, '');
-            return digitsOnly.length >= 9;
+            // const digitsOnly = phone.replace(/\D/g, '');
+            // return digitsOnly.length >= 9;
         }
 
         try {
@@ -76,14 +92,43 @@ export function MainConfirm() {
                 }
             })
 
+
+            setIsRequiredCityActive(false);
+            setIsRequiredRegionActive(false);
+            setIsRequiredWarehouseActive(false);
+            setIsRequiredNameActive(false);
+            setIsRequiredVornameActive(false);
+            setIsRequiredTelActive(false);
+            setIsIncorrectTelActive(false);
+
             if (productText === '') {
                 alert("Ви не обрали жодного товару для замовлення");
                 return
-            } else if (!isValidPhoneNumber(inputTelValue)) {
-                alert("Некоректно введений номер телефону");
-                return
             } else if (inputNameValue === '' || inputVornameValue === '' || regionSelectValue === '' || citySelectValue === '' || warehouseSelectValue === '') {
-                alert("Заповніть усі необхідні поля");
+                switch ("") {
+                    case inputNameValue:
+                        setIsRequiredNameActive(true);
+                    case inputVornameValue:
+                        setIsRequiredVornameActive(true);
+                    case inputTelValue:
+                        setIsRequiredTelActive(true);
+                    case regionSelectValue:
+                        setIsRequiredRegionActive(true);
+                    case citySelectValue:
+                        setIsRequiredCityActive(true);
+                    case warehouseSelectValue:
+                        setIsRequiredWarehouseActive(true);
+                }
+                return
+            } else if (!isValidPhoneNumber(inputTelValue)) {
+                setIsRequiredCityActive(false);
+                setIsRequiredRegionActive(false);
+                setIsRequiredWarehouseActive(false);
+                setIsRequiredNameActive(false);
+                setIsRequiredVornameActive(false);
+                setIsRequiredTelActive(false);
+
+                setIsIncorrectTelActive(true);
                 return
             }
 

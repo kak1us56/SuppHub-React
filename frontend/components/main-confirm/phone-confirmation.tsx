@@ -12,11 +12,15 @@ interface PhoneConfirmationProps {
 
 export const PhoneConfirmation = ({ isPhoneConfirmationActive }: PhoneConfirmationProps) => {
     const [buttonActive, setButtonActive] = useState<boolean>(false);
+    const [code, setCode] = useState<string>("");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
 
-        if (inputValue.length === 4) {
+        const numericValue = inputValue.replace(/\D/g, '');
+        setCode(numericValue);
+
+        if (numericValue.length === 4) {
             setButtonActive(true);
         } else {
             setButtonActive(false);
@@ -32,7 +36,7 @@ export const PhoneConfirmation = ({ isPhoneConfirmationActive }: PhoneConfirmati
                     </div>
                     <div className="pt-5">
                         <form action="" className="flex flex-col gap-3">
-                            <input type="text" maxLength={4} inputMode="numeric" onChange={handleInputChange} className="text-[24px] text-center
+                            <input type="text" maxLength={4} inputMode="numeric" value={code} onChange={handleInputChange} className="text-[24px] text-center
                                 w-[25rem] h-[3.2rem] rounded-[6px] bg-[#494949] outline-none border-0 tracking-[10px] text-white" />
                             <button className={`${buttonActive ? "bg-[#F90]" : "bg-[#d9d9d9]"} flex justify-center items-center self-center w-[20.9375rem] h-[3.125rem]
                                 rounded-[8px] outline-none border-0 transition-linear`}>

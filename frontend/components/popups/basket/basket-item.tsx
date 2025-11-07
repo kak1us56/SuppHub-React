@@ -2,13 +2,16 @@ import Image from "next/image";
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { cardProps } from "../../constants/interfaces";
 import { controlBasketItems, handleSelectChange } from "./basket-logic";
-import { handleDeleteItem } from "../../constants/functions-global-logic";
+import { handleDeleteItem, laptopResize } from "../../constants/functions-global-logic";
 
 const optionsArr: ReactNode[] | null[] = new Array(10).fill(null);
 
 export const BasketItem: React.FC<cardProps> = ({ img, name, price, id }) => {
   const [itemActive, setItemActive] = useState<boolean>(false);
   const itemSelect = useRef<HTMLSelectElement | null>(null);
+  const [isLaptop, setIsLaptop] = useState<boolean>(false);
+
+  useEffect(() => laptopResize(setIsLaptop), []);  
 
   // Item display
   useEffect(() => controlBasketItems(id, setItemActive, itemSelect), []);
@@ -16,7 +19,7 @@ export const BasketItem: React.FC<cardProps> = ({ img, name, price, id }) => {
   return (
     <div
       className={`${itemActive ? "flex" : "hidden"}
-      justify-between items-center w-[63.75rem] h-[11.25rem] border-b-2 border-b-[#494949] border-solid`}
+      justify-between items-center w-[63.75rem] ${isLaptop ? "h-[9.3rem]" : "h-[11.25rem]"} border-b-2 border-b-[#494949] border-solid`}
     >
       <div className="flex gap-[38px] items-end pl-[42px]">
         <div>

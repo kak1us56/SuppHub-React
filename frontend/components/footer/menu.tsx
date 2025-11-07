@@ -35,12 +35,12 @@ export function Menu() {
         >
           Контакти
         </p>
-        <Link
+        {/* <Link
           href="#"
           className="text-white max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] font-semibold cursor-pointer text-[1.25rem]/[20px] tracking-[1.4px]"
         >
           Соц мережі
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

@@ -10,6 +10,16 @@ export function mobileResize(setIsMobile: (active: boolean) => void) {
     return () => removeEventListener("resize", handleResize);
 }
 
+// Laptop size
+export function laptopResize(setIsLaptop: (active: boolean) => void) {
+    const handleResize = () => setIsLaptop(window.innerWidth >= 768 && window.innerWidth < 1740);
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => removeEventListener("resize", handleResize);
+}
+
 // Items basket sum
 export function controlBasketSum(setBasketSum: (sum: number) => void) {
     const updateBasketSum = () => {
