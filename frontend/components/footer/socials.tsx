@@ -4,6 +4,7 @@ import instIcon from "./images/inst-icon.png";
 import tgIcon from "./images/tg-icon.png";
 import { useEffect, useState } from "react";
 import { mobileResize } from "../constants/functions-global-logic";
+import { sendMetrik } from "../utils";
 
 export function Socials() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -12,50 +13,37 @@ export function Socials() {
 
   return (
     <div className="flex flex-col max-md:gap-[6px] gap-[11px]">
-      <div className="flex gap-3 items-center">
+      <Link
+        href="https://www.instagram.com/supphub.shop"
+        target="_blank"
+        className="flex gap-3 items-center"
+        onClick={() => sendMetrik("click", "ClickToInstagram", "Socials", isMobile ? "Mobile" : "Desktop")}
+      >
         <div>
-          {
-            isMobile ? (
-              <Link href="https://www.instagram.com/supphub.shop" target="_blank">
-                <Image src={instIcon} alt="Інстаграм" className="max-md:w-5" />
-              </Link>
-            ) : <Image src={instIcon} alt="Інстаграм" />
-          }
+          <Image src={instIcon} alt="Інстаграм" className="max-md:w-5" />
         </div>
-        {isMobile ? (
-          ""
-        ) : (
-          <Link
-            href="https://www.instagram.com/supphub.shop"
-            target="_blank"
-            className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem]"
-          >
-            instagram.com/supphub.shop
-          </Link>
-        )}
-      </div>
-      <div className="flex gap-3 items-center">
+        <span
+          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-md:hidden"
+        >
+          instagram.com/supphub.shop
+        </span>
+      </Link>
+      <Link
+        href="https://t.me/supphub_manager"
+        target="_blank"
+        className="flex gap-3 items-center"
+        onClick={() => sendMetrik("click", "ClickToTelegram", "Socials", isMobile ? "Mobile" : "Desktop")}
+      >
         <div>
-          {
-            isMobile ? (
-              <Link href="https://t.me/supphub_manager" target="_blank">
-                <Image src={tgIcon} alt="Телеграм" className="max-md:w-5" />
-              </Link>
-            ) : <Image src={tgIcon} alt="Телеграм" />
-          }
+          <Image src={tgIcon} alt="Телеграм" className="max-md:w-5" />
         </div>
-        {isMobile ? (
-          ""
-        ) : (
-          <Link
-            href="https://t.me/supphub_manager"
-            target="_blank"
-            className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem]"
-          >
-            t.me/supphub_manager
-          </Link>
-        )}
-      </div>
+        <span
+          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-md:hidden"
+        >
+          t.me/supphub_manager
+        </span>
+      </Link>
+
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Handjet } from "next/font/google";
 import { BasketMobileItem } from "./basket-mobile-item";
 import { controlBasketTotal, controlButtonActive, mobileResize } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
+import { sendMetrik } from "../../utils";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -103,6 +104,7 @@ export function BasketMobilePopup() {
           </div>
           <div className="flex justify-between pt-10">
             <div
+              onClick={() => sendMetrik("click", "ClickToConfirmPage", "BasketMobilePopup", "Mobile")}
               className={`${buttonActive ? 'bg-[#F90] cursor-pointer' : 'bg-[#cca365] cursor-default'}
                 rounded-[4px] text-center w-[8.75rem] h-[2.85rem] mt-2 flex justify-center items-center transition-15`}
             >

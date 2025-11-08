@@ -5,6 +5,7 @@ import tgIcon from "./images/tg-icon.png";
 import Link from "next/link";
 import { useContext } from "react";
 import { StateContext, StatesType } from "../../uikit/state-context";
+import { sendMetrik } from "../../utils";
 
 export function ContactsPopup() {
   const states: StatesType = useContext(StateContext);
@@ -35,6 +36,7 @@ export function ContactsPopup() {
           </div>
           <Link
             href="https://t.me/supphub_manager"
+            onClick={() => sendMetrik("click", "ClickToTelegram", "Socials", "Desktop")}
             className="text-white font-medium leading-cssnormal tracking-[1.8px] text-[1.25rem]"
           >
             t.me/supphub_manager

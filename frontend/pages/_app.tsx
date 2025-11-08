@@ -13,11 +13,17 @@ const montserrat: any = Montserrat({
 // Fix lint error for typeScript and Google Analytics
 declare global {
   interface Window {
-    gtag: (
+    gtag(
       command: 'config' | 'js',
       gaIdOrDate: string | Date,
       options?: { page_path: string }
-    ) => void;
+    ): void;
+    
+    gtag(
+      command: 'event',
+      action: string,
+      params?: object
+    ): void;
     dataLayer: any[];
   }
 }

@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { Handjet } from "next/font/google";
 import { mobileResize } from "../../constants/functions-global-logic";
+import { sendMetrik } from "../../utils";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -47,6 +48,7 @@ export function ContactsMobilePopup() {
           <Link
             href="https://t.me/supphub_manager"
             target="_blank"
+            onClick={() => sendMetrik("click", "ClickToTelegram", "Socials", "Mobile")}
             className="leading-cssnormal tracking-[1.2px] text-[1rem] text-white font-medium"
           >
             t.me/supphub_manager

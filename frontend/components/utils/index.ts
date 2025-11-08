@@ -1,0 +1,1 @@
+export { sendMetrik } from "./send-metrics";

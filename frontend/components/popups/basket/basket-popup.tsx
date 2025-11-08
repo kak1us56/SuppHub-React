@@ -5,6 +5,7 @@ import { BasketItem } from "./basket-item";
 import Link from "next/link";
 import { controlBasketTotal, controlButtonActive, laptopResize } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
+import { sendMetrik } from "../../utils";
 
 export function BasketPopup() {
   const [basketTotal, setBasketTotal] = useState<number>(0);
@@ -92,7 +93,7 @@ export function BasketPopup() {
           /> */}
         </div>
         <div className="flex justify-between pt-[35px] px-[40px]">
-          <Link href={`${buttonActive ? '/confirm' : '/'}`}>
+          <Link href={`${buttonActive ? '/confirm' : '/'}`} onClick={() => sendMetrik("click", "ClickToConfirmPage", "BasketPopup", "Desktop")}>
             <div className={`${buttonActive ? 'bg-[#F90] cursor-pointer' : 'bg-[#cca365] cursor-default'}
               flex justify-center items-center w-[18.75rem] h-[3.25rem] rounded-[4px]`}>
               <p className="font-medium leading-cssnormal tracking-[1.6px] text-black text-[1.25rem]">
