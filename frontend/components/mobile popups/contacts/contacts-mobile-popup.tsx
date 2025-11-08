@@ -34,7 +34,7 @@ export function ContactsMobilePopup() {
             <Image className="h-5" src={convert} alt="Пошта" />
           </div>
           <Link
-            href="#"
+            href="mailto:contact.supphub@gmail.com"
             className="leading-cssnormal tracking-[1.2px] text-[1rem] text-white font-medium"
           >
             contact.supphub@gmail.com

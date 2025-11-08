@@ -1,7 +1,7 @@
 import csv
 import io
 from django.shortcuts import redirect
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers, serializers, viewsets, permissions
 
 from .models import Product
 
@@ -17,6 +17,8 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductAPIViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 def import_products(request):
