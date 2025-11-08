@@ -2,6 +2,12 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+ARG NEXT_PUBLIC_GA_ID
+ARG API_NOVA_POST
+
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
+ENV API_NOVA_POST=$API_NOVA_POST
+
 COPY package.json package-lock.json* ./
 
 RUN npm install
