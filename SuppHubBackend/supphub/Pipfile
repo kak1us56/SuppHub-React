@@ -10,6 +10,7 @@ drf-spectacular = "*"
 psycopg2-binary = "~=2.9.10"  # PostgreSQL adapter
 gunicorn = "~=20.1.0"  # WSGI server for deployment
 dotenv = "~=0.9.9"  # environment variables
+redis = "~=5.0.0" # Caching
 django-cors-headers = "*"
 requests = "*"
 

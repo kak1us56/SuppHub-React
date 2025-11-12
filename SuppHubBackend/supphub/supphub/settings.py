@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -42,9 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "rest_framework",
     "corsheaders",
+    
     "products",
+    "sendsms",
 ]
 
 MIDDLEWARE = [
@@ -82,23 +86,23 @@ WSGI_APPLICATION = "supphub.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DJANGO_DB_NAME", default="postgres"),
-        'USER': os.getenv("DJANGO_DB_USER", default="postgres"),
-        'PASSWORD': os.getenv("DJANGO_DB_PASSWORD", default="postgres"),
-        'HOST': os.getenv("DJANGO_DB_HOST", default="database"),
-        'PORT': os.getenv("DJANGO_DB_PORT", default="5432"),
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv("DJANGO_DB_NAME", default="postgres"),
+#         'USER': os.getenv("DJANGO_DB_USER", default="postgres"),
+#         'PASSWORD': os.getenv("DJANGO_DB_PASSWORD", default="postgres"),
+#         'HOST': os.getenv("DJANGO_DB_HOST", default="database"),
+#         'PORT': os.getenv("DJANGO_DB_PORT", default="5432"),
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation
@@ -141,6 +145,37 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "1000/day",
+        "user": "1000/day",
+
+        "sms": "1/min", 
+        "webhook": "5/min",
+    },
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.getenv("DJANGO_CACHE_URL", default="redis://localhost:6379/0"),
+        "TIMEOUT": 50,
+    }
+}
+
+if DEBUG is True and ("tests/" in sys.argv):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        }
+    }
+    CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
 CORS_ALLOW_ALL_ORIGINS = True
 
