@@ -37,9 +37,6 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
                 sms_id=sms_message.id
             )
             
-            # request.session['sms_code_to_verify'] = generated_code
-            # request.session['sms_last_sent'] = time.time()
-            
             return Response({"success": "Code sent"}, status=status.HTTP_200_OK)
         
         except ValueError as e:

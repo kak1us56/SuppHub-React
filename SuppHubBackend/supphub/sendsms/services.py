@@ -3,12 +3,16 @@ import os
 import string
 import requests
 
+from shared.cache import CacheService
+
 
 class SMSService:
     def __init__(self):
         self.api_key = os.getenv("SMSCLUB_API_KEY")
         self.api_url = "https://api.alphasms.ua/api/json.php"
         self.webhook_url = os.getenv("SMS_WEBHOOK_URL")
+
+        self.cache = CacheService()
 
         if not self.api_key:
             raise ValueError("There is not SMS API in .env")
@@ -59,6 +63,8 @@ class SMSService:
         
         code = self._generate_code()
         message = f"Ваш код підтвердження: {code}"
+
+        self.cache.set("sms_code", str(sms_id), {"code": str(code)}, 3600)
 
         payload = self._form_payload(
             phone_number=validated_phone,
