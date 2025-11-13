@@ -72,22 +72,22 @@ class SMSService:
             sms_id=sms_id
         )
         
-        # try:
-        #     response = requests.post(
-        #         self.api_url,
-        #         headers={"Content-Type": "application/json"},
-        #         json=payload,
-        #         timeout=10
-        #     )
-        #     response.raise_for_status()
+        try:
+            response = requests.post(
+                self.api_url,
+                headers={"Content-Type": "application/json"},
+                json=payload,
+                timeout=10
+            )
+            response.raise_for_status()
 
-        #     data = response.json()
+            data = response.json()
 
-        #     if data.get("success") is False or data.get("data", [{}])[0].get("success") is False:
-        #         error_msg = data.get("error") or data.get("data", [{}])[0].get("error", "Unknown error SMS")
-        #         raise Exception(f"Error AlphaSMS: {error_msg}")
+            if data.get("success") is False or data.get("data", [{}])[0].get("success") is False:
+                error_msg = data.get("error") or data.get("data", [{}])[0].get("error", "Unknown error SMS")
+                raise Exception(f"Error AlphaSMS: {error_msg}")
 
-        # except requests.exceptions.RequestException as e:
-        #     raise Exception("Error while sending the message")
+        except requests.exceptions.RequestException as e:
+            raise Exception("Error while sending the message")
         
         return code

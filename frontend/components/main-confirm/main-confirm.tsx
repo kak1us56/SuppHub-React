@@ -2,6 +2,7 @@ import { Handjet } from "next/font/google";
 import { ConfirmForm } from "./confirm-form";
 import { ConfirmTotal } from "./confirm-total";
 import { PhoneConfirmation } from "./phone-confirmation";
+import { useRouter } from 'next/router';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
@@ -16,6 +17,9 @@ const handjet: any = Handjet({
 });
 
 export function MainConfirm() {
+    const [smsId, setSmsId] = useState<number | null>(null)
+    const router = useRouter();
+
     const inputNameRef = useRef<HTMLInputElement>(null);
     const inputVornameRef = useRef<HTMLInputElement>(null);
     const inputTelRef = useRef<HTMLInputElement>(null);
@@ -34,8 +38,6 @@ export function MainConfirm() {
     const [isRequiredWarehouseActive, setIsRequiredWarehouseActive] = useState<boolean>(false);
     const [basketTotal, setBasketTotal] = useState<number>(0)
     const [isPhoneConfirmationActive, setIsPhoneConfirmationActive] = useState<boolean>(false);
-
-    useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
 
     const statesConfirm: StatesConfirmType = {
         inputNameRef,
@@ -57,27 +59,24 @@ export function MainConfirm() {
         isRequiredWarehouseActive,
     };
 
+    // Calculate sum price
+    useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
 
-    const sendData = async () => {
+    // Send confirmation code
+    const sendCode = async () => {
         const inputNameValue = inputNameRef.current?.value || '';
         const inputVornameValue = inputVornameRef.current?.value || '';
         const inputTelValue = inputTelRef.current?.value || '';
         const regionSelectValue = regionSelectRef.current?.getValue()[0]?.label || '';
         const citySelectValue = citySelectRef.current?.getValue()[0]?.label || '';
         const warehouseSelectValue = warehouseSelectRef.current?.getValue()[0]?.label || '';
-        const textareaCommentValue = textareaCommentRef.current?.value || '';
-        const checkboxCallMeValue = checkboxCallMeRef.current?.checked
-            ? 'Не дзвонити мені'
-            : 'Передзвоніть мені';
-
-        const fullSummMsg = basketTotal;
 
         function isValidPhoneNumber(phone) {
-          const regex = /^(\+380\d{9}|0\d{9})$/;
-          return regex.test(phone);
+            const regex = /^(\+380\d{9}|0\d{9})$/;
+            return regex.test(phone);
 
-            // const digitsOnly = phone.replace(/\D/g, '');
-            // return digitsOnly.length >= 9;
+                // const digitsOnly = phone.replace(/\D/g, '');
+                // return digitsOnly.length >= 9;
         }
 
         try {
@@ -92,7 +91,6 @@ export function MainConfirm() {
                 }
             })
 
-
             setIsRequiredCityActive(false);
             setIsRequiredRegionActive(false);
             setIsRequiredWarehouseActive(false);
@@ -103,7 +101,7 @@ export function MainConfirm() {
 
             if (productText === '') {
                 alert("Ви не обрали жодного товару для замовлення");
-                return
+                return;
             } else if (inputNameValue === '' || inputVornameValue === '' || regionSelectValue === '' || citySelectValue === '' || warehouseSelectValue === '') {
                 switch ("") {
                     case inputNameValue:
@@ -119,7 +117,7 @@ export function MainConfirm() {
                     case warehouseSelectValue:
                         setIsRequiredWarehouseActive(true);
                 }
-                return
+                return;
             } else if (!isValidPhoneNumber(inputTelValue)) {
                 setIsRequiredCityActive(false);
                 setIsRequiredRegionActive(false);
@@ -129,26 +127,15 @@ export function MainConfirm() {
                 setIsRequiredTelActive(false);
 
                 setIsIncorrectTelActive(true);
-                return
+                return;
             }
 
-            setIsPhoneConfirmationActive(true);
-
             const body = {
-                inputNameValue,
-                inputVornameValue,
-                inputTelValue,
-                regionSelectValue,
-                citySelectValue,
-                warehouseSelectValue,
-                textareaCommentValue,
-                checkboxCallMeValue,
-                fullSummMsg,
-                orderText: productText,
-            };
+                "phone_number": inputTelValue
+            }
 
             try {
-                const response = await fetch("/api/submit/", {
+                const response = await fetch("/api/sms/send-sms-code/", {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',
@@ -156,28 +143,115 @@ export function MainConfirm() {
                     body: JSON.stringify(body),
                 });
 
-                const result = await response.text();
-                console.log('Відповідь сервера:', result);
-
-                inputNameRef.current.value = '';
-                inputVornameRef.current.value = '';
-                inputTelRef.current.value = '';
-                regionSelectRef.current.clearValue();
-                citySelectRef.current.clearValue();
-                warehouseSelectRef.current.clearValue();
-                textareaCommentRef.current.value = '';
-                checkboxCallMeRef.current.checked = false;
+                const result = await response.json();
+                
+                if (response.ok) {
+                    setIsPhoneConfirmationActive(true);
+                    setSmsId(result.sms_id);
+                    console.log('Відповідь сервера:', result);
+                } else {
+                    console.error('Ошибка от сервера:', result.error || result);
+                }
             } catch (error) {
                 console.error('Помилка:', error);
             }
         } catch (error) {
             console.error("Ошибка при загрузке данных:", error);
         }
+    }
+
+    // Send data per telegram
+    const sendData = async (code: string) => {
+        const inputNameValue = inputNameRef.current?.value || '';
+        const inputVornameValue = inputVornameRef.current?.value || '';
+        const inputTelValue = inputTelRef.current?.value || '';
+        const regionSelectValue = regionSelectRef.current?.getValue()[0]?.label || '';
+        const citySelectValue = citySelectRef.current?.getValue()[0]?.label || '';
+        const warehouseSelectValue = warehouseSelectRef.current?.getValue()[0]?.label || '';
+        const textareaCommentValue = textareaCommentRef.current?.value || '';
+        const checkboxCallMeValue = checkboxCallMeRef.current?.checked
+            ? 'Не дзвонити мені'
+            : 'Передзвоніть мені';
+        
+        setIsPhoneConfirmationActive(false);
+        
+        try {
+            const res = await fetch("/api/products/");
+            const data = await res.json();
+
+            let productText = '';
+            let fullSummPrice = 0
+            
+            data.forEach((product: cardProps) => {
+                fullSummPrice += Number(localStorage.getItem(`itemAmount${product.id}`)) * product.price
+            });
+
+            data.forEach((item: cardProps) => {
+                if (Number(localStorage.getItem(`itemAmount${item.id}`)) !== 0) {
+                    productText += `${item.name} ${localStorage.getItem(`itemAmount${item.id}`)} шт. \n`
+                }
+            })
+
+            const body = {
+                "code": code,
+                "sms_id": smsId,
+                "data": {
+                    "inputNameValue": inputNameValue,
+                    "inputVornameValue": inputVornameValue,
+                    "inputTelValue": inputTelValue,
+                    "regionSelectValue": regionSelectValue,
+                    "citySelectValue": citySelectValue,
+                    "warehouseSelectValue": warehouseSelectValue,
+                    "textareaCommentValue": textareaCommentValue,
+                    "checkboxCallMeValue": checkboxCallMeValue,
+                    "fullSummMsg": fullSummPrice,
+                    "orderText": productText,
+                }
+            };
+
+            try {
+                const response = await fetch("/api/submit/", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    inputNameRef.current.value = '';
+                    inputVornameRef.current.value = '';
+                    inputTelRef.current.value = '';
+                    regionSelectRef.current.clearValue();
+                    citySelectRef.current.clearValue();
+                    warehouseSelectRef.current.clearValue();
+                    textareaCommentRef.current.value = '';
+                    checkboxCallMeRef.current.checked = false;
+
+                    data.forEach((product: cardProps) => {
+                        localStorage.setItem(`itemAmount${product.id}`, "");
+                    });
+                    localStorage.setItem("itemAmountSumm", "");
+
+                    router.push('/confirmed');
+                } else {
+                    router.push('/confirm');
+                }
+
+            } catch (error) {
+                console.error('Uknown error');
+            }  
+
+        } catch (error) {
+            console.error("Error while loading data");
+        }
     };
 
     return (
         <div className="min-h-[1311px] bg-[#1F1F1F] mt-20 bg-repeat bg-pill bg-[length:250px]">
-            <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} />
+            <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} />     
             <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
                 <div>
                     <h1 className={`${handjet.className}
@@ -188,7 +262,7 @@ export function MainConfirm() {
                 <div className="min-h-[1064px]">
                     <StateContextConfirm.Provider value={statesConfirm}>
                         <ConfirmForm />
-                        <ConfirmTotal sendData={sendData} />                        
+                        <ConfirmTotal sendCode={sendCode} />
                     </StateContextConfirm.Provider>
                 </div>
             </div>

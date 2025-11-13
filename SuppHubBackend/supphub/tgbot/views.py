@@ -36,14 +36,14 @@ def submit_order(request):
                     f"{message_data.get('checkboxCallMeValue')}\n"
                     f"Коментарій:\n{message_data.get('textareaCommentValue')}\n\n"
                     f"Замовлення:\n{message_data.get('orderText')}\n"
-                    f"Сума: {data.get('fullSummMsg')} грн"
+                    f"Сума: {message_data.get('fullSummMsg')} грн"
                 )
 
                 res1 = requests.post(
                     f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID1, "text": message}
                 )
 
-                return JsonResponse({"success": True, "telegram_response": res1.json()}, status=status.HTTP_200_OK)
+                return JsonResponse({"success": True}, status=status.HTTP_200_OK)
             else:
                 return JsonResponse({"error": "Wrong code"}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:

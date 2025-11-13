@@ -10,10 +10,10 @@ const handjet: any = Handjet({
 });
 
 type ConfirmTotalProps = {
-  sendData: () => void;
+  sendCode: () => void;
 };
 
-export function ConfirmTotal({ sendData }: ConfirmTotalProps) {
+export function ConfirmTotal({ sendCode }: ConfirmTotalProps) {
     const [totalSum, setTotalSum] = useState<number>(0);
     const [items, setItems] = useState<cardProps[]>([]);
 
@@ -71,7 +71,7 @@ export function ConfirmTotal({ sendData }: ConfirmTotalProps) {
                 </div>
             </div>
             <button 
-                onClick={sendData}
+                onClick={sendCode}
                 className="w-[15.375rem] h-[3.25rem] bg-[#F90] rounded-[4px] flex items-center justify-center cursor-pointer self-center outline-none border-none">
                 <p className="leading-cssnormal text-black text-[1.25rem] tracking-[1.6px]">
                     Підтвердити

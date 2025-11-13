@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
+from django.utils.decorators import method_decorator
 
 from .models import SMSMessage, SMSStatus
 from .services import SMSService
@@ -15,9 +16,10 @@ from .services import SMSService
 class SMSMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = SMSMessage
-        fields = ['id', 'phone_number', 'sent_at']
+        fields = ['phone_number']
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class SMSMessageViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     throttle_scope = "sms"
@@ -37,7 +39,7 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
                 sms_id=sms_message.id
             )
             
-            return Response({"success": "Code sent"}, status=status.HTTP_200_OK)
+            return Response({"success": "Code sent", "sms_id": sms_message.id}, status=status.HTTP_200_OK)
         
         except ValueError as e:
             SMSMessage.objects.filter(id=sms_message.id).update(status=SMSStatus.FAILED)
