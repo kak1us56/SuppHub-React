@@ -62,14 +62,16 @@ def sms_webhook(request: Request):
 
     print("Received SMS webhook data:", data)
 
-    sms_id = data.get("data")[0].get("data").get("id")
+    sms_id = data.get("id")
 
     try:
         SMSMessage.objects.get(id=sms_id)
     except SMSMessage.DoesNotExist:
         raise ValueError(f"The message with {sms_id} doesn`t exist")
+    
+    status_text = data.get("status", "").upper()
 
-    if data.get('success') is True and data.get("data", [{}])[0].get("success") is True:
+    if status_text == "DELIVERED":
         SMSMessage.objects.filter(id=sms_id).update(status=SMSStatus.SENT)
     else:
         SMSMessage.objects.filter(id=sms_id).update(status=SMSStatus.FAILED)

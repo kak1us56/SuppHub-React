@@ -37,7 +37,7 @@ services:
       - .env
     volumes:
       - ./frontend/src:/app/src
-      - ./staticfiles:/usr/share/nginx/html/staticfiles:ro
+      - ./SuppHubBackend/supphub/staticfiles:/usr/share/nginx/html/static:ro
     depends_on:
       - api
     restart: always
