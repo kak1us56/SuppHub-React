@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework import serializers, viewsets, status, routers
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
 from django.utils.decorators import method_decorator
@@ -50,6 +50,8 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
 
 
 @csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny]) 
 def sms_webhook(request: Request):
     print("\n------------SMS webhook is handled-------------")
 
