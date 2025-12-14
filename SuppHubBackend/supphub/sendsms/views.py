@@ -21,6 +21,8 @@ class SMSMessageSerializer(serializers.ModelSerializer):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class SMSMessageViewSet(viewsets.ModelViewSet):
+    authentication_classes = []
+
     permission_classes = [AllowAny]
     throttle_scope = "sms"
     sms_service = SMSService()
