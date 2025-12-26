@@ -3,7 +3,7 @@ services:
     build:
       context: ./SuppHubBackend/supphub
       dockerfile: Dockerfile
-      target: prod
+      target: dev
     ports:
       - "8000:8000"
     env_file:

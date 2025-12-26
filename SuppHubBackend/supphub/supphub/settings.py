@@ -182,3 +182,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID1 = os.getenv("CHAT_ID1")
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://supphub.shop",
+    "https://www.supphub.shop",
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
