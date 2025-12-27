@@ -1,4 +1,4 @@
-# 🛒 SuppHub - Sports Nutrition E-commerce Platform
+# 🛒 SuppHub - Study Nutrition E-commerce Platform
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=google-chrome)](https://supphub.shop/)
 ![Python](https://img.shields.io/badge/python-3.13-blue?style=for-the-badge&logo=python)
