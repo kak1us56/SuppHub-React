@@ -54,17 +54,12 @@ class SMSService:
         }
 
         return payload
-
-    def send_sms(self, phone_number: str, sms_id: int) -> None:
+    
+    def send_sms(self, phone_number: str, sms_id: int, message: str) -> None:
         try:
             validated_phone = self._check_phone_number(phone_number)
         except ValueError as e:
             raise ValueError(f"Not correct phone number {e}")
-        
-        code = self._generate_code()
-        message = f"Ваш код підтвердження: {code}"
-
-        self.cache.set("sms_code", str(sms_id), {"code": str(code)}, 3600)
 
         payload = self._form_payload(
             phone_number=validated_phone,
@@ -89,5 +84,39 @@ class SMSService:
 
         except requests.exceptions.RequestException as e:
             raise Exception("Error while sending the message")
-        
-        return code
+
+    def send_sms_code(self, phone_number: str, sms_id: int) -> None:
+        try:
+            validated_phone = self._check_phone_number(phone_number)
+        except ValueError as e:
+            raise ValueError(f"Not correct phone number {e}")
+
+        code = self._generate_code()
+        message = f"Ваш код підтвердження: {code}"
+
+        self.cache.set("sms_code", str(sms_id), {"code": str(code)}, 3600)
+
+        self.send_sms(phone_number=validated_phone, sms_id=sms_id, message=message)
+    
+    def send_confirmation_sms(self, phone_number: int, sms_id: int, name: str, surname: str, region: str, city: str, warehouse: str, order: str):
+        try:
+            validated_phone = self._check_phone_number(phone_number)
+        except ValueError as e:
+            raise ValueError(f"Not correct phone number {e}")
+
+        order_number = self._generate_code(k=6)
+        message = (
+            f"Номер вашого замовлення {order_number}\n\n"
+            f"Деталі замовлення:\n"
+            f"Замовник: {surname.capitalize()} {name.capitalize()}\n"
+            f"Адреса доставки:\n"
+            f"Область: {region}\n"
+            f"Місто: {city}\n"
+            f"Відділення: {warehouse}\n"
+            f"Замовлення:\n{order}\n\n"
+            "Дякуємо Вам за замовлення. В межах 24 годин Ви отримаєте підтвердження від Нової Пошти з інформацією про дату доставки."
+        )
+
+        self.send_sms(phone_number=validated_phone, sms_id=sms_id, message=message)
+
+

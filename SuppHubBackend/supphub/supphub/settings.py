@@ -157,7 +157,7 @@ REST_FRAMEWORK = {
         "anon": "1000/day",
         "user": "1000/day",
 
-        "sms": "1/min", 
+        "sms": "2/min", 
         "webhook": "5/min",
     },
 }

@@ -19,6 +19,7 @@ class SMSMessageSerializer(serializers.ModelSerializer):
         fields = ['phone_number']
 
 
+
 @method_decorator(csrf_exempt, name='dispatch')
 class SMSMessageViewSet(viewsets.ModelViewSet):
     authentication_classes = []
@@ -36,7 +37,7 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
 
 
         try:
-            generated_code = self.sms_service.send_sms(
+            self.sms_service.send_sms_code(
                 phone_number=request.data.get('phone_number'),
                 sms_id=sms_message.id
             )
@@ -49,6 +50,35 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
         except Exception as e:
             SMSMessage.objects.filter(id=sms_message.id).update(status=SMSStatus.FAILED)
             return Response({"error": str(e)}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+    
+    # @action(methods=["post"], detail=False, url_path=r"send_confirmation")
+    # def send_confirmation(self, request: Request) -> Response:
+    #     serializer = SMSMessageSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+
+    #     sms_message = serializer.save()
+
+        
+    #     try:
+    #         self.sms_service.send_confirmation_sms(
+    #             phone_number=request.data.get('phone_number'),
+    #             sms_id=sms_message.id,
+    #             name=request.data.get('name'),
+    #             surname=request.data.get('surname'),
+    #             region=request.data.get('region'),
+    #             city=request.data.get('city'),
+    #             warehouse=request.data.get('warehouse'),
+    #             order=request.data.get('order'),
+    #         )
+            
+    #         return Response({"success": "Code sent", "sms_id": sms_message.id}, status=status.HTTP_200_OK)
+        
+    #     except ValueError as e:
+    #         SMSMessage.objects.filter(id=sms_message.id).update(status=SMSStatus.FAILED)
+    #         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    #     except Exception as e:
+    #         SMSMessage.objects.filter(id=sms_message.id).update(status=SMSStatus.FAILED)
+    #         return Response({"error": str(e)}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 
 @csrf_exempt
