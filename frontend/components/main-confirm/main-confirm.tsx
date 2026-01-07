@@ -27,6 +27,7 @@ export function MainConfirm() {
     const citySelectRef = useRef<SelectInstance<OptionType>>(null);
     const warehouseSelectRef = useRef<SelectInstance<OptionType>>(null);
     const textareaCommentRef = useRef<HTMLTextAreaElement>(null);
+    const inputPromocodeRef = useRef<HTMLInputElement>(null);
     const checkboxCallMeRef = useRef<HTMLInputElement>(null);
 
     const [isRequiredNameActive, setIsRequiredNameActive] = useState<boolean>(false);
@@ -47,6 +48,7 @@ export function MainConfirm() {
         citySelectRef,
         warehouseSelectRef,
         textareaCommentRef,
+        inputPromocodeRef,
         checkboxCallMeRef,
 
         // Validation states
@@ -169,6 +171,7 @@ export function MainConfirm() {
         const citySelectValue = citySelectRef.current?.getValue()[0]?.label || '';
         const warehouseSelectValue = warehouseSelectRef.current?.getValue()[0]?.label || '';
         const textareaCommentValue = textareaCommentRef.current?.value || '';
+        const inputPromocodeValue = inputPromocodeRef.current?.value || "";
         const checkboxCallMeValue = checkboxCallMeRef.current?.checked
             ? 'Не дзвонити мені'
             : 'Передзвоніть мені';
@@ -203,6 +206,7 @@ export function MainConfirm() {
                     "citySelectValue": citySelectValue,
                     "warehouseSelectValue": warehouseSelectValue,
                     "textareaCommentValue": textareaCommentValue,
+                    "inputPromocodeValue": inputPromocodeValue,
                     "checkboxCallMeValue": checkboxCallMeValue,
                     "fullSummMsg": fullSummPrice,
                     "orderText": productText,

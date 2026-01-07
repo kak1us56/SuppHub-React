@@ -24,6 +24,7 @@ export interface StatesConfirmType {
   citySelectRef: RefObject<SelectInstance<OptionType>>;
   warehouseSelectRef: RefObject<SelectInstance<OptionType>>;
   textareaCommentRef: RefObject<HTMLTextAreaElement>;
+  inputPromocodeRef: RefObject<HTMLInputElement>;
   checkboxCallMeRef: RefObject<HTMLInputElement>;
 
   isRequiredNameActive: boolean;

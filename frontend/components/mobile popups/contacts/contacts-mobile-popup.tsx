@@ -3,6 +3,7 @@ import { StateContext, StatesType } from "../../uikit/state-context";
 import Image from "next/image";
 import convert from "./images/convert.png";
 import tgIcon from "./images/tg-icon.png";
+import phoneIcon from "./images/phone.png";
 import Link from "next/link";
 
 import { Handjet } from "next/font/google";
@@ -52,6 +53,19 @@ export function ContactsMobilePopup() {
             className="leading-cssnormal tracking-[1.2px] text-[1rem] text-white font-medium"
           >
             t.me/supphub_manager
+          </Link>
+        </div>
+        <div className="flex gap-[6px] items-center">
+          <div>
+            <Image className="h-5 w-5" src={phoneIcon} alt="Телефон" />
+          </div>
+          <Link
+            href="tel:+380737227307"
+            target="_blank"
+            onClick={() => sendMetrik("click", "ClickToPhone", "Socials", "Mobile")}
+            className="leading-cssnormal tracking-[1.2px] text-[1rem] text-white font-medium"
+          >
+            +380-737-227-307
           </Link>
         </div>
       </div>

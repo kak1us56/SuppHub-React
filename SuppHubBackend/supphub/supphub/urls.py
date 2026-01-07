@@ -9,10 +9,12 @@ from products.views import router as products_router
 from sendsms.views import router as sms_router
 from sendsms.views import sms_webhook
 from products.views import import_products
+from products.views import import_promocodes
 from tgbot.views import submit_order
 
 urlpatterns = [
     path("admin/products/product/import-products/", import_products, name="import_products"),
+    path("admin/products/promocode/import-promocodes/", import_promocodes, name="import_promocodes"),
     path("admin/", admin.site.urls),
     path("", include(products_router.urls)),
     path("sms/", include(sms_router.urls)),

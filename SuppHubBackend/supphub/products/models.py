@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
@@ -14,3 +15,15 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+
+class Promocode(models.Model):
+    class Meta:
+        db_table = "promocodes"
+    
+    code = models.CharField(max_length=8, validators=[MinLengthValidator(8)], null=False)
+    discount = models.PositiveIntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)], null=False)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.code
