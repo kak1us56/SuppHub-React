@@ -23,7 +23,7 @@ class Promocode(models.Model):
     
     code = models.CharField(max_length=8, validators=[MinLengthValidator(8)], null=False)
     discount = models.PositiveIntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)], null=False)
-    is_active = models.BooleanField(default=True)
+    usages_amount = models.PositiveSmallIntegerField(default=1, null=False)
 
     def __str__(self):
         return self.code

@@ -1,7 +1,13 @@
 import csv
 import io
 from django.shortcuts import redirect
-from rest_framework import routers, serializers, viewsets, permissions
+from rest_framework import routers, serializers, viewsets, permissions, status
+from rest_framework.decorators import permission_classes, action
+from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
+from rest_framework.request import Request
+from rest_framework.response import Response
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Product, Promocode
 
@@ -24,7 +30,36 @@ class ProductAPIViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class PromocodeAPIViewSet(viewsets.ModelViewSet):
+    queryset = Promocode.objects.all()
+
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    throttle_scope = "promocode"
+
+    @action(methods=["post"], detail=False, url_path=r"check-promocode")
+    def check_promocode(self, request: Request) -> Response:
+        # serializer = PromocodeSerializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+
+        code_val = request.data.get("code")
+
+        if not code_val:
+            return Response({"error": "Промокод не може бути пустим"}, status=status.HTTP_400_BAD_REQUEST)
+
+        db_code = Promocode.objects.get(code=code_val)
+
+        if db_code.usages_amount > 0:
+            db_code.usages_amount -= 1
+            db_code.save()
+
+            return Response({"success": "Ваш промокод успішно застосований", "discount": db_code.discount}, status=status.HTTP_200_OK)
+        else:
+            return Response({"success": "Ваш промокод більше не дійсний"}, status=status.HTTP_200_OK)
 
 
 def handle_csv_import(request, callback):
@@ -72,3 +107,4 @@ def import_promocodes(request):
 
 router = routers.DefaultRouter()
 router.register(r"products", ProductAPIViewSet, basename="products")
+router.register(r"promocodes", PromocodeAPIViewSet, basename="promocodes")

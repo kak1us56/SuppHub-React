@@ -11,5 +11,5 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Promocode)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["code", "discount", "id"]
-    list_filter = ["discount"]
+    list_display = ["code", "discount", "usages_amount", "id"]
+    list_filter = ["discount", "usages_amount"]
