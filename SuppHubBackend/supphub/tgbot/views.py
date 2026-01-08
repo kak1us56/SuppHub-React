@@ -37,6 +37,7 @@ def submit_order(request):
                     f"Відділення: {message_data.get('warehouseSelectValue')}\n\n"
                     f"{message_data.get('checkboxCallMeValue')}\n"
                     f"Коментарій:\n{message_data.get('textareaCommentValue')}\n\n"
+                    f"Промокод: {message_data.get('inputPromocodeValue')}"
                     f"Замовлення:\n{message_data.get('orderText')}\n"
                     f"Сума: {message_data.get('fullSummMsg')} грн"
                 )

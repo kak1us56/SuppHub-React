@@ -11,9 +11,10 @@ const handjet: any = Handjet({
 
 type ConfirmTotalProps = {
   sendCode: () => void;
+  discount: number;
 };
 
-export function ConfirmTotal({ sendCode }: ConfirmTotalProps) {
+export function ConfirmTotal({ sendCode, discount }: ConfirmTotalProps) {
     const [totalSum, setTotalSum] = useState<number>(0);
     const [items, setItems] = useState<cardProps[]>([]);
 
@@ -32,6 +33,9 @@ export function ConfirmTotal({ sendCode }: ConfirmTotalProps) {
     }, [])
 
     useEffect(() => controlBasketTotal(setTotalSum), []);
+    const finalPrice = discount > 0 
+        ? totalSum - (totalSum * discount / 100) 
+        : totalSum;
 
     return (
         <div className="sticky top-[100px] w-[37.5rem] min-h-[26.5rem] px-10 pt-10 pb-7
@@ -63,7 +67,7 @@ export function ConfirmTotal({ sendCode }: ConfirmTotalProps) {
                 </div>
                 <div className={`text-[2.25rem] leading-cssnormal tracking-[2.52px] flex flex-col gap-2`}>
                     <p className={`${handjet.className} text-white font-medium`}>
-                        <span>{totalSum}</span> грн
+                        <span>{finalPrice.toFixed(0)}</span> грн
                     </p>
                     <p className={`${handjet.className} text-white font-medium`}>
                         За тарифами<br /> перевізника

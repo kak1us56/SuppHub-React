@@ -18,6 +18,7 @@ const handjet: any = Handjet({
 
 export function MainConfirm() {
     const [smsId, setSmsId] = useState<number | null>(null)
+    const [discount, setDiscount] = useState<number>(0)
     const router = useRouter();
 
     const inputNameRef = useRef<HTMLInputElement>(null);
@@ -63,6 +64,36 @@ export function MainConfirm() {
 
     // Calculate sum price
     useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
+
+    const apply_promocode = async (event) => {
+        event.preventDefault();
+        const inputPromocodeValue = inputPromocodeRef.current?.value || '';
+
+        const body = {
+            "code": inputPromocodeValue
+        }
+
+        try {
+            const response = await fetch("/api/promocodes/check-promocode/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body),
+            });
+
+            const result = await response.json()
+
+            if (response.ok && result.success) {
+                setDiscount(result.discount);
+            }
+            
+            
+        } catch (error) {
+            console.log("Помилка при застосуванні промокоду: ", error);
+        }
+    }
+
 
     // Send confirmation code
     const sendCode = async () => {
@@ -188,6 +219,7 @@ export function MainConfirm() {
             data.forEach((product: cardProps) => {
                 fullSummPrice += Number(localStorage.getItem(`itemAmount${product.id}`)) * product.price
             });
+            fullSummPrice = discount > 0 ? fullSummPrice - (fullSummPrice * discount / 100) : fullSummPrice;
 
             data.forEach((item: cardProps) => {
                 if (Number(localStorage.getItem(`itemAmount${item.id}`)) !== 0) {
@@ -208,7 +240,7 @@ export function MainConfirm() {
                     "textareaCommentValue": textareaCommentValue,
                     "inputPromocodeValue": inputPromocodeValue,
                     "checkboxCallMeValue": checkboxCallMeValue,
-                    "fullSummMsg": fullSummPrice,
+                    "fullSummMsg": fullSummPrice.toFixed(0),
                     "orderText": productText,
                 }
             };
@@ -265,8 +297,8 @@ export function MainConfirm() {
                 </div>
                 <div className="min-h-[1064px]">
                     <StateContextConfirm.Provider value={statesConfirm}>
-                        <ConfirmForm />
-                        <ConfirmTotal sendCode={sendCode} />
+                        <ConfirmForm apply_promo={apply_promocode} />
+                        <ConfirmTotal sendCode={sendCode} discount={discount} />
                     </StateContextConfirm.Provider>
                 </div>
             </div>

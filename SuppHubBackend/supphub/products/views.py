@@ -59,7 +59,7 @@ class PromocodeAPIViewSet(viewsets.ModelViewSet):
 
             return Response({"success": "Ваш промокод успішно застосований", "discount": db_code.discount}, status=status.HTTP_200_OK)
         else:
-            return Response({"success": "Ваш промокод більше не дійсний"}, status=status.HTTP_200_OK)
+            return Response({"error": "Ваш промокод більше не дійсний"}, status=status.HTTP_200_OK)
 
 
 def handle_csv_import(request, callback):

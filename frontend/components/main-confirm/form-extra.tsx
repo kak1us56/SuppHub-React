@@ -1,7 +1,11 @@
 import { useContext, useState } from "react";
 import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
 
-export function FormExtra() {
+type FormExtraProps = {
+    apply_promo: (event: any) => Promise<void>;
+}
+
+export const FormExtra = ({ apply_promo }: FormExtraProps) => {
     const states: StatesConfirmType = useContext(StateContextConfirm);
     const [value, setValue] = useState<string>("");
 
@@ -41,6 +45,8 @@ export function FormExtra() {
                         className="rounded-[5px] bg-[#494949] text-center text-[1.25rem]/[20px]
                         tracking-[1.4px] text-white outline-none w-[232px] h-[44px]" />
                     <button
+                        onClick={apply_promo}
+                        type="submit"
                         className="w-[165px] h-[44px] bg-[#F90] rounded-[4px] flex items-center justify-center cursor-pointer self-center outline-none border-none">
                         <p className="leading-cssnormal text-black text-[1.25rem] tracking-[1.6px]">
                             Застосувати
