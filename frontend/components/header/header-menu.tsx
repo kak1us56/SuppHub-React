@@ -27,21 +27,29 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
   // Indicator active
   useEffect(() => controlIndicator(setIndicActive), [])
 
+  // isBasketOpen
+  const handleCartClick = () => {
+    if (states.basketActive) {
+      states.setBasketActive(false);
+    } else {
+      states.setBasketActive(true);
+    }
+
+    states.setContactsActive(false);
+    states.setAboutActive(false);
+    setIsMenuOpen(false);
+  }
+
   return (
     <>
       {isMobile ? (
         <div className="flex gap-4 pt-[6px]">
           <div
             className="mt-[-4px] relative"
-            onClick={() => {
-              states.setBasketActive(true);
-              states.setContactsActive(false);
-              states.setAboutActive(false);
-              setIsMenuOpen(false);
-            }}  
+            onClick={handleCartClick}  
           >
             <Image height={32} src={cart} alt="Кошик" />
-            <div className={`${indicActive ? 'block' : 'hidden'} absolute w-2 h-2 rounded-full bg-[#F90] top-[6px] right-[-1px] z-[6]`}></div>
+            <div className={`${indicActive ? 'block' : 'hidden'} absolute w-2 h-2 rounded-full bg-[#F90] top-[6px] right-[-1px] z-[0]`}></div>
           </div>
           <div onClick={() => handleBurger(isMenuOpen, setIsMenuOpen)} className="relative transition-linear">
             <div className="inline-block w-[40px] h-[24px] relative z-[5] transition-linear">
