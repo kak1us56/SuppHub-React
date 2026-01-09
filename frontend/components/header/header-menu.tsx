@@ -1,4 +1,6 @@
 // import Link from "next/link";
+import Image from "next/image";
+import cart from "./images/shopping-cart.png";
 import { Link, animateScroll as scroll } from "react-scroll";
 import { useContext, useEffect, useState } from "react";
 import { StateContext, StatesType } from "../uikit/state-context";
@@ -28,22 +30,35 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
   return (
     <>
       {isMobile ? (
-        <div onClick={() => handleBurger(isMenuOpen, setIsMenuOpen)} className="relative transition-linear">
-          <div className="inline-block w-[40px] h-[24px] relative z-[5] transition-linear">
-            <span
-              className={`${isMenuOpen ? "hidden" : "inline-block"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-0 transition-linear`}
-            ></span>
-            <span
-              className={`${isMenuOpen ? "rotate-45" : "rotate-0"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[11px] transition-linear`}
-            ></span>
-            <span
-              className={`${isMenuOpen ? "-rotate-45" : "rotate-0"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[11px] transition-linear`}
-            ></span>
-            <span
-              className={`${isMenuOpen ? "hidden" : "inline-block"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[22px] transition-linear`}
-            ></span>
+        <div className="flex gap-4 pt-[6px]">
+          <div
+            className="mt-[-4px] relative"
+            onClick={() => {
+              states.setBasketActive(true);
+              states.setContactsActive(false);
+              states.setAboutActive(false);
+              setIsMenuOpen(false);
+            }}  
+          >
+            <Image height={32} src={cart} alt="Кошик" />
+            <div className={`${indicActive ? 'block' : 'hidden'} absolute w-2 h-2 rounded-full bg-[#F90] top-[6px] right-[-1px] z-[6]`}></div>
           </div>
-          <div className={`${indicActive ? 'block' : 'hidden'} absolute w-3 h-3 rounded-full bg-[#F90] top-[-4px] right-[1px] z-[6]`}></div>
+          <div onClick={() => handleBurger(isMenuOpen, setIsMenuOpen)} className="relative transition-linear">
+            <div className="inline-block w-[40px] h-[24px] relative z-[5] transition-linear">
+              <span
+                className={`${isMenuOpen ? "hidden" : "inline-block"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-0 transition-linear`}
+              ></span>
+              <span
+                className={`${isMenuOpen ? "rotate-45" : "rotate-0"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[11px] transition-linear`}
+              ></span>
+              <span
+                className={`${isMenuOpen ? "-rotate-45" : "rotate-0"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[11px] transition-linear`}
+              ></span>
+              <span
+                className={`${isMenuOpen ? "hidden" : "inline-block"} w-[30px] h-[2px] bg-[#D9D9D9] absolute left-[5px] top-[22px] transition-linear`}
+              ></span>
+            </div>
+          </div>        
         </div>
       ) : (
         ""
