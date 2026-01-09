@@ -37,7 +37,7 @@ def submit_order(request):
                     f"Відділення: {message_data.get('warehouseSelectValue')}\n\n"
                     f"{message_data.get('checkboxCallMeValue')}\n"
                     f"Коментарій:\n{message_data.get('textareaCommentValue')}\n\n"
-                    f"Промокод: {message_data.get('inputPromocodeValue')}"
+                    f"Промокод: {message_data.get('inputPromocodeValue')}\n"
                     f"Замовлення:\n{message_data.get('orderText')}\n"
                     f"Сума: {message_data.get('fullSummMsg')} грн"
                 )
@@ -72,12 +72,12 @@ def submit_order(request):
                     sms_service.send_confirmation_sms(
                         phone_number=phone,
                         sms_id=confirmation_sms.id,
-                        name=message_data.get('inputNameValue'),
-                        surname=message_data.get('inputVornameValue'),
-                        city=message_data.get('citySelectValue'),
-                        region=message_data.get('regionSelectValue'),
-                        warehouse=message_data.get('warehouseSelectValue'),
-                        order=message_data.get('orderText')
+                        # name=message_data.get('inputNameValue'),
+                        # surname=message_data.get('inputVornameValue'),
+                        # city=message_data.get('citySelectValue'),
+                        # region=message_data.get('regionSelectValue'),
+                        # warehouse=message_data.get('warehouseSelectValue'),
+                        # order=message_data.get('orderText')
                     )
                     print(f"Confirmation SMS sent to {phone}, ID: {confirmation_sms.id}")
 

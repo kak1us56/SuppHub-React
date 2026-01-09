@@ -98,24 +98,26 @@ class SMSService:
 
         self.send_sms(phone_number=validated_phone, sms_id=sms_id, message=message)
     
-    def send_confirmation_sms(self, phone_number: int, sms_id: int, name: str, surname: str, region: str, city: str, warehouse: str, order: str):
+    def send_confirmation_sms(self, phone_number: int, sms_id: int):
         try:
             validated_phone = self._check_phone_number(phone_number)
         except ValueError as e:
             raise ValueError(f"Not correct phone number {e}")
 
         order_number = self._generate_code(k=6)
-        message = (
-            f"Номер вашого замовлення {order_number}\n\n"
-            f"Деталі замовлення:\n"
-            f"Замовник: {surname.capitalize()} {name.capitalize()}\n"
-            f"Адреса доставки:\n"
-            f"Область: {region}\n"
-            f"Місто: {city}\n"
-            f"Відділення: {warehouse}\n"
-            f"Замовлення:\n{order}\n\n"
-            "Дякуємо Вам за замовлення. В межах 24 годин Ви отримаєте підтвердження від Нової Пошти з інформацією про дату доставки."
-        )
+        message = f"Ваше замовлення №{order_number} прийнято.\nОчікуйте повідомлення від Нової Пошти"
+
+        # message = (
+        #     f"Номер вашого замовлення {order_number}\n\n"
+        #     f"Деталі замовлення:\n"
+        #     f"Замовник: {surname.capitalize()} {name.capitalize()}\n"
+        #     f"Адреса доставки:\n"
+        #     f"Область: {region}\n"
+        #     f"Місто: {city}\n"
+        #     f"Відділення: {warehouse}\n"
+        #     f"Замовлення:\n{order}\n\n"
+        #     "Дякуємо Вам за замовлення. В межах 24 годин Ви отримаєте підтвердження від Нової Пошти з інформацією про дату доставки."
+        # )
 
         self.send_sms(phone_number=validated_phone, sms_id=sms_id, message=message)
 
