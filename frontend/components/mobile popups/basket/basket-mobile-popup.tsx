@@ -6,6 +6,7 @@ import { BasketMobileItem } from "./basket-mobile-item";
 import { controlBasketTotal, controlButtonActive, mobileResize } from "../../constants/functions-global-logic";
 import { cardProps } from "../../constants/interfaces";
 import { sendMetrik } from "../../utils";
+import Link from "next/link";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -103,15 +104,16 @@ export function BasketMobilePopup() {
             /> */}
           </div>
           <div className="flex justify-between pt-10">
-            <div
-              onClick={() => sendMetrik("click", "ClickToConfirmPage", "BasketMobilePopup", "Mobile")}
-              className={`${buttonActive ? 'bg-[#F90] cursor-pointer' : 'bg-[#cca365] cursor-default'}
-                rounded-[4px] text-center w-[8.75rem] h-[2.85rem] mt-2 flex justify-center items-center transition-15`}
-            >
-              <p className="text-black text-[0.975rem] tracking-[1.3px] leading-cssnormal font-medium">
-                Оформити замовлення
-              </p>
-            </div>
+            <Link href={`${buttonActive ? '/confirm' : '/'}`} onClick={() => sendMetrik("click", "ClickToConfirmPage", "BasketMobilePopup", "Mobile")}>
+              <div
+                className={`${buttonActive ? 'bg-[#F90] cursor-pointer' : 'bg-[#cca365] cursor-default'}
+                  rounded-[4px] text-center w-[8.75rem] h-[2.85rem] mt-2 flex justify-center items-center transition-15`}
+              >
+                <p className="text-black text-[0.975rem] tracking-[1.3px] leading-cssnormal font-medium">
+                  Оформити замовлення
+                </p>
+              </div>            
+            </Link>
             <p className="tracking-[2.4px] text-[1.5rem] leading-cssnormal text-white font-medium">
               Сума:
               <br />

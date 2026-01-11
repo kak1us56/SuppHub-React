@@ -9,8 +9,9 @@ import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
 import Select from "react-select/dist/declarations/src/Select";
 import { SelectInstance } from "react-select";
 import { OptionType } from "./form-place";
-import { controlBasketTotal } from "../constants/functions-global-logic";
+import { controlBasketTotal, mobileResize } from "../constants/functions-global-logic";
 import { cardProps } from "../constants/interfaces";
+import { ProductsMobile } from "./products-mobile";
 
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
@@ -40,6 +41,7 @@ export function MainConfirm() {
     const [isRequiredWarehouseActive, setIsRequiredWarehouseActive] = useState<boolean>(false);
     const [basketTotal, setBasketTotal] = useState<number>(0)
     const [isPhoneConfirmationActive, setIsPhoneConfirmationActive] = useState<boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const statesConfirm: StatesConfirmType = {
         inputNameRef,
@@ -61,6 +63,9 @@ export function MainConfirm() {
         isRequiredCityActive,
         isRequiredWarehouseActive,
     };
+
+    //   Mobile
+    useEffect(() => mobileResize(setIsMobile), []);
 
     // Calculate sum price
     useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
@@ -286,22 +291,26 @@ export function MainConfirm() {
     };
 
     return (
-        <div className="min-h-[1311px] bg-[#1F1F1F] mt-20 bg-repeat bg-pill bg-[length:250px]">
-            <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} />     
-            <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
-                <div>
-                    <h1 className={`${handjet.className}
-                        text-[#D9D9D9] leading-cssnormal tracking-[5.12px] text-[4rem] py-[68px] font-medium`}>
-                        Оформлення замовлення
-                    </h1>
+        <main>
+            <div className="min-h-[1311px] max-md:min-h-[700px] bg-[#1F1F1F] mt-20 max-md:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-md:bg-[length:130px]">
+                <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} />     
+                <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
+                    <div>
+                        <h1 className={`${handjet.className} max-md:text-[24px] max-md:tracking-[1.92px] max-md:pt-4 max-md:pb-8
+                            text-[#D9D9D9] leading-cssnormal tracking-[5.12px] text-[4rem] py-[68px] font-medium`}>
+                            Оформлення замовлення
+                        </h1>
+                    </div>
+                    <div className="min-h-[1064px] max-md:min-h-[600px]">
+                        <StateContextConfirm.Provider value={statesConfirm}>
+                            {isMobile && <ProductsMobile />}
+                            <ConfirmForm apply_promo={apply_promocode} />
+                            <ConfirmTotal sendCode={sendCode} discount={discount} />
+                        </StateContextConfirm.Provider>
+                    </div>
                 </div>
-                <div className="min-h-[1064px]">
-                    <StateContextConfirm.Provider value={statesConfirm}>
-                        <ConfirmForm apply_promo={apply_promocode} />
-                        <ConfirmTotal sendCode={sendCode} discount={discount} />
-                    </StateContextConfirm.Provider>
-                </div>
-            </div>
-        </div>
+            </div>            
+        </main>
+
     )
 }

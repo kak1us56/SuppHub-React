@@ -35,10 +35,6 @@ export default function ConfirmPage() {
             <StateContext.Provider value={states}>
                 <AboutMobilePopup />
                 <ContactsMobilePopup />
-                <BasketMobilePopup />
-                <ContactsPopup />
-                <AboutPopup />
-                <BasketPopup />
                 <Header isBasket={false} />
                 <MainConfirm />
                 <Footer />

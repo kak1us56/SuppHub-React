@@ -106,13 +106,13 @@ export function FormPlace() {
 
   return (
     <div className="flex flex-col">
-      <h2 className="leading-cssnormal tracking-[2.24px] text-[2rem] text-white font-semibold">
+      <h2 className="leading-cssnormal tracking-[2.24px] text-[2rem] text-white font-semibold max-md:text-[16px] max-md:tracking-[1.12px]">
         2. Дані для доставки
       </h2>
-      <div className="flex flex-col pt-7 gap-[21px]">
+      <div className="flex flex-col pt-7 gap-[21px] max-md:pt-1 max-md:pl-[18px] max-md:gap-[10px]">
         <div>
-          <div className="flex justify-between items-center">
-            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Область*</p>
+          <div className="flex justify-between items-center max-md:flex-col max-md:items-start">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium max-md:text-[14px] max-md:tracking-[0.98px] max-md:pl-0">Область*</p>
             <div className="w-[17.1875rem]">
               <Select<OptionType>
                   ref={states.regionSelectRef}
@@ -136,8 +136,8 @@ export function FormPlace() {
           <p className={`${states.isRequiredRegionActive ? "block" : "hidden"} text-red-500 text-[0.775rem] pl-2`}>Це поле обов'язкове*</p>          
         </div>
         <div>
-          <div className="flex justify-between items-center">
-            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Місто*</p>
+          <div className="flex justify-between items-center max-md:flex-col max-md:items-start">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium max-md:text-[14px] max-md:tracking-[0.98px] max-md:pl-0">Місто*</p>
             <div className="w-[17.1875rem]">
               <Select<OptionType>
               ref={states.citySelectRef}
@@ -160,8 +160,8 @@ export function FormPlace() {
           <p className={`${states.isRequiredCityActive ? "block" : "hidden"} text-red-500 text-[0.775rem] pl-2`}>Це поле обов'язкове*</p>          
         </div>
         <div>
-          <div className="flex justify-between items-center">
-            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium">Відділення НП*</p>
+          <div className="flex justify-between items-center max-md:flex-col max-md:items-start">
+            <p className="text-[1.25rem]/[20px] tracking-[1.4px] text-white pl-[9px] font-medium max-md:text-[14px] max-md:tracking-[0.98px] max-md:pl-0">Відділення НП*</p>
             <div className="w-[17.1875rem]">
               <Select<OptionType>
               ref={states.warehouseSelectRef}
@@ -186,7 +186,7 @@ export function FormPlace() {
         </div>
 
       </div>
-      <p className="text-[1rem] leading-cssnormal pt-[23px] pl-[11px] text-white font-normal">
+      <p className="text-[1rem] max-md:text-[0.75rem] leading-cssnormal pt-[23px] max-md:pt-[14px] max-md:w-full pl-[11px] text-white font-normal">
         Доставка відбувається виключно Новою Поштою <br />
         та накладеним платежем!
       </p>

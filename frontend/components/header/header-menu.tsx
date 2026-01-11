@@ -45,7 +45,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
       {isMobile ? (
         <div className="flex gap-4 pt-[6px]">
           <div
-            className="mt-[-4px] relative"
+            className={`${isBasket ? "block" : "hidden"} mt-[-4px] relative`}
             onClick={handleCartClick}  
           >
             <Image height={32} src={cart} alt="Кошик" />
