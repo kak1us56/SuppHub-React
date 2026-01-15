@@ -35,7 +35,6 @@ class SMSMessageViewSet(viewsets.ModelViewSet):
 
         sms_message = serializer.save()
 
-
         try:
             self.sms_service.send_sms_code(
                 phone_number=request.data.get('phone_number'),
