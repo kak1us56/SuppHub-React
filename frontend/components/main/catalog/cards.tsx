@@ -20,7 +20,7 @@ export function Cards() {
   }, [])
 
   return (
-    <div className="flex flex-wrap justify-center max-md:gap-y-[18px] max-md:gap-x-[30px] gap-y-[73px] gap-x-[118px] pb-[106px]">
+    <div className="flex flex-wrap justify-center max-md:gap-y-[14px] max-md:gap-x-[10px] gap-y-[73px] gap-x-[118px] pb-[106px] max-md:pb-[50px]">
       {
         items.map((item) => (
           <Card
@@ -34,6 +34,14 @@ export function Cards() {
           />
         )) || 'Наразі немає товару в наявності'
       }
+      {/* <Card
+        hitBool={false}
+        veganBool={false}
+        name="L-tyrosine"
+        price={220}
+        img={}
+        id="1"
+      /> */}
     </div>
   );
 }

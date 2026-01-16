@@ -8,7 +8,7 @@ export function cardCounterIn(cardCounter: number, setCardCounter: (count: numbe
     }
 }
 export function cardCounterDe(cardCounter: number, setCardCounter: (count: number) => void) {
-    if (cardCounter > 0) {
+    if (cardCounter > 1) {
         let cardCounterCopy = Number(cardCounter);
         setCardCounter(cardCounterCopy - 1);
     }
@@ -16,6 +16,8 @@ export function cardCounterDe(cardCounter: number, setCardCounter: (count: numbe
 
 // Push count
 export async function handlePushCount(id: string, cardCounter: number) {
+    console.log(cardCounter);
+    
     localStorage.setItem(`itemAmount${id}`, cardCounter.toString());
 
     let basketSummVar = 0;
