@@ -14,12 +14,36 @@ const handjet: any = Handjet({
 interface PhoneConfirmationProps {
   isPhoneConfirmationActive: boolean;
   sendData: (code: string) => void;
+  sendCode: () => void;
 }
 
 
-export const PhoneConfirmation = ({ isPhoneConfirmationActive, sendData }: PhoneConfirmationProps) => {
+export const PhoneConfirmation = ({ isPhoneConfirmationActive, sendData, sendCode }: PhoneConfirmationProps) => {
     const [buttonActive, setButtonActive] = useState<boolean>(false);
     const [code, setCode] = useState<string>("");
+    const [time, setTime] = useState<number>(90);
+    const [isSendAgain, setIsSendAgain] = useState<boolean>(false);
+
+    const counterTime = () => {
+        if (!isPhoneConfirmationActive) return;
+
+        setTime(90);
+        setIsSendAgain(false);
+
+        const interval = setInterval(() => {
+            setTime((prevTime) => {
+                if (prevTime <= 1) {
+                    clearInterval(interval);
+                    setIsSendAgain(true);
+                    return 0;
+                }
+                return prevTime - 1;
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);        
+    }
+    useEffect(() => counterTime(), [isPhoneConfirmationActive]);
     
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -49,17 +73,28 @@ export const PhoneConfirmation = ({ isPhoneConfirmationActive, sendData }: Phone
                     <div className="flex justify-between items-center py-[10px] max-md:min-h-[48px] px-[34px] w-full min-h-[68px] bg-black">
                         <p className={`leading-cssnormal tracking-[3.2px] text-[2.5rem] max-md:text-[1.5rem] max-md:tracking-[1.8px] text-[#D9D9D9] font-medium ${handjet.className}`}>Код підтвердження</p>
                     </div>
-                    <div className="pt-5">
+                    <div className="pt-5 max-md:h-[178px]">
                         <form action="" className="flex flex-col gap-3 max-md:items-center">
                             <input type="text" maxLength={4} inputMode="numeric" value={code} onChange={handleInputChange} className="text-[24px] text-center
                                 w-[25rem] h-[3.2rem] max-md:w-[15rem] max-md:h-[2.5rem] max-md:text-[1.25rem] rounded-[6px] bg-[#494949] outline-none border-0 tracking-[10px] text-white" />
                             <button
                                 onClick={handleConfirmClick}
                                 className={`${buttonActive ? "bg-[#F90] cursor-pointer" : "bg-[#d9d9d9] cursor-default"} flex justify-center items-center self-center w-[20.9375rem] h-[3.125rem]
-                                rounded-[8px] outline-none border-0 transition-linear max-md:w-[12rem] max-md:h-[2.5rem] max-md:mb-5`}>
+                                rounded-[8px] outline-none border-0 transition-linear max-md:w-[12rem] max-md:h-[2.5rem] max-md:mb-0`}>
                                 <p className="text-black text-[22px] font-medium max-md:text-[1.2rem]">Підтвердити</p>
                             </button>
                         </form>
+                        <p 
+                            onClick={() => {
+                                if (isSendAgain) {
+                                    sendCode();
+                                    counterTime();
+                                }
+                            }}
+                            className={`${isSendAgain ? "cursor-pointer" : "cursor-auto"} text-[#d9d9d9] text-[1rem] leading-cssnormal pt-[13px] text-center max-md:text-[0.9rem] max-md:mb-4`}>
+                            Відправити знову<br />
+                            <span className={`${isSendAgain ? "hidden" : "block"}`}>(доступно через {time} секунд)</span>
+                        </p>
                     </div>
                 </div>
             </div>

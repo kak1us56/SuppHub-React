@@ -29,6 +29,7 @@ export function Cards() {
             name={item.name}
             price={item.price}
             img={item.img}
+            amount={item.amount}
             id={item.id}
             key={item.id}
           />

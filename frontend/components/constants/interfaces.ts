@@ -6,5 +6,6 @@ export interface cardProps {
     img: StaticImageData;
     name: string;
     price: number;
+    amount?: number;
     id: string;
 }

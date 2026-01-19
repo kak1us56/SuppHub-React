@@ -6,7 +6,8 @@ from .models import Product, Promocode
 # Register your models here.
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name", "price", "id"]
+    list_display = ["name", "price", "amount", "id"]
+    search_fields = ["name"]
 
 
 @admin.register(Promocode)

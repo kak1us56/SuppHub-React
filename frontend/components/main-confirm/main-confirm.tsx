@@ -219,7 +219,8 @@ export function MainConfirm() {
             const data = await res.json();
 
             let productText = '';
-            let fullSummPrice = 0
+            let fullSummPrice = 0;
+            let order_items: any[] = [];
             
             data.forEach((product: cardProps) => {
                 fullSummPrice += Number(localStorage.getItem(`itemAmount${product.id}`)) * product.price
@@ -227,8 +228,15 @@ export function MainConfirm() {
             fullSummPrice = discount > 0 ? fullSummPrice - (fullSummPrice * discount / 100) : fullSummPrice;
 
             data.forEach((item: cardProps) => {
-                if (Number(localStorage.getItem(`itemAmount${item.id}`)) !== 0) {
-                    productText += `${item.name} ${localStorage.getItem(`itemAmount${item.id}`)} шт. \n`
+                const product_amount = Number(localStorage.getItem(`itemAmount${item.id}`));
+
+                if (product_amount !== 0) {
+                    productText += `${item.name} ${product_amount} шт. \n`;
+                    
+                    order_items.push({
+                        product_id: item.id,
+                        quantity: product_amount,
+                    })
                 }
             })
 
@@ -247,6 +255,7 @@ export function MainConfirm() {
                     "checkboxCallMeValue": checkboxCallMeValue,
                     "fullSummMsg": fullSummPrice.toFixed(0),
                     "orderText": productText,
+                    "order": order_items,
                 }
             };
 
@@ -293,7 +302,7 @@ export function MainConfirm() {
     return (
         <main>
             <div className="min-h-[1311px] max-md:min-h-[700px] bg-[#1F1F1F] mt-20 max-md:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-md:bg-[length:130px]">
-                <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} />     
+                <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} sendCode={sendCode} />     
                 <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
                     <div>
                         <h1 className={`${handjet.className} max-md:text-[24px] max-md:tracking-[1.92px] max-md:pt-4 max-md:pb-8

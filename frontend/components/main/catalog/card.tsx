@@ -6,21 +6,27 @@ import { cardProps } from "../../constants/interfaces";
 import { cardCounterDe, cardCounterIn, controlCardCounter, handlePushCount } from "./card-logic";
 import { mobileResize } from "../../constants/functions-global-logic";
 
-export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price, id }) => {
+export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price, id, amount }) => {
   const [cardCounter, setCardCounter] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   //   Mobile
   useEffect(() => mobileResize(setIsMobile), []);
 
   // Reset count
-  // useEffect(() => controlCardCounter(id, setCardCounter), []);
+  useEffect(() => controlCardCounter(id, setCardCounter), []);
+
+  // Is the product in stock
+  useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
 
   return (
     <div
       className="relative bg-[#343434] max-md:w-[9.6rem] max-md:h-[15.5rem] max-md:rounded-[12px]
       w-[20rem] h-[28.75rem] rounded-[20px] flex flex-col"
     >
+      {/* Not active block */}
+      <div className={`${isActive ? "hidden" : "block"} absolute top-0 left-0 w-full h-full opacity-[0.3] pointer-events-none z-[1] bg-black rounded-[20px] max-md:rounded-[12px]`}></div>
       <div
         className="flex justify-center max-md:w-[9.6rem] max-md:h-[7.5rem]
         max-md:rounded-t-[12px] w-[20rem] h-[15.875rem] rounded-t-[20px] bg-[#494949]"
@@ -51,8 +57,8 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
         </p>
         <div className={`flex max-md:py-[7px] max-md:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}>
           <div
-            className="user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
-              w-[23px] h-[23px] bg-[#494949] rounded-full cursor-pointer font-normal"
+            className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
+              w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
             onClick={() => cardCounterDe(cardCounter, setCardCounter)}
           >
             -
@@ -61,20 +67,21 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
             {cardCounter}
           </div>
           <div
-            className="user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
-              w-[23px] h-[23px] bg-[#494949] rounded-full cursor-pointer font-normal"
-            onClick={() => cardCounterIn(cardCounter, setCardCounter)}
+            className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
+              w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
+            onClick={() => cardCounterIn(cardCounter, setCardCounter, amount)}
           >
             +
           </div>
         </div>
         <div
-          onClick={() => handlePushCount(id, cardCounter)}
-          className="flex max-md:w-[8.5rem] max-md:h-[2.25rem] max-md:rounded-[16px] justify-center items-center
-            self-center w-[9.8125rem] h-[3.125rem] cursor-pointer rounded-[40px] bg-[#F90]"
+          onClick={() => isActive && handlePushCount(id, cardCounter)}
+          className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}
+            flex max-md:w-[8.5rem] max-md:h-[2.25rem] max-md:rounded-[16px] justify-center items-center
+            self-center h-[3.125rem] rounded-[40px]`}
         >
-          <p className="max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] text-white font-medium">
-            В корзину
+          <p className="max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] text-white font-medium text-center">
+            {isActive ? "В корзину" : "Нема в наявності"}
           </p>
         </div>
       </div>

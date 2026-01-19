@@ -12,6 +12,7 @@ class Product(models.Model):
     hitBool = models.BooleanField(default=False)
     veganBool = models.BooleanField(default=False)
     img = models.TextField(null=True, blank=True)
+    amount = models.PositiveIntegerField(null=False, default=0)
 
     def __str__(self) -> str:
         return self.name

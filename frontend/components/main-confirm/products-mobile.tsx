@@ -24,7 +24,7 @@ export const ProductsMobile = () => {
             <h2 className="text-[1.15rem]/[20px] leading-cssnormal py-3 text-white font-semibold">
                 РАЗОМ
             </h2>
-            <div className="flex flex-col gap-[8px] h-[104px] overflow-y-auto max-w-[17.5rem] pr-4">
+            <div className="flex flex-col gap-[8px] min-h-5 max-h-[104px] overflow-y-auto max-w-[17.5rem] pr-4">
                 {items.map((item) => (
                     <ConfirmTotalItem key={item.id} name={item.name} id={item.id} />
                 ))}

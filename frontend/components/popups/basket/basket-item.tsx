@@ -4,14 +4,17 @@ import { cardProps } from "../../constants/interfaces";
 import { controlBasketItems, handleSelectChange } from "./basket-logic";
 import { handleDeleteItem, laptopResize } from "../../constants/functions-global-logic";
 
-const optionsArr: ReactNode[] | null[] = new Array(10).fill(null);
-
-export const BasketItem: React.FC<cardProps> = ({ img, name, price, id }) => {
+export const BasketItem: React.FC<cardProps> = ({ img, name, price, id, amount }) => {
   const [itemActive, setItemActive] = useState<boolean>(false);
   const itemSelect = useRef<HTMLSelectElement | null>(null);
   const [isLaptop, setIsLaptop] = useState<boolean>(false);
+  const [maxAmount, setMaxAmount] = useState<number>(10);
 
-  useEffect(() => laptopResize(setIsLaptop), []);  
+  // Set amount of available products
+  useEffect(() => amount < 10 ? setMaxAmount(amount) : setMaxAmount(10), [amount])
+  const optionsArr: ReactNode[] | null[] = new Array(maxAmount).fill(null)
+
+  useEffect(() => laptopResize(setIsLaptop), []);
 
   // Item display
   useEffect(() => controlBasketItems(id, setItemActive, itemSelect), []);

@@ -23,8 +23,7 @@ ENV DJANGO_DEBUG=1
 RUN pipenv sync --dev --system
 
 EXPOSE 8000/tcp
-ENTRYPOINT [ "python" ]
-CMD [ "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 
 
 
@@ -36,5 +35,4 @@ ENV GUNICORN_CMD_ARGS="--bind 0.0.0.0:8000 --reload"
 RUN pipenv install --deploy --system
 
 EXPOSE 8000/tcp
-ENTRYPOINT [ "python" ]
-CMD [ "-m", "gunicorn", "supphub.wsgi:application"]
+CMD [ "python", "-m", "gunicorn", "supphub.wsgi:application"]

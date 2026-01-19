@@ -1,8 +1,14 @@
 import { cardProps } from "../../constants/interfaces";
 
 // Card Counter
-export function cardCounterIn(cardCounter: number, setCardCounter: (count: number) => void) {
-    if (cardCounter < 10) {
+export function cardCounterIn(cardCounter: number, setCardCounter: (count: number) => void, amount: number) {
+    let maxAmount = 10;
+
+    if (amount < 10) {
+        maxAmount = amount;
+    }
+
+    if (cardCounter < maxAmount) {
         let cardCounterCopy = Number(cardCounter);
         setCardCounter(cardCounterCopy + 1);
     }
@@ -40,7 +46,12 @@ export async function handlePushCount(id: string, cardCounter: number) {
 export function controlCardCounter(id: string, setCardCounter: (count: number) => void) {
     const updateCardCounter = () => {
         const storedCardCounter = Number(localStorage.getItem(`itemAmount${id}`));
-        setCardCounter(storedCardCounter);
+
+        if (storedCardCounter === 0) {
+            setCardCounter(1);
+        } else {
+            setCardCounter(storedCardCounter);
+        }
     };
 
     updateCardCounter();

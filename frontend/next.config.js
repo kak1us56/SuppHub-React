@@ -10,7 +10,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/:path*',
+        destination: 'http://api:8000/:path*',
       },
     ];
   },

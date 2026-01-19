@@ -50,6 +50,7 @@ export function BasketPopup() {
               img={item.img}
               name={item.name}
               price={item.price}
+              amount={item.amount}
               id={item.id}
               key={item.id}
             />

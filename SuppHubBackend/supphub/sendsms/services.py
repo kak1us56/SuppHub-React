@@ -9,7 +9,7 @@ from shared.cache import CacheService
 class SMSService:
     def __init__(self):
         self.api_key = os.getenv("SMSCLUB_API_KEY")
-        self.api_url = "https://smsclub.com.ua/api/json.php"
+        self.api_url = "https://alphasms.ua/api/json.php"
         self.webhook_url = os.getenv("SMS_WEBHOOK_URL")
 
         self.cache = CacheService()
