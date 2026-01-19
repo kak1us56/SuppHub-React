@@ -46,6 +46,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+      - ./SuppHubBackend/supphub/media:/usr/share/nginx/html/media:ro
     depends_on:
       - api
     restart: always

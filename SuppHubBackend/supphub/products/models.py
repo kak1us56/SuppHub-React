@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.PositiveIntegerField(null=False)
     hitBool = models.BooleanField(default=False)
     veganBool = models.BooleanField(default=False)
-    img = models.TextField(null=True, blank=True)
+    img = models.ImageField(upload_to='images/', null=True, blank=True)
     amount = models.PositiveIntegerField(null=False, default=0)
 
     def __str__(self) -> str:

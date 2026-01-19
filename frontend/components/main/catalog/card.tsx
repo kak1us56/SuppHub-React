@@ -20,6 +20,20 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   // Is the product in stock
   useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
 
+  // const getImageUrl = (url: any): string => {
+  //   if (!url) return 'https://via.placeholder.com/150?text=No+Image';
+  //   if (typeof url !== 'string') return String(url);
+
+  //   if (url.includes('localhost/media/')) {
+  //     const parts = url.split('localhost');
+  //     return parts.length > 1 ? parts[1] : url;
+  //   }
+    
+  //   return url;
+  // };
+
+  // const finalImgSrc = getImageUrl(img);
+
   return (
     <div
       className="relative bg-[#343434] max-md:w-[9.6rem] max-md:h-[15.5rem] max-md:rounded-[12px]
@@ -36,7 +50,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
         >
           <Image src={hit} alt="Хіт" className="max-md:w-[2.6rem]" />
         </div>
-        <div className="max-md:pt-[20px] pt-[42px]">
+        <div className="max-md:pt-[14px] pt-[24px]">
           <Image src={img} width={100} height={100} alt="Товар" className="max-md:w-[2.85rem]" />
         </div>
         <div

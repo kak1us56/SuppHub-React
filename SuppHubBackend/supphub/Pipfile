@@ -13,6 +13,7 @@ dotenv = "~=0.9.9"  # environment variables
 django-cors-headers = "*"
 requests = "*"
 redis = "*"
+pillow = "*"
 
 [dev-packages]
 black="~=25.1.0"  # formatter
