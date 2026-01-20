@@ -10,8 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Product, Promocode
-
-from rest_framework.response import Response
+from shared.cache import CacheService
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -27,10 +26,25 @@ class PromocodeSerializer(serializers.ModelSerializer):
 
 
 class ProductAPIViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
     permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+    cache = CacheService()
+
+    def list(self, request: Request) -> Response:
+        cached_data = self.cache.get(namespace="products", key="list")
+
+        if cached_data:
+            return Response(data=cached_data, status=status.HTTP_200_OK)
+        
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = serializer.data
+
+        self.cache.set(namespace="products", key="list", value=data, ttl=1600)
+
+        return Response(data=data, status=status.HTTP_200_OK)
 
 
 @method_decorator(csrf_exempt, name='dispatch')

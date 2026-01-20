@@ -33,7 +33,13 @@ class CacheService:
     def get(self, namespace: str, key: str):
         result: str = self.connection.get(self._build_key(namespace, key))
 
-        return json.loads(result)
+        if result is None:
+            return None
+
+        try:
+            return json.loads(result)
+        except json.JSONDecodeError:
+            return None
     
     def delete(self, namespace: str, key: str):
         self.connection.delete(self._build_key(namespace, key))
