@@ -3,6 +3,7 @@ import Image from "next/image";
 import cart from "./images/shopping-cart.png";
 import { Link, animateScroll as scroll } from "react-scroll";
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { StateContext, StatesType } from "../uikit/state-context";
 import { controlBasketSum, mobileResize } from "../constants/functions-global-logic";
 import { controlIndicator, handleBurger } from "./header-logic";
@@ -17,6 +18,8 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [indicActive, setIndicActive] = useState<boolean>(false);
   const states: StatesType = useContext(StateContext);
+
+  const router = useRouter();
 
   // Mobile
   useEffect(() => mobileResize(setIsMobile));
@@ -91,7 +94,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
               duration={500}
               onClick={() => {
                 setIsMenuOpen(false);
-                states.setAboutActive(false);
+                // states.setAboutActive(false);
                 states.setContactsActive(false);
                 states.setBasketActive(false);
               }}
@@ -100,17 +103,19 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
             </Link>
           </li>
           <li>
-            <p
+            <div
               className="cursor-pointer"
               onClick={() => {
-                states.setAboutActive(true);
+                // states.setAboutActive(true);
                 states.setContactsActive(false);
                 states.setBasketActive(false);
                 setIsMenuOpen(false);
+
+                router.push('/about');
               }}
             >
               Про нас
-            </p>
+            </div>
           </li>
           <li>
             <p
@@ -118,7 +123,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
               onClick={() => {
                 states.setContactsActive(true);
                 states.setBasketActive(false);
-                states.setAboutActive(false);
+                // states.setAboutActive(false);
                 setIsMenuOpen(false);
               }}
             >

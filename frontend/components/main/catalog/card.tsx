@@ -60,12 +60,12 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
         </div>
       </div>
       <div className="flex flex-col">
-        <p
+        <h3
           className="max-md:pt-[6px] max-md:text-[0.9rem]/[16px] max-md:tracking-[1.64px] max-md:pl-2 pl-[18px]
           pt-[14px] text-[1.75rem]/[35px] text-[#F90] tracking-[3.64px] font-semibold"
         >
           {name}
-        </p>
+        </h3>
         <p className="max-md:text-[0.875rem] max-md:tracking-[1px] max-md:pl-2 text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
           {price} ₴
         </p>
