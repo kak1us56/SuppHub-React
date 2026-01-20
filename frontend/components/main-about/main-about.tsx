@@ -29,9 +29,9 @@ export const MainAbout = () => {
                             </p>
                         </section>
                         <section className="flex justify-between mb-8 max-md:m-0 max-md:flex-col max-md:gap-4">
-                            <div className="text-[1.625rem]/[2.25rem] max-md:text-[1rem]/[1.125rem] max-md:w-full max-md:p-4 max-md:bg-[#494949] max-md:rounded-[18px] max-md:border-none font-normal text-white w-[50%] border-r-[1px] border-r-white pr-4">
+                            <div className="text-[1.625rem]/[2.25rem] text-justify max-md:text-[1rem]/[1.125rem] max-md:w-full max-md:p-4 max-md:bg-[#494949] max-md:rounded-[18px] max-md:border-none font-normal text-white w-[50%] border-r-[1px] border-r-white pr-8">
                                 <h4 className="font-bold">Що ми пропонуємо</h4>
-                                <ul className="list-inside list-disc marker:text-[0.7em] pl-4 max-md:pl-2 flex flex-col justify-between h-[calc(100%_-_36px)]">
+                                <ul className="list-outside list-disc marker:text-[0.7em] pl-9 max-md:pl-5 flex flex-col justify-between h-[calc(100%_-_36px)]">
                                     <li>Ноотропи для фокусу та пам’яті.</li>
                                     <li>Амінокислоти для відновлення та мотивації.</li>
                                     <li>Енергетичні добавки без «провалів» після дії.</li>
@@ -39,9 +39,9 @@ export const MainAbout = () => {
                                     <li>Вітаміни для підтримки імунітету.</li>
                                 </ul>
                             </div>
-                            <div className="text-[1.625rem]/[2.25rem] font-normal text-white w-[50%] pl-8 max-md:text-[1rem]/[1.125rem] max-md:w-full max-md:p-4 max-md:bg-[#343434] max-md:rounded-[18px]">
+                            <div className="text-[1.625rem]/[2.25rem] font-normal text-justify text-white w-[50%] pl-8 max-md:text-[1rem]/[1.125rem] max-md:w-full max-md:p-4 max-md:bg-[#343434] max-md:rounded-[18px]">
                                 <h4 className="font-bold">Чому обирають SuppHub</h4>
-                                <ul className="list-inside list-disc marker:text-[0.7em] pl-4 max-md:pl-2 flex flex-col justify-between h-[calc(100%_-_36px)]">
+                                <ul className="list-outside list-disc marker:text-[0.7em] pl-9 max-md:pl-5 flex flex-col justify-between h-[calc(100%_-_36px)]">
                                     <li>Біодоступні форми та підтверджені компоненти.</li>
                                     <li>Науковий підхід без обіцянок «магії».</li>
                                     <li>Підходить для студентів, спортсменів і тих, хто поєднує кар’єру з активним життям.</li>
@@ -51,16 +51,16 @@ export const MainAbout = () => {
                             </div>
                         </section>
                         <section className="max-md:bg-[#494949] max-md:rounded-[18px] max-md:p-4">
-                            <div className="text-[1.625rem]/[2.25rem] font-normal text-white mb-8 max-md:mb-4 max-md:text-[1rem]/[1.125rem]">
+                            <div className="text-[1.625rem]/[2.25rem] text-justify font-normal text-white mb-8 max-md:mb-4 max-md:text-[1rem]/[1.125rem]">
                                 <h4 className="font-bold">SuppHub  для тих, хто:</h4>
-                                <ul className="list-inside list-disc marker:text-[0.7em] pl-4 max-md:pl-2">
+                                <ul className="list-outside list-disc marker:text-[0.7em] pl-9 max-md:pl-5">
                                     <li>готується до іспитів або важливого захисту;</li>
                                     <li>поєднує роботу з тренуваннями;</li>
                                     <li>хоче відчувати бадьорість та швидкість мислення цілодобово;</li>
                                     <li>цінує якість і науковий підхід до свого здоров’я.</li>
                                 </ul>
                             </div>
-                            <div className="text-[1.625rem]/[2.25rem] font-normal text-white mb-8 max-md:mb-4 max-md:text-[1rem]/[1.125rem]">
+                            <div className="text-[1.625rem]/[2.25rem] text-justify font-normal text-white mb-8 max-md:mb-4 max-md:text-[1rem]/[1.125rem]">
                                 <h4 className="font-bold">Наш підхід</h4>
                                 <p>
                                     Кожен продукт у каталозі - результат відбору по критеріях якості, безпеки та ефективності.<br />
@@ -68,7 +68,7 @@ export const MainAbout = () => {
                                     Ми працюємо з перевіреними постачальниками й обираємо форми з високою біодоступністю.
                                 </p>
                             </div>
-                            <div className="text-[1.625rem]/[2.25rem] font-normal text-white mb-8 max-md:m-0 max-md:text-[1rem]/[1.125rem]">
+                            <div className="text-[1.625rem]/[2.25rem] text-justify font-normal text-white mb-4 max-md:m-0 max-md:text-[1rem]/[1.125rem]">
                                 <h4 className="font-bold">Готовий увімкнути режим суперсили?</h4>
                                 <p>
                                     Почни з нашого бестселера або проконсультуйся з нами — підберемо добавку під твої цілі. <br />
