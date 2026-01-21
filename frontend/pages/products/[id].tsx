@@ -70,7 +70,7 @@ export default function ProductPage() {
                 <BasketPopup />
                 <Header isBasket={true} />
                 <main>
-                    <div className="min-h-[calc(100vh_-_80px_-_172px)] bg-pill bg-[#1F1F1F] bg-repeat max-md:bg-[length:60px] bg-[length:250px] mt-20 max-md:mt-[48px]">
+                    <div className="min-h-[calc(100vh_-_48px_-_80px)] max-md:min-h-[calc(100vh_-_80px_-_172px)] bg-pill bg-[#1F1F1F] bg-repeat max-md:bg-[length:60px] bg-[length:250px] mt-20 max-md:mt-[48px]">
                         {!loading && product && <MainProduct product={product} />}
                     </div>
                 </main>

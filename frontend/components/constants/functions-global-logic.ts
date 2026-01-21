@@ -19,6 +19,14 @@ export function laptopResize(setIsLaptop: (active: boolean) => void) {
     window.addEventListener("resize", handleResize);
     return () => removeEventListener("resize", handleResize);
 }
+export function laptopHeightResize(isSmallHeight: (active: boolean) => void) {
+    const handleResize = () => isSmallHeight(window.innerHeight <= 656);
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => removeEventListener("resize", handleResize);
+}
 
 // Items basket sum
 export function controlBasketSum(setBasketSum: (sum: number) => void) {

@@ -21,7 +21,7 @@ export function ContactsMobilePopup() {
 
   return (
     <div
-      className={`fixed w-[100%] min-h-[100vh] bg-[#343434] py-[62px] px-8 z-[8] popup-transition
+      className={`fixed w-[100%] min-h-[100vh] bg-[#343434] pb-[62px] pt-3 px-8 z-[8] popup-transition
             ${states.contactsActive ? "translate-none" : "-translate-y-full"}
             ${isMobile ? "block" : "hidden"}`}
     >
