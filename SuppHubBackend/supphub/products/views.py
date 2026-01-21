@@ -1,6 +1,6 @@
 import csv
 import io
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from rest_framework import routers, serializers, viewsets, permissions, status
 from rest_framework.decorators import permission_classes, action
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
@@ -45,6 +45,13 @@ class ProductAPIViewSet(viewsets.ModelViewSet):
         self.cache.set(namespace="products", key="list", value=data, ttl=1600)
 
         return Response(data=data, status=status.HTTP_200_OK)
+    
+    def retrieve(self, request: Request, pk=None) -> Response:
+        queryset = Product.objects.all()
+        product = get_object_or_404(queryset, pk=pk)
+        serializer = ProductSerializer(product)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @method_decorator(csrf_exempt, name='dispatch')

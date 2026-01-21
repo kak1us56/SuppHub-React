@@ -13,7 +13,7 @@ import { StateContext, StatesType } from "../components/uikit/state-context";
 import { useState } from "react";
 import { MainConfirmed } from "../components/main-confirmed/main-confirmed";
 
-export default function ConfirmPage() {
+export default function ConfirmedPage() {
     const [aboutActive, setAboutActive] = useState<boolean>(false);
     const [contactsActive, setContactsActive] = useState<boolean>(false);
     const [basketActive, setBasketActive] = useState<boolean>(false);

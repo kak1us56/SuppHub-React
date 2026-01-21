@@ -14,6 +14,7 @@ django-cors-headers = "*"
 requests = "*"
 redis = "*"
 pillow = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 black="~=25.1.0"  # formatter

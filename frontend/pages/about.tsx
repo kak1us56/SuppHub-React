@@ -13,7 +13,7 @@ import { StateContext, StatesType } from "../components/uikit/state-context";
 import { useState } from "react";
 import { MainAbout } from "../components/main-about";
 
-export default function ConfirmPage() {
+export default function AboutPage() {
     const [aboutActive, setAboutActive] = useState<boolean>(false);
     const [contactsActive, setContactsActive] = useState<boolean>(false);
     const [basketActive, setBasketActive] = useState<boolean>(false);

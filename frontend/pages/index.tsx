@@ -33,11 +33,9 @@ export default function HomePage() {
         <link rel="shortcut icon" href="/logo-img.png" type="image/x-icon" />
       </Head>
       <StateContext.Provider value={states}>
-        <AboutMobilePopup />
         <ContactsMobilePopup />
         <BasketMobilePopup />
         <ContactsPopup />
-        <AboutPopup />
         <BasketPopup />
         <Header isBasket={true} />
         <Main />
