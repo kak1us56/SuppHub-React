@@ -53,7 +53,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
             <Image src={hit} alt="Хіт" className="max-md:w-[2.6rem]" />
           </div>
           <div className="max-md:pt-[14px] pt-[24px]">
-            <Image src={img} width={100} height={100} alt="Товар" className="max-md:w-[2.85rem]" />
+            <Image src={img} width={100} height={100} alt={name} className="max-md:w-[2.85rem]" />
           </div>
           <div
             className={`absolute max-md:top-[5px] max-md:right-[9px] top-[18px] right-[21px] ${veganBool ? "block" : "hidden"}`}
@@ -71,7 +71,12 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
           <p className="max-md:text-[0.875rem] max-md:tracking-[1px] max-md:pl-2 text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
             {price} ₴
           </p>
-          <div className={`flex max-md:py-[7px] max-md:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}>
+          <div 
+            className={`flex max-md:py-[7px] max-md:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation(); 
+            }}>
             <div
               className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
                 w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
@@ -91,7 +96,13 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
             </div>
           </div>
           <div
-            onClick={() => isActive && handlePushCount(id, cardCounter)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation(); 
+              if (isActive) {
+                handlePushCount(id, cardCounter);
+              }
+            }}
             className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}
               flex max-md:w-[8.5rem] max-md:h-[2.25rem] max-md:rounded-[16px] justify-center items-center
               self-center h-[3.125rem] rounded-[40px]`}
@@ -103,6 +114,5 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
         </div>
       </div>    
     </Link>
-
   );
 }

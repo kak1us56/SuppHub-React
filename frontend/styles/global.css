@@ -75,3 +75,8 @@
 .product-description-content ul li::marker {
   font-size: 0.7em;
 }
+@media (max-width: 720px) {
+  .product-description-content ul {
+    padding-left: 1.25rem;
+  }
+}
