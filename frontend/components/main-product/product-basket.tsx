@@ -9,9 +9,10 @@ interface ProductBasketProps {
     producer_country: string;
     pill_form: string;
     amount: number;
+    setIsAddToBasketActive: (active: boolean) => void;
 }
 
-export const ProductBasket: React.FC<ProductBasketProps> = ({ id, price, active_ingredients, pill_amount, pill_form, producer_country, amount }) => {
+export const ProductBasket: React.FC<ProductBasketProps> = ({ id, price, active_ingredients, pill_amount, pill_form, producer_country, amount, setIsAddToBasketActive }) => {
     const [cardCounter, setCardCounter] = useState<number>(1);
     const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -80,7 +81,7 @@ export const ProductBasket: React.FC<ProductBasketProps> = ({ id, price, active_
                     </div>
                 </div>
                 <div
-                    onClick={() => isActive && handlePushCount(id, cardCounter)}
+                    onClick={() => isActive && handlePushCount(id, cardCounter, setIsAddToBasketActive)}
                     className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}
                     flex max-md:w-[8.5rem] max-md:h-[2.25rem] max-md:rounded-[16px] justify-center items-center
                     self-center h-[3.125rem] rounded-[40px]`}

@@ -13,7 +13,7 @@ export function Footer() {
             <Socials />
           </div>
           <p className="text-white max-md:tracking-[1px] max-md:pb-2 max-md:text-[0.5rem] text-center leading-cssnormal text-[1.125rem] tracking-[1.08px] font-medium">
-            © SuppHub 2025
+            © SuppHub 2026
           </p>
         </div>
       </div>

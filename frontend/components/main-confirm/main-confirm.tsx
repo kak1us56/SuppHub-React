@@ -12,6 +12,7 @@ import { OptionType } from "./form-place";
 import { controlBasketTotal, mobileResize } from "../constants/functions-global-logic";
 import { cardProps } from "../constants/interfaces";
 import { ProductsMobile } from "./products-mobile";
+import Link from "next/link";
 
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
@@ -304,6 +305,11 @@ export function MainConfirm() {
             <div className="min-h-[1311px] max-md:min-h-[700px] bg-[#1F1F1F] mt-20 max-md:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-md:bg-[length:130px]">
                 <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} sendCode={sendCode} />     
                 <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
+                    <Link href="/">
+                        <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[60px] max-md:text-[0.875rem] max-md:pt-[17px]">
+                            ← На головну
+                        </p>
+                    </Link>
                     <div>
                         <h1 className={`${handjet.className} max-md:text-[24px] max-md:tracking-[1.92px] max-md:pt-4 max-md:pb-8
                             text-[#D9D9D9] leading-cssnormal tracking-[5.12px] text-[4rem] py-[68px] font-medium`}>

@@ -2,16 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Handjet } from "next/font/google";
+import { useRouter } from "next/router";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
 
 export const MainAbout = () => {
+    const router = useRouter();
+
     return (
         <main>
             <div className="min-h-[1216px] bg-[#1F1F1F] mt-20 max-md:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-md:bg-[length:130px]">
                 <div className="max-w-[1312px] max-md:max-w-[382px] mx-auto px-4 flex flex-col items-center">
-                    <h1 className={`${handjet.className} max-md:text-[2rem] text-[4rem] leading-cssnormal text-[#D9D9D9] tracking-[5.12px] pt-[53px] max-md:pt-[48px] pl-[32px] max-md:pl-5 font-medium self-start`}>
+                    <Link href="/" className="self-start">
+                        <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[60px] max-md:text-[0.875rem] max-md:pt-[17px]">
+                            ← На головну
+                        </p>
+                    </Link>
+                    <h1 className={`${handjet.className} max-md:text-[2rem] text-[4rem] leading-cssnormal text-[#D9D9D9] tracking-[5.12px] pt-[60px] max-md:pt-[20px] pl-[32px] max-md:pl-5 font-medium self-start`}>
                         Про нас
                     </h1>
                     <div className="w-full bg-[rgba(0,_0,_0,_0.35)] max-md:flex max-md:flex-col max-md:gap-4 max-md:bg-transparent max-md:p-0 rounded-[24px] px-[50px] pt-[28px] pb-[40px] mt-[22px]">
@@ -77,11 +85,11 @@ export const MainAbout = () => {
                             </div>
                         </section>
                     </div>
-                    <Link href={"/"}>
-                        <button className="w-[12.375rem] h-[2.9rem] bg-[#F90] rounded-[4px] text-center text-black text-[1.25rem] max-md:text-[1.125rem] leading-cssnormal tracking-[1.6px] font-medium mt-[34px] max-md:mt-[24px]">
-                            До каталогу
-                        </button>                    
-                    </Link>
+                    <button 
+                        className="w-[12.375rem] h-[2.9rem] bg-[#F90] rounded-[4px] text-center text-black text-[1.25rem] max-md:text-[1.125rem] leading-cssnormal tracking-[1.6px] font-medium mt-[34px] max-md:mt-[24px]"
+                        onClick={() => router.push("/#catalog")}>
+                        До каталогу
+                    </button>
                     <div className="pt-8 pb-9 max-md:w-[60px] max-md:pt-5 max-md:pb-6">
                         <Image src="/logo-img.png" alt="Логотип" width={82} height={82} />
                     </div>

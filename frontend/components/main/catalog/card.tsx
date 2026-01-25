@@ -1,16 +1,18 @@
 import Image from "next/image";
 import hit from "./images/hit.png";
 import vegan from "./images/vegan.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { cardProps } from "../../constants/interfaces";
 import { cardCounterDe, cardCounterIn, controlCardCounter, handlePushCount } from "./card-logic";
 import { mobileResize } from "../../constants/functions-global-logic";
 import Link from "next/link";
+import { AddToBasketState, AddToBasketStateStateContext } from "./state-context";
 
 export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price, id, amount }) => {
   const [cardCounter, setCardCounter] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const states: AddToBasketState = useContext(AddToBasketStateStateContext);
 
   //   Mobile
   useEffect(() => mobileResize(setIsMobile), []);
@@ -100,7 +102,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
               e.preventDefault();
               e.stopPropagation(); 
               if (isActive) {
-                handlePushCount(id, cardCounter);
+                handlePushCount(id, cardCounter, states.setIsAddToBasketActive);
               }
             }}
             className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}

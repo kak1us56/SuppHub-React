@@ -25,6 +25,11 @@ export function ContactsMobilePopup() {
             ${states.contactsActive ? "translate-none" : "-translate-y-full"}
             ${isMobile ? "block" : "hidden"}`}
     >
+      <Link href="/">
+        <p className="text-white leading-cssnormal font-normal tracking-[2.24px] text-[0.875rem] pt-[50px]">
+            ← На головну
+        </p>
+      </Link>
       <h1
         className={`${handjet.className} pt-6 pb-2 text-[#D9D9D9] tracking-[1.5px] text-[2rem] font-medium`}
       >

@@ -84,7 +84,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
         >
           <li>
             <Link
-              // href="#catalog"
+              // href="/#catalog"
               className="cursor-pointer"
               to="catalog"
               activeClass="active"
@@ -97,6 +97,8 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
                 // states.setAboutActive(false);
                 states.setContactsActive(false);
                 states.setBasketActive(false);
+
+                router.push('/#catalog');
               }}
             >
               Каталог

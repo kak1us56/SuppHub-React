@@ -21,9 +21,7 @@ export function cardCounterDe(cardCounter: number, setCardCounter: (count: numbe
 }
 
 // Push count
-export async function handlePushCount(id: string, cardCounter: number) {
-    console.log(cardCounter);
-    
+export async function handlePushCount(id: string, cardCounter: number, setIsAddToBasketActive: (active: boolean) => void) {
     localStorage.setItem(`itemAmount${id}`, cardCounter.toString());
 
     let basketSummVar = 0;
@@ -36,11 +34,19 @@ export async function handlePushCount(id: string, cardCounter: number) {
             basketSummVar += Number(localStorage.getItem(`itemAmount${item.id}`))
         });
     } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
+        console.error("Error loading data:", error);
     }
+
+    openAddToBasket(setIsAddToBasketActive);
 
     localStorage.setItem("itemAmountSumm", basketSummVar.toString());
     window.dispatchEvent(new Event("storage"));
+}
+
+function openAddToBasket(setIsActive: (active: boolean) => void) {
+    setIsActive(true);
+
+    setTimeout(() => setIsActive(false), 3000);
 }
 
 export function controlCardCounter(id: string, setCardCounter: (count: number) => void) {

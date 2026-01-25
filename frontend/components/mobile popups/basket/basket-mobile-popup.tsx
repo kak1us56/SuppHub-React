@@ -50,8 +50,13 @@ export function BasketMobilePopup() {
     >
       <div className="flex flex-col items-center">
         <div>
+          <Link href="/">
+            <p className="text-white leading-cssnormal font-normal tracking-[2.24px] text-[0.875rem] pt-[17px]">
+                ← На головну
+            </p>
+          </Link>
           <h1
-            className={`${handjet.className} pt-6 pb-2 text-[#D9D9D9] text-[2rem] tracking-[1.5px] font-medium`}
+            className={`${handjet.className} pt-4 pb-2 text-[#D9D9D9] text-[2rem] tracking-[1.5px] font-medium`}
           >
             Корзина
           </h1>
@@ -103,7 +108,7 @@ export function BasketMobilePopup() {
               id='6'
             /> */}
           </div>
-          <div className="flex justify-between pt-10">
+          <div className="flex justify-between pt-4">
             <Link href={`${buttonActive ? '/confirm' : '/'}`} onClick={() => sendMetrik("click", "ClickToConfirmPage", "BasketMobilePopup", "Mobile")}>
               <div
                 className={`${buttonActive ? 'bg-[#F90] cursor-pointer' : 'bg-[#cca365] cursor-default'}
