@@ -29,8 +29,16 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>SuppHub</title>
+        <title>SuppHub — Магазин вітамінів та ноотропів</title>
         <link rel="shortcut icon" href="/logo-img.png" type="image/x-icon" />
+        <meta 
+          name="description" 
+          content="SuppHub — твій компаньйон у світі продуктивності. Ми підбираємо ноотропи, вітаміни та амінокислоти, які реально працюють для покращення пам’яті та енергії." 
+        />
+        <meta name="keywords" content="ноотропи, вітаміни, енергія, SuppHub, бади україна, купити амінокислоти, амінокислоти" />
+        <meta property="og:title" content="SuppHub — Твій потенціал на максимум" />
+        <meta property="og:description" content="Ноотропи та вітаміни для ефективного навчання та роботи." />
+        <meta property="og:image" content="/logo-img.png" />
       </Head>
       <StateContext.Provider value={states}>
         <ContactsMobilePopup />
