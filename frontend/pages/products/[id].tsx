@@ -18,6 +18,15 @@ const stripHtml = (html: string) => {
    return html.replace(/<[^>]*>?/gm, '');
 };
 
+const getImageUrl = (img: any) => {
+    if (!img) return "/logo-img.png";
+    
+    const src = typeof img === 'object' && img.src ? img.src : img;
+    return typeof src === 'string' && src.startsWith('http') 
+        ? src 
+        : `https://supphub.shop${src}`;
+};
+
 export default function ProductPage({ product }: { product: cardProps | null }) {
     const router = useRouter();
 
@@ -47,9 +56,7 @@ export default function ProductPage({ product }: { product: cardProps | null }) 
         ? stripHtml(product.description).slice(0, 160) + "..." 
         : "SuppHub — твій компаньйон у світі продуктивності.";
 
-    const ogImage = product.img 
-        ? (product.img.src.startsWith('http') ? product.img.src : `https://supphub.shop${product.img}`) 
-        : "/logo-img.png";
+    const ogImage = getImageUrl(product.img);
 
     return (
         <>
