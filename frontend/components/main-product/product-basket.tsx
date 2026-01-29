@@ -18,7 +18,7 @@ export const ProductBasket: React.FC<ProductBasketProps> = ({ id, price, active_
     const [isActive, setIsActive] = useState<boolean>(false);
 
     // Reset count
-    useEffect(() => controlCardCounter(id, setCardCounter), []);
+    // useEffect(() => controlCardCounter(id, setCardCounter), []);
 
     // Is the product in stock
     useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
