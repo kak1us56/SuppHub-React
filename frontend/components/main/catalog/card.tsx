@@ -18,7 +18,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   useEffect(() => mobileResize(setIsMobile), []);
 
   // Reset count
-  useEffect(() => controlCardCounter(id, setCardCounter), []);
+  // useEffect(() => controlCardCounter(id, setCardCounter), []);
 
   // Is the product in stock
   useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
@@ -102,7 +102,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
               e.preventDefault();
               e.stopPropagation(); 
               if (isActive) {
-                handlePushCount(id, cardCounter, states.setIsAddToBasketActive);
+                handlePushCount(id, cardCounter, states.setIsAddToBasketActive, states.setIsNoProductActive, amount);
               }
             }}
             className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}

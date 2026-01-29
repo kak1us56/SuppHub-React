@@ -7,6 +7,7 @@ import { ProductBasket } from "./product-basket";
 import { CertificatePopup } from "./certificate-popup";
 import { useState } from "react";
 import { AddToBasketMsg } from "../main/catalog/add-to-basket-msg";
+import { NoProductMsg } from "../main/catalog/no-product-msg";
 const handjet: any = Handjet({
   subsets: ["latin", "cyrillic"],
 });
@@ -18,10 +19,12 @@ interface MainProductProps {
 export const MainProduct = ({ product }: MainProductProps) => {
     const [isCertificatePopupOpen, setIsCertificatePopupOpen] = useState<boolean>(false);
     const [isAddToBasketActive, setIsAddToBasketActive] = useState<boolean>(false);
+    const [isNoProductActive, setIsNoProductActive] = useState<boolean>(false);
 
     return (
         <>
             <AddToBasketMsg isActive={isAddToBasketActive} />
+            <NoProductMsg isActive={isNoProductActive} />
             {
                 product.certificate &&
                 <CertificatePopup 
@@ -52,6 +55,7 @@ export const MainProduct = ({ product }: MainProductProps) => {
                         pill_form={product.pill_form} price={product.price} 
                         producer_country={product.producer_country}
                         setIsAddToBasketActive={setIsAddToBasketActive}
+                        setIsNoProductActive={setIsNoProductActive}
                         />
                 </div>
                 <div className="pb-[60px] flex justify-between max-md:pb-[30px] max-md:flex-col max-md:gap-7 max-md:items-center">

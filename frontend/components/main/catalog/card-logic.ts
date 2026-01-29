@@ -21,8 +21,18 @@ export function cardCounterDe(cardCounter: number, setCardCounter: (count: numbe
 }
 
 // Push count
-export async function handlePushCount(id: string, cardCounter: number, setIsAddToBasketActive: (active: boolean) => void) {
-    localStorage.setItem(`itemAmount${id}`, cardCounter.toString());
+export async function handlePushCount(id: string, cardCounter: number, setIsAddToBasketActive: (active: boolean) => void, setIsNoProductActive: (active: boolean) => void, amount: number) {
+    let maxAmount = amount < 10 ? amount : 10;
+    
+    const storagedValue = Number(localStorage.getItem(`itemAmount${id}`));
+    const updatedValue = storagedValue + cardCounter;
+
+    if (updatedValue > maxAmount) {
+        openMsg(setIsNoProductActive);
+        return;
+    }
+    
+    localStorage.setItem(`itemAmount${id}`, updatedValue.toString());
 
     let basketSummVar = 0;
 
@@ -37,13 +47,13 @@ export async function handlePushCount(id: string, cardCounter: number, setIsAddT
         console.error("Error loading data:", error);
     }
 
-    openAddToBasket(setIsAddToBasketActive);
+    openMsg(setIsAddToBasketActive);
 
     localStorage.setItem("itemAmountSumm", basketSummVar.toString());
     window.dispatchEvent(new Event("storage"));
 }
 
-function openAddToBasket(setIsActive: (active: boolean) => void) {
+function openMsg(setIsActive: (active: boolean) => void) {
     setIsActive(true);
 
     setTimeout(() => setIsActive(false), 3000);
