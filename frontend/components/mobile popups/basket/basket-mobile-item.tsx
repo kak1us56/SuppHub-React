@@ -18,12 +18,12 @@ export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) 
     >
       <div className="flex flex-col w-[9.375rem] gap-2 items-center pt-3">
         <div>
-          <Image src={img} width={42} height={80} alt="Продукт" className="w-[42px]" />
+          <Image src={img} width={42} height={80} alt={name} className="w-[42px]" />
         </div>
         <div className="flex self-start flex-col gap-[5px] pl-2">
-          <p className="tracking-[2px] text-[1rem] leading-cssnormal text-white font-medium">
+          <h3 className="tracking-[2px] text-[1rem] leading-cssnormal text-white font-medium">
             {name}
-          </p>
+          </h3>
           <p className="text-[0.875rem] tracking-[1.4px] leading-cssnormal text-white font-medium">
             {price} ₴
             <span className="text-orange-400">
@@ -34,9 +34,9 @@ export const BasketMobileItem: React.FC<cardProps> = ({ img, name, price, id }) 
         </div>
       </div>
       <div className="flex items-center pl-2 pb-[.5rem]">
-        <p onClick={() => handleDeleteItem(id, setItemActive)} className="text-[#D9D9D9] cursor-pointer leading-cssnormal font-medium text-[0.775rem] tracking-[1px] underline">
+        <button onClick={() => handleDeleteItem(id, setItemActive)} className="text-[#D9D9D9] cursor-pointer leading-cssnormal font-medium text-[0.775rem] tracking-[1px] underline">
           Видалити
-        </p>
+        </button>
       </div>
     </div>
   );

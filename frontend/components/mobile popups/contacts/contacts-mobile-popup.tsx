@@ -38,7 +38,7 @@ export function ContactsMobilePopup() {
       <div className="flex items-center flex-col pt-[38px] gap-[21px]">
         <div className="flex gap-[6px] items-center">
           <div>
-            <Image className="h-5" src={convert} alt="Пошта" />
+            <Image className="h-5" src={convert} alt="Електронна пошта" />
           </div>
           <Link
             href="mailto:contact.supphub@gmail.com"
@@ -62,7 +62,7 @@ export function ContactsMobilePopup() {
         </div>
         <div className="flex gap-[6px] items-center">
           <div>
-            <Image className="h-5 w-5" src={phoneIcon} alt="Телефон" />
+            <Image className="h-5 w-5" src={phoneIcon} alt="Мобільний телефон" />
           </div>
           <Link
             href="tel:+380737227307"

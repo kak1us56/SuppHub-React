@@ -8,17 +8,18 @@ import { ContactsPopup } from "../../components/popups/contacts";
 import { StateContext, StatesType } from "../../components/uikit/state-context";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import { cardProps } from "../../components/constants/interfaces";
 import { MainProduct } from "../../components/main-product";
+import { useRouter } from "next/router";
 
-export const dynamic = 'force-dynamic';
 
+const stripHtml = (html: string) => {
+   if (!html) return "";
+   return html.replace(/<[^>]*>?/gm, '');
+};
 
-export default function ProductPage() {
-    const { id } = useParams();
-    const [product, setProduct] = useState<cardProps | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+export default function ProductPage({ product }: { product: cardProps | null }) {
+    const router = useRouter();
 
     const [aboutActive, setAboutActive] = useState<boolean>(false);
     const [contactsActive, setContactsActive] = useState<boolean>(false);
@@ -33,43 +34,37 @@ export default function ProductPage() {
         setBasketActive,
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            if (!id) return;
+    if (router.isFallback) {
+        return <div className="min-h-screen bg-[#1F1F1F] text-white flex items-center justify-center text-xl">Завантаження...</div>;
+    }
 
-            setLoading(true);
-            try {
-                const res = await fetch(`/api/products/${id}/`);
+    if (!product) {
+        return <div className="min-h-screen bg-[#1F1F1F] text-white flex items-center justify-center text-xl">Товар не знайдено</div>;
+    }
 
-                if (!res.ok) {
-                    throw new Error(`Error API: ${res.status} ${res.statusText}`);
-                }
+    // SEO
+    // const seoDescription = product.description 
+    //     ? stripHtml(product.description).slice(0, 160) + "..." 
+    //     : "SuppHub — твій компаньйон у світі продуктивності.";
 
-                const data = await res.json();
-                setProduct(data);
-            } catch (e) {
-                console.log("Error while getting the product: " + e);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchData();
-    }, [id]);
+    // const ogImage = product.img 
+    //     ? (product.img.src.startsWith('http') ? product.img.src : `https://supphub.shop${product.img}`) 
+    //     : "/logo-img.png";
 
     return (
         <>
             <Head>
-                <title>{product?.name}</title>
+                <title>{product.name} | SuppHub</title>
                 <link rel="shortcut icon" href="/logo-img.png" type="image/x-icon" />
-                <meta 
+                {/* <meta 
                     name="description" 
-                    content="SuppHub — твій компаньйон у світі продуктивності. Ми підбираємо ноотропи, вітаміни та амінокислоти, які реально працюють для покращення пам’яті та енергії." 
+                    content={seoDescription} 
                 />
-                <meta name="keywords" content="ноотропи, вітаміни, енергія, SuppHub, бади україна, купити амінокислоти, амінокислоти" />
-                <meta property="og:title" content="SuppHub — Твій потенціал на максимум" />
-                <meta property="og:description" content="Ноотропи та вітаміни для ефективного навчання та роботи." />
-                <meta property="og:image" content="/logo-img.png" />
+                <meta name="keywords" content={`ноотропи, вітаміни, енергія, ${product.name}, SuppHub, бади україна, купити амінокислоти, купити ${product.name}, амінокислоти`} />
+
+                <meta property="og:title" content={`${product.name} | SuppHub`} />
+                <meta property="og:description" content={seoDescription} />
+                <meta property="og:image" content={ogImage} /> */}
             </Head>
             <StateContext.Provider value={states}>
                 <ContactsMobilePopup />
@@ -79,7 +74,7 @@ export default function ProductPage() {
                 <Header isBasket={true} />
                 <main>
                     <div className="min-h-[calc(100vh_-_48px_-_80px)] max-md:min-h-[calc(100vh_-_80px_-_172px)] bg-pill bg-[#1F1F1F] bg-repeat max-md:bg-[length:60px] bg-[length:250px] mt-20 max-md:mt-[48px]">
-                        {!loading && product && <MainProduct product={product} />}
+                        <MainProduct product={product} />
                     </div>
                 </main>
                 
@@ -89,23 +84,23 @@ export default function ProductPage() {
     )
 }
 
-export async function getStaticPaths() {
+export async function getServerSideProps(context: any) {
+  const { id } = context.params;
+
   try {
-      const res = await fetch('http://api:8000/api/products/');
-      const products = await res.json();
+      const res = await fetch(`http://api:8000/products/${id}/`);
+      
+      if (!res.ok) {
+          return { notFound: true };
+      }
 
-      const paths = products.map((product: any) => ({
-        params: { id: product.id.toString() },
-      }));
+      const product = await res.json();
 
-      return { paths, fallback: false };
+      return { 
+          props: { product },
+      }; 
   } catch (e) {
-      console.log('Build error: API not available');
-      return { paths: [], fallback: false };
+      console.error(`SSR Error for id ${id}:`, e);
+      return { notFound: true };
   }
 }
-
-export async function getStaticProps({ params }: any) {
-  return { props: {} }; 
-}
-

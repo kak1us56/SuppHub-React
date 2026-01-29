@@ -1,11 +1,8 @@
 import Head from "next/head";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
-import { MainConfirm } from "../components/main-confirm";
-import { AboutMobilePopup } from "../components/mobile popups/about";
 import { BasketMobilePopup } from "../components/mobile popups/basket";
 import { ContactsMobilePopup } from "../components/mobile popups/contacts";
-import { AboutPopup } from "../components/popups/about";
 import { BasketPopup } from "../components/popups/basket";
 import { ContactsPopup } from "../components/popups/contacts";
 import { StateContext, StatesType } from "../components/uikit/state-context";

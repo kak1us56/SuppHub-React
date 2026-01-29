@@ -2,7 +2,6 @@ export function CrossIcon() {
   return (
     <svg
       class="cursor-pointer"
-      id="popupClose"
       xmlns="http://www.w3.org/2000/svg"
       width="26"
       height="26"

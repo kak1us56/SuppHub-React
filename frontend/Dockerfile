@@ -1,27 +1,39 @@
-FROM node:20-alpine AS builder
+FROM node:18-alpine AS base
 
+
+FROM base AS deps
 WORKDIR /app
-
-ARG NEXT_PUBLIC_GA_ID
-ARG API_NOVA_POST
-
-ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
-ENV API_NOVA_POST=$API_NOVA_POST
-
 COPY package.json package-lock.json* ./
+RUN npm ci
 
-RUN npm install
 
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-FROM nginx:1.27-alpine AS production
 
-COPY --from=builder /app/out /usr/share/nginx/html
+FROM base AS runner
+WORKDIR /app
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-EXPOSE 80
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-CMD ["nginx", "-g", "daemon off;"]
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+
+CMD ["node", "server.js"]

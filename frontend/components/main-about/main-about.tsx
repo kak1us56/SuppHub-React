@@ -91,7 +91,7 @@ export const MainAbout = () => {
                         До каталогу
                     </button>
                     <div className="pt-8 pb-9 max-md:w-[60px] max-md:pt-5 max-md:pb-6">
-                        <Image src="/logo-img.png" alt="Логотип" width={82} height={82} />
+                        <Image src="/logo-img.png" alt="Логотип SuppHub" width={82} height={82} />
                     </div>
                 </div>
             </div>

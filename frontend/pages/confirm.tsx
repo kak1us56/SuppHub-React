@@ -2,11 +2,7 @@ import Head from "next/head";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import { MainConfirm } from "../components/main-confirm";
-import { AboutMobilePopup } from "../components/mobile popups/about";
-import { BasketMobilePopup } from "../components/mobile popups/basket";
 import { ContactsMobilePopup } from "../components/mobile popups/contacts";
-import { AboutPopup } from "../components/popups/about";
-import { BasketPopup } from "../components/popups/basket";
 import { ContactsPopup } from "../components/popups/contacts";
 import { StateContext, StatesType } from "../components/uikit/state-context";
 
@@ -39,6 +35,8 @@ export default function ConfirmPage() {
                 <meta property="og:title" content="SuppHub — Твій потенціал на максимум" />
                 <meta property="og:description" content="Ноотропи та вітаміни для ефективного навчання та роботи." />
                 <meta property="og:image" content="/logo-img.png" />
+
+                <meta name="robots" content="noindex, nofollow" />
             </Head>
             <StateContext.Provider value={states}>
                 <ContactsMobilePopup />

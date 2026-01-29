@@ -1,7 +1,7 @@
-// import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import cart from "./images/shopping-cart.png";
-import { Link, animateScroll as scroll } from "react-scroll";
+// import { Link, animateScroll as scroll } from "react-scroll";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { StateContext, StatesType } from "../uikit/state-context";
@@ -84,28 +84,28 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
         >
           <li>
             <Link
-              // href="/#catalog"
-              className="cursor-pointer"
-              to="catalog"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
+              href="/#catalog"
+              // to="catalog"
+              // activeClass="active"
+              // spy={true}
+              // smooth={true}
+              // offset={-70}
+              // duration={500}
               onClick={() => {
                 setIsMenuOpen(false);
                 // states.setAboutActive(false);
                 states.setContactsActive(false);
                 states.setBasketActive(false);
 
-                router.push('/#catalog');
+                // router.push('/#catalog');
               }}
             >
               Каталог
             </Link>
           </li>
           <li>
-            <div
+            <Link
+              href="/about"
               className="cursor-pointer"
               onClick={() => {
                 // states.setAboutActive(true);
@@ -113,14 +113,14 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
                 states.setBasketActive(false);
                 setIsMenuOpen(false);
 
-                router.push('/about');
+                // router.push('/about');
               }}
             >
               Про нас
-            </div>
+            </Link>
           </li>
           <li>
-            <p
+            <button
               className="cursor-pointer"
               onClick={() => {
                 states.setContactsActive(true);
@@ -130,10 +130,10 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
               }}
             >
               Контакти
-            </p>
+            </button>
           </li>
           <li className={`${isBasket ? 'block' : 'hidden'}`}>
-            <span
+            <button
               className="cursor-pointer flex items-center gap-[6px]"
               onClick={() => {
                 states.setBasketActive(true);
@@ -148,7 +148,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
               >
                 {basketSum}
               </div>
-            </span>
+            </button>
           </li>
         </ul>
       </nav>

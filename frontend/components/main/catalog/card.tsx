@@ -23,20 +23,6 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   // Is the product in stock
   useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
 
-  // const getImageUrl = (url: any): string => {
-  //   if (!url) return 'https://via.placeholder.com/150?text=No+Image';
-  //   if (typeof url !== 'string') return String(url);
-
-  //   if (url.includes('localhost/media/')) {
-  //     const parts = url.split('localhost');
-  //     return parts.length > 1 ? parts[1] : url;
-  //   }
-    
-  //   return url;
-  // };
-
-  // const finalImgSrc = getImageUrl(img);
-
   return (
     <Link href={`/products/${id}/`}>
       <div
@@ -52,7 +38,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
           <div
             className={`absolute max-md:top-[2px] max-md:left-0 top-[5px] left-[2px] ${hitBool ? "block" : "hidden"}`}
           >
-            <Image src={hit} alt="Хіт" className="max-md:w-[2.6rem]" />
+            <Image src={hit} alt="Хіт продажів" className="max-md:w-[2.6rem]" />
           </div>
           <div className="max-md:pt-[14px] pt-[24px]">
             <Image src={img} width={100} height={100} alt={name} className="max-md:w-[2.85rem]" />
@@ -73,31 +59,31 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
           <p className="max-md:text-[0.875rem] max-md:tracking-[1px] max-md:pl-2 text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
             {price} ₴
           </p>
-          <div 
+          <div
             className={`flex max-md:py-[7px] max-md:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation(); 
             }}>
-            <div
+            <button
               className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
                 w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
               onClick={() => cardCounterDe(cardCounter, setCardCounter)}
             >
               -
-            </div>
+            </button>
             <div className="text-[#F90] max-md:text-[1.2rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] font-medium">
               {cardCounter}
             </div>
-            <div
+            <button
               className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
                 w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
               onClick={() => cardCounterIn(cardCounter, setCardCounter, amount)}
             >
               +
-            </div>
+            </button>
           </div>
-          <div
+          <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation(); 
@@ -112,7 +98,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
             <p className="max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] text-white font-medium text-center">
               {isActive ? "В корзину" : "Нема в наявності"}
             </p>
-          </div>
+          </button>
         </div>
       </div>    
     </Link>

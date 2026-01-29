@@ -40,6 +40,8 @@ export default function ConfirmedPage() {
                 <meta property="og:title" content="SuppHub — Твій потенціал на максимум" />
                 <meta property="og:description" content="Ноотропи та вітаміни для ефективного навчання та роботи." />
                 <meta property="og:image" content="/logo-img.png" />
+
+                <meta name="robots" content="noindex" />
             </Head>
             <StateContext.Provider value={states}>
                 <ContactsMobilePopup />

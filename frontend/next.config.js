@@ -1,17 +1,17 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['i.ibb.co'],
+    domains: ['localhost', 'api'],
     unoptimized: true,
   },
-  output: 'export',
+  output: 'standalone', 
 
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://api:8000/:path*',
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: 'http://api:8000/:path*',
+  //     },
+  //   ];
+  // },
 };

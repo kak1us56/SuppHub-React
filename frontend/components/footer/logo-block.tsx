@@ -12,7 +12,7 @@ export function LogoBlock() {
   return (
     <div className="flex max-md:gap-0 gap-[20px]">
       <div>
-        <Image src={logoFoot} alt="Лого" className="max-md:w-[42px]" />
+        <Image src={logoFoot} alt="Логотип SuppHub" className="max-md:w-[42px]" />
       </div>
       {isMobile ? (
         ""

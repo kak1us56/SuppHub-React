@@ -22,7 +22,7 @@ export function ContactsPopup() {
       <div className="pt-[64px] pb-[60px] flex flex-col items-center gap-[21px]">
         <div className="flex gap-[14px] items-center">
           <div>
-            <Image src={convert} alt="Конверт" />
+            <Image src={convert} alt="Електронна пошта" />
           </div>
           <Link
             href="mailto:contact.supphub@gmail.com"
@@ -33,7 +33,7 @@ export function ContactsPopup() {
         </div>
         <div className="flex gap-[14px] items-center">
           <div>
-            <Image src={tgIcon} alt="Telegram" />
+            <Image src={tgIcon} alt="Телеграм" />
           </div>
           <Link
             href="https://t.me/supphub_manager"
@@ -45,7 +45,7 @@ export function ContactsPopup() {
         </div>
         <div className="flex gap-[14px] items-center">
           <div>
-            <Image src={phoneIcon} alt="Телефон" width={40} />
+            <Image src={phoneIcon} alt="Мобільний телефон" width={40} />
           </div>
           <p
             onClick={() => sendMetrik("click", "ClickToPhone", "Socials", "Desktop")}
