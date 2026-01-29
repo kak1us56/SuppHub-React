@@ -43,20 +43,20 @@ export default function ProductPage({ product }: { product: cardProps | null }) 
     }
 
     // SEO
-    // const seoDescription = product.description 
-    //     ? stripHtml(product.description).slice(0, 160) + "..." 
-    //     : "SuppHub — твій компаньйон у світі продуктивності.";
+    const seoDescription = product.description 
+        ? stripHtml(product.description).slice(0, 160) + "..." 
+        : "SuppHub — твій компаньйон у світі продуктивності.";
 
-    // const ogImage = product.img 
-    //     ? (product.img.src.startsWith('http') ? product.img.src : `https://supphub.shop${product.img}`) 
-    //     : "/logo-img.png";
+    const ogImage = product.img 
+        ? (product.img.src.startsWith('http') ? product.img.src : `https://supphub.shop${product.img}`) 
+        : "/logo-img.png";
 
     return (
         <>
             <Head>
                 <title>{product.name} | SuppHub</title>
                 <link rel="shortcut icon" href="/logo-img.png" type="image/x-icon" />
-                {/* <meta 
+                <meta 
                     name="description" 
                     content={seoDescription} 
                 />
@@ -64,7 +64,7 @@ export default function ProductPage({ product }: { product: cardProps | null }) 
 
                 <meta property="og:title" content={`${product.name} | SuppHub`} />
                 <meta property="og:description" content={seoDescription} />
-                <meta property="og:image" content={ogImage} /> */}
+                <meta property="og:image" content={ogImage} />
             </Head>
             <StateContext.Provider value={states}>
                 <ContactsMobilePopup />
