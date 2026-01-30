@@ -28,6 +28,7 @@ class PromocodeSerializer(serializers.ModelSerializer):
 class ProductAPIViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = ProductSerializer
+    lookup_field = "slug"
     queryset = Product.objects.all()
 
     cache = CacheService()
@@ -46,9 +47,9 @@ class ProductAPIViewSet(viewsets.ModelViewSet):
 
         return Response(data=data, status=status.HTTP_200_OK)
     
-    def retrieve(self, request: Request, pk=None) -> Response:
+    def retrieve(self, request: Request, slug=None) -> Response:
         queryset = Product.objects.all()
-        product = get_object_or_404(queryset, pk=pk)
+        product = get_object_or_404(queryset, slug=slug)
         serializer = ProductSerializer(product)
         
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -15,6 +15,7 @@ requests = "*"
 redis = "*"
 pillow = "*"
 django-ckeditor = "*"
+python-slugify = "*"
 
 [dev-packages]
 black="~=25.1.0"  # formatter

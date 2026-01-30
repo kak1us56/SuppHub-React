@@ -31,6 +31,7 @@ export function Cards() {
             img={item.img}
             amount={item.amount}
             id={item.id}
+            slug={item.slug}
             key={item.id}
           />
         )) || 'Наразі немає товару в наявності'

@@ -8,7 +8,7 @@ import { mobileResize } from "../../constants/functions-global-logic";
 import Link from "next/link";
 import { AddToBasketState, AddToBasketStateStateContext } from "./state-context";
 
-export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price, id, amount }) => {
+export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price, id, amount, slug }) => {
   const [cardCounter, setCardCounter] = useState<number>(1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
 
   return (
-    <Link href={`/products/${id}/`}>
+    <Link href={`/products/${slug}/`}>
       <div
         className="relative bg-[#343434] max-md:w-[9.6rem] max-md:h-[15.5rem] max-md:rounded-[12px]
         w-[20rem] h-[28.75rem] rounded-[20px] flex flex-col"

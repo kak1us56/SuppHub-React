@@ -8,6 +8,7 @@ export interface cardProps {
     price: number;
     amount?: number;
     id: string;
+    slug?: string;
 
     pill_amount?: string;
     active_ingredients?: string;

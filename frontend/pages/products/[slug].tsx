@@ -92,10 +92,10 @@ export default function ProductPage({ product }: { product: cardProps | null }) 
 }
 
 export async function getServerSideProps(context: any) {
-  const { id } = context.params;
+  const { slug } = context.params;
 
   try {
-      const res = await fetch(`http://api:8000/products/${id}/`);
+      const res = await fetch(`http://api:8000/products/${slug}/`);
       
       if (!res.ok) {
           return { notFound: true };
@@ -107,7 +107,7 @@ export async function getServerSideProps(context: any) {
           props: { product },
       }; 
   } catch (e) {
-      console.error(`SSR Error for id ${id}:`, e);
+      console.error(`SSR Error for id ${slug}:`, e);
       return { notFound: true };
   }
 }
