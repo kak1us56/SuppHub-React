@@ -34,9 +34,9 @@ ENV/
 .idea/
 
 # Migrations (optional, if you're resetting often)
-**/migrations/*.py
-**/migrations/*.pyc
-!**/migrations/__init__.py
+# **/migrations/*.py
+# **/migrations/*.pyc
+# !**/migrations/__init__.py
 
 # OS-specific
 .DS_Store
