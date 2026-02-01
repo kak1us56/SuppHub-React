@@ -39,7 +39,7 @@ export function ConfirmTotal({ sendCode, discount }: ConfirmTotalProps) {
 
     return (
         <div className="sticky top-[100px] w-[37.5rem] min-h-[26.5rem] max-md:min-h-[8.75rem] px-10 pt-10 pb-7 max-md:m-0 max-md:p-0 max-md:w-full
-            rounded-[25px] md:bg-[#5E5A53] flex flex-col mt-[73px] float-right max-md:float-none">
+            rounded-[25px] md:bg-[#5E5A53] flex flex-col mt-[73px]">
             <h2 className="text-[2rem] leading-cssnormal pl-[7px] pb-[34px] text-white font-semibold max-md:hidden">
                 РАЗОМ
             </h2>
@@ -76,7 +76,7 @@ export function ConfirmTotal({ sendCode, discount }: ConfirmTotalProps) {
             </div>
             <button 
                 onClick={sendCode}
-                className="w-[15.375rem] h-[3.25rem] max-md:w-[10rem] max-md:h-[2rem] bg-[#F90] rounded-[4px] flex items-center justify-center cursor-pointer self-center outline-none border-none max-md:mb-8">
+                className="w-[15.375rem] h-[3.25rem] max-md:w-[10rem] max-md:h-[2rem] bg-[#F90] rounded-[4px] flex items-center justify-center cursor-pointer self-center border-none max-md:mb-8">
                 <p className="leading-cssnormal text-black text-[1.25rem] tracking-[1.6px] max-md:text-[1rem] max-md:tracking-[1.28px] max-md:mx-auto">
                     Підтвердити
                 </p>

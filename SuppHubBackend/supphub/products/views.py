@@ -73,15 +73,18 @@ class PromocodeAPIViewSet(viewsets.ModelViewSet):
         if not code_val:
             return Response({"error": "Промокод не може бути пустим"}, status=status.HTTP_400_BAD_REQUEST)
 
-        db_code = Promocode.objects.get(code=code_val)
+        try:
+            db_code = Promocode.objects.get(code=code_val)
 
-        if db_code.usages_amount > 0:
-            db_code.usages_amount -= 1
-            db_code.save()
+            if db_code.usages_amount > 0:
+                db_code.usages_amount -= 1
+                db_code.save()
 
-            return Response({"success": "Ваш промокод успішно застосований", "discount": db_code.discount}, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "Ваш промокод більше не дійсний"}, status=status.HTTP_200_OK)
+                return Response({"success": "Ваш промокод успішно застосований", "discount": db_code.discount}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "Ваш промокод більше не дійсний"}, status=status.HTTP_200_OK)
+        except Exception:
+            return Response({"error": "Промокод не знайдено"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def handle_csv_import(request, callback):

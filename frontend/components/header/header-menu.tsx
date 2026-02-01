@@ -143,11 +143,11 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
               }}
             >
               Корзина
-              <div
+              <span
                 className={`${Number(basketSum) === 0 ? "hidden" : "flex"} w-[30px] h-[30px] text-[24px] rounded-full bg-[#F90] items-center justify-center font-extrabold`}
               >
                 {basketSum}
-              </div>
+              </span>
             </button>
           </li>
         </ul>

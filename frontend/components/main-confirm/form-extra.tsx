@@ -1,13 +1,28 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StateContextConfirm, StatesConfirmType } from "../uikit/state-context";
 
 type FormExtraProps = {
-    apply_promo: (event: any) => Promise<void>;
+    apply_promo: (event: any, setResponse: (res: any) => void) => Promise<void>;
 }
 
 export const FormExtra = ({ apply_promo }: FormExtraProps) => {
     const states: StatesConfirmType = useContext(StateContextConfirm);
     const [value, setValue] = useState<string>("");
+    const [promoRes, setPromoRes] = useState<any>(null);
+    const [promoErr, setPromoErr] = useState(false);
+    const [promoResText, setPromoResText] = useState("");
+
+    useEffect(() => {
+        if (!promoRes) return;
+
+        if (promoRes.success) {
+            setPromoErr(false);
+            setPromoResText(promoRes.success);
+        } else if (promoRes.error) {
+            setPromoErr(true);
+            setPromoResText(promoRes.error);
+        }
+    }, [promoRes])
 
     // Promocode input to uppercase
     const handleChange = (event) => {
@@ -22,9 +37,9 @@ export const FormExtra = ({ apply_promo }: FormExtraProps) => {
                 3. Додаткові дані
             </h2>
             <div className="flex flex-col pt-[35px] gap-[10px] max-md:pt-1 max-md:pl-[18px]">
-                <p className="text-[1.25rem]/[20px] pl-[9px] tracking-[1.4px] font-medium text-white max-md:pl-0 max-md:text-[14px] max-md:tracking-[0.98px]">
+                <label className="text-[1.25rem]/[20px] pl-[9px] tracking-[1.4px] font-medium text-white max-md:pl-0 max-md:text-[14px] max-md:tracking-[0.98px]">
                     Коментарій
-                </p>
+                </label>
                 <textarea name="comment"
                     ref={states.textareaCommentRef}
                     className="w-[26.4375rem] h-[6.0625rem] rounded-[5px] bg-[#494949] pl-[11px] pt-2 text-[1.25rem]/[20px]
@@ -33,7 +48,7 @@ export const FormExtra = ({ apply_promo }: FormExtraProps) => {
                 </textarea>
             </div>
             <div className="w-[26.4375rem] pt-8 max-md:w-[18.5rem] max-md:pl-[18px] max-md:pt-3">
-                <p className="text-white font-medium text-[1.25rem]/[20px] tracking-[1.4px] pl-[9px] pb-[10px] max-md:pl-0 max-md:pb-1 max-md:text-[14px] max-md:tracking-[0.98px]">Промокод:</p>
+                <label className="text-white font-medium text-[1.25rem]/[20px] tracking-[1.4px] pl-[9px] pb-[10px] max-md:pl-0 max-md:pb-1 max-md:text-[14px] max-md:tracking-[0.98px]">Промокод:</label>
                 <div className="flex justify-between">
                     <input 
                         type="text" 
@@ -45,15 +60,17 @@ export const FormExtra = ({ apply_promo }: FormExtraProps) => {
                         className="rounded-[5px] bg-[#494949] text-center text-[1.25rem]/[20px] max-md:w-[10.125rem] max-md:h-[2rem]
                         tracking-[1.4px] text-white outline-none w-[232px] h-[44px] max-md:tracking-[1.15px] max-md:text-[16px]/[14px]" />
                     <button
-                        onClick={apply_promo}
+                        onClick={(e) => apply_promo(e, setPromoRes)}
                         type="submit"
-                        className="w-[165px] h-[44px] max-md:w-[6.75rem] max-md:h-[2rem] bg-[#F90] rounded-[5px] flex items-center justify-center cursor-pointer self-center outline-none border-none">
+                        className="w-[165px] h-[44px] max-md:w-[6.75rem] max-md:h-[2rem] bg-[#F90] rounded-[5px] flex items-center justify-center cursor-pointer self-center border-none">
                         <p className="leading-cssnormal text-black text-[1.25rem] max-md:text-[0.875rem] max-md:tracking-[0.98px] tracking-[1.6px]">
                             Застосувати
                         </p>
                     </button>
                 </div>
-
+                <div className={`${promoResText !== "" ? "block" : "hidden"} ${promoErr ? "text-red-500" : "text-green-500"} text-[0.775rem] pl-2`}>
+                    {promoResText}
+                </div>
             </div>
             <div className="pt-[43px] pl-[23px] max-md:pt-6">
                 <input type="checkbox" id="checkbox"

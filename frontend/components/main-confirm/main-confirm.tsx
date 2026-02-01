@@ -71,7 +71,7 @@ export function MainConfirm() {
     // Calculate sum price
     useEffect(() => {controlBasketTotal(setBasketTotal)}, [])
 
-    const apply_promocode = async (event) => {
+    const apply_promocode = async (event, setResponse) => {
         event.preventDefault();
         const inputPromocodeValue = inputPromocodeRef.current?.value || '';
 
@@ -89,6 +89,7 @@ export function MainConfirm() {
             });
 
             const result = await response.json()
+            setResponse(result);
 
             if (response.ok && result.success) {
                 setDiscount(result.discount);
@@ -316,7 +317,7 @@ export function MainConfirm() {
                             Оформлення замовлення
                         </h1>
                     </div>
-                    <div className="min-h-[1064px] max-md:min-h-[600px]">
+                    <div className="min-h-[1064px] max-md:min-h-[600px] flex justify-between items-start flex-wrap pb-8">
                         <StateContextConfirm.Provider value={statesConfirm}>
                             {isMobile && <ProductsMobile />}
                             <ConfirmForm apply_promo={apply_promocode} />
