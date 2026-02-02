@@ -43,7 +43,7 @@ class ProductAPIViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
 
-        self.cache.set(namespace="products", key="list", value=data, ttl=1600)
+        self.cache.set(namespace="products", key="list", value=data, ttl=8000)
 
         return Response(data=data, status=status.HTTP_200_OK)
     

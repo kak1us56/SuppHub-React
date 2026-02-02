@@ -12,7 +12,7 @@ export function Cards() {
         const data = await res.json();
         setItems(data);
       } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
+        console.error("Error loading data:", error);
       }
     };
 
@@ -20,7 +20,7 @@ export function Cards() {
   }, [])
 
   return (
-    <div className="flex flex-wrap justify-center max-md:gap-y-[14px] max-md:gap-x-[10px] gap-y-[73px] gap-x-[118px] pb-[106px] max-md:pb-[50px]">
+    <div className="flex flex-wrap justify-center max-sm:gap-y-[14px] max-sm:gap-x-[10px] gap-y-[73px] gap-x-[118px] max-lg:gap-y-9 max-lg:gap-x-10 pb-[106px] max-sm:pb-[50px]">
       {
         items.map((item) => (
           <Card

@@ -10,9 +10,9 @@ export function LogoBlock() {
   useEffect(() => mobileResize(setIsMobile), []);
 
   return (
-    <div className="flex max-md:gap-0 gap-[20px]">
+    <div className="flex max-sm:gap-0 gap-[20px]">
       <div>
-        <Image src={logoFoot} alt="Логотип SuppHub" className="max-md:w-[42px]" />
+        <Image src={logoFoot} alt="Логотип SuppHub" className="max-sm:w-[42px]" />
       </div>
       {isMobile ? (
         ""

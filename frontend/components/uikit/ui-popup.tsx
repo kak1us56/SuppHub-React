@@ -26,7 +26,7 @@ export const UiPopup: React.FC<Props> = ({
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
 
     handleResize();
 

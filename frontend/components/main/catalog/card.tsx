@@ -26,57 +26,57 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   return (
     <Link href={`/products/${slug}/`} className={`${hitBool ? "order-[0]" : "order-1"}`}>
       <div
-        className="relative bg-[#343434] max-md:w-[9.6rem] max-md:h-[15.5rem] max-md:rounded-[12px]
+        className="relative bg-[#343434] max-sm:w-[9.6rem] max-sm:h-[15.5rem] max-sm:rounded-[12px]
         w-[20rem] h-[28.75rem] rounded-[20px] flex flex-col"
       >
         {/* Not active block */}
-        <div className={`${isActive ? "hidden" : "block"} absolute top-0 left-0 w-full h-full opacity-[0.3] pointer-events-none z-[1] bg-black rounded-[20px] max-md:rounded-[12px]`}></div>
+        <div className={`${isActive ? "hidden" : "block"} absolute top-0 left-0 w-full h-full opacity-[0.3] pointer-events-none z-[1] bg-black rounded-[20px] max-sm:rounded-[12px]`}></div>
         <div
-          className="flex justify-center max-md:w-[9.6rem] max-md:h-[7.5rem]
-          max-md:rounded-t-[12px] w-[20rem] h-[15.875rem] rounded-t-[20px] bg-[#494949]"
+          className="flex justify-center max-sm:w-[9.6rem] max-sm:h-[7.5rem]
+          max-sm:rounded-t-[12px] w-[20rem] h-[15.875rem] rounded-t-[20px] bg-[#494949]"
         >
           <div
-            className={`absolute max-md:top-[2px] max-md:left-0 top-[5px] left-[2px] ${hitBool ? "block" : "hidden"}`}
+            className={`absolute max-sm:top-[2px] max-sm:left-0 top-[5px] left-[2px] ${hitBool ? "block" : "hidden"}`}
           >
-            <Image src={hit} alt="Хіт продажів" className="max-md:w-[2.6rem]" />
+            <Image src={hit} alt="Хіт продажів" className="max-sm:w-[2.6rem]" />
           </div>
-          <div className="max-md:pt-[14px] pt-[24px]">
-            <Image src={img} width={100} height={100} alt={name} className="max-md:w-[2.85rem]" />
+          <div className="max-sm:pt-[14px] pt-[24px]">
+            <Image src={img} width={100} height={100} alt={name} className="max-sm:w-[2.85rem]" />
           </div>
           <div
-            className={`absolute max-md:top-[5px] max-md:right-[9px] top-[18px] right-[21px] ${veganBool ? "block" : "hidden"}`}
+            className={`absolute max-sm:top-[5px] max-sm:right-[9px] top-[18px] right-[21px] ${veganBool ? "block" : "hidden"}`}
           >
-            <Image src={vegan} alt="Веганське" className="max-md:w-[1.9rem]" />
+            <Image src={vegan} alt="Веганське" className="max-sm:w-[1.9rem]" />
           </div>
         </div>
         <div className="flex flex-col">
           <h3
-            className="max-md:pt-[6px] max-md:text-[0.9rem]/[16px] max-md:tracking-[1.64px] max-md:pl-2 pl-[18px]
+            className="max-sm:pt-[6px] max-sm:text-[0.9rem]/[16px] max-sm:tracking-[1.64px] max-sm:pl-2 pl-[18px]
             pt-[14px] text-[1.75rem]/[35px] text-[#F90] tracking-[3.64px] font-semibold"
           >
             {name}
           </h3>
-          <p className="max-md:text-[0.875rem] max-md:tracking-[1px] max-md:pl-2 text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
+          <p className="max-sm:text-[0.875rem] max-sm:tracking-[1px] max-sm:pl-2 text-[1.25rem] tracking-[2.6px] text-[#F90] font-medium pl-[18px]">
             {price} ₴
           </p>
           <div
-            className={`flex max-md:py-[7px] max-md:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}
+            className={`flex max-sm:py-[7px] max-sm:gap-[0.75rem] py-[14px] self-center gap-[14px] items-center`}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation(); 
             }}>
             <button
-              className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
+              className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-sm:w-[25px] max-sm:h-[25px] text-[1.5rem] flex justify-center items-center
                 w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
               onClick={() => cardCounterDe(cardCounter, setCardCounter)}
             >
               -
             </button>
-            <div className="text-[#F90] max-md:text-[1.2rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] font-medium">
+            <div className="text-[#F90] max-sm:text-[1.2rem]/[16px] max-sm:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] font-medium">
               {cardCounter}
             </div>
             <button
-              className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-md:w-[25px] max-md:h-[25px] text-[1.5rem] flex justify-center items-center
+              className={`${isActive ? "cursor-pointer" : "cursor-default"} user-select max-sm:w-[25px] max-sm:h-[25px] text-[1.5rem] flex justify-center items-center
                 w-[23px] h-[23px] bg-[#494949] rounded-full font-normal`}
               onClick={() => cardCounterIn(cardCounter, setCardCounter, amount)}
             >
@@ -92,10 +92,10 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
               }
             }}
             className={`${isActive ? "w-[9.8125rem] bg-[#F90] cursor-pointer" : "w-[15.8125rem] bg-[#8c8c8c] cursor-default"}
-              flex max-md:w-[8.5rem] max-md:h-[2.25rem] max-md:rounded-[16px] justify-center items-center
+              flex max-sm:w-[8.5rem] max-sm:h-[2.25rem] max-sm:rounded-[16px] justify-center items-center
               self-center h-[3.125rem] rounded-[40px]`}
           >
-            <p className="max-md:text-[0.875rem]/[16px] max-md:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] text-white font-medium text-center">
+            <p className="max-sm:text-[0.875rem]/[16px] max-sm:tracking-[1px] text-[1.25rem]/[35px] tracking-[2.6px] text-white font-medium text-center">
               {isActive ? "В корзину" : "Нема в наявності"}
             </p>
           </button>

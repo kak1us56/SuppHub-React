@@ -2,7 +2,7 @@ export const customSelectStyles = {
   container: (base: any) => ({
     ...base,
     width: '17.1875rem',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 640px)': {
       width: '15.5rem',
     },
   }),
@@ -19,7 +19,7 @@ export const customSelectStyles = {
 
     fontSize: '1.25rem',
     
-    '@media (max-width: 768px)': {
+    '@media (max-width: 640px)': {
       minHeight: '2rem',
       fontSize: '16px',
     },

@@ -303,21 +303,21 @@ export function MainConfirm() {
 
     return (
         <main>
-            <div className="min-h-[1311px] max-md:min-h-[700px] bg-[#1F1F1F] mt-20 max-md:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-md:bg-[length:130px]">
+            <div className="min-h-[1311px] max-sm:min-h-[700px] bg-[#1F1F1F] mt-20 max-sm:mt-[48px] bg-repeat bg-pill bg-[length:250px] max-sm:bg-[length:130px]">
                 <PhoneConfirmation isPhoneConfirmationActive={isPhoneConfirmationActive} sendData={sendData} sendCode={sendCode} />     
-                <div className="max-w-[1312px] max-md:max-w-[352px] mx-auto px-4">
+                <div className="max-w-[1312px] max-sm:max-w-[352px] mx-auto px-4">
                     <Link href="/">
-                        <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[60px] max-md:text-[0.875rem] max-md:pt-[17px]">
+                        <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[60px] max-sm:text-[0.875rem] max-sm:pt-[17px]">
                             ← На головну
                         </p>
                     </Link>
                     <div>
-                        <h1 className={`${handjet.className} max-md:text-[24px] max-md:tracking-[1.92px] max-md:pt-4 max-md:pb-8
+                        <h1 className={`${handjet.className} max-sm:text-[24px] max-sm:tracking-[1.92px] max-sm:pt-4 max-sm:pb-8
                             text-[#D9D9D9] leading-cssnormal tracking-[5.12px] text-[4rem] py-[68px] font-medium`}>
                             Оформлення замовлення
                         </h1>
                     </div>
-                    <div className="min-h-[1064px] max-md:min-h-[600px] flex justify-between items-start flex-wrap pb-8">
+                    <div className="min-h-[1064px] max-sm:min-h-[600px] flex justify-between items-start flex-wrap pb-8">
                         <StateContextConfirm.Provider value={statesConfirm}>
                             {isMobile && <ProductsMobile />}
                             <ConfirmForm apply_promo={apply_promocode} />

@@ -14,7 +14,7 @@ export const ConfirmTotalItem: React.FC<ItemProps> = ({ name, id }) => {
     useEffect(() => controlTotalItems(id, setIsActive, setItemAmount), []);
 
     return (
-        <div className={`${isActive ? 'flex' : 'hidden'} tracking-[1.68px] text-[1.5rem] max-md:text-[1rem]/[20px] max-md:tracking-[0.98px] text-white leading-cssnormal justify-between font-medium`}>
+        <div className={`${isActive ? 'flex' : 'hidden'} tracking-[1.68px] text-[1.5rem] max-sm:text-[1rem]/[20px] max-sm:tracking-[0.98px] text-white leading-cssnormal justify-between font-medium`}>
             <p>
                 {name}
             </p>

@@ -39,14 +39,14 @@ export function BasketPopup() {
 
   return (
     <UiPopup
-      width="w-[71.25rem]"
+      width="w-[71.25rem] max-lg:max-w-[55rem]"
       heigth={isLaptop ? isSmallHeight ? "min-h-[30.625rem]" : "min-h-[39.625rem]" : "min-h-[45.5rem]"}
       header="Корзина"
       active={states.basketActive}
       setActive={states.setBasketActive}
     >
-      <div>
-        <div className={`w-[63.75rem] ${isLaptop ? isSmallHeight ? "h-[18.7rem]" : "h-[28rem]" : "h-[33.875rem]"} border-b-2 border-b-[#494949] border-solid overflow-y-auto overflow-x-hidden`}>
+      <div className="w-[90%]">
+        <div className={`w-100% ${isLaptop ? isSmallHeight ? "h-[18.7rem]" : "h-[28rem]" : "h-[33.875rem]"} border-b-2 border-b-[#494949] border-solid overflow-y-auto overflow-x-hidden`}>
           {items.map((item) => (
             <BasketItem
               img={item.img}

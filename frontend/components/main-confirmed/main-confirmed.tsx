@@ -6,14 +6,14 @@ const handjet: any = Handjet({
 
 export function MainConfirmed() {
     return (
-        <main className="min-h-[calc(100vh_-_172px)] max-md:min-h-[calc(100vh_-_80px)] bg-pill bg-[#1F1F1F] bg-repeat max-md:bg-[length:60px] bg-[length:250px]">
-            <div className="max-w-[1232px] max-md:max-w-[352px] mx-auto px-4">
+        <main className="min-h-[calc(100vh_-_172px)] max-sm:min-h-[calc(100vh_-_80px)] bg-pill bg-[#1F1F1F] bg-repeat max-sm:bg-[length:60px] bg-[length:250px]">
+            <div className="max-w-[1232px] max-sm:max-w-[352px] mx-auto px-4">
                 <Link href="/">
-                    <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[120px] max-md:text-[0.875rem] max-md:pt-[65px]">
+                    <p className="text-white text-[28px] leading-cssnormal font-normal tracking-[2.24px] pt-[120px] max-sm:text-[0.875rem] max-sm:pt-[65px]">
                         ← На головну
                     </p>
                 </Link>
-                <h1 className={`${handjet.className} text-[#D9D9D9] pt-[100px] max-md:text-[32px] max-md:pt-[80px] text-center text-[64px] leading-cssnormal tracking-[5.12px] font-medium mx-auto`}>
+                <h1 className={`${handjet.className} text-[#D9D9D9] pt-[100px] max-sm:text-[32px] max-sm:pt-[80px] text-center text-[64px] leading-cssnormal tracking-[5.12px] font-medium mx-auto`}>
                     Замовлення оформлено успішно<br />Дякуємо Вам за довіру!
                 </h1>
             </div>

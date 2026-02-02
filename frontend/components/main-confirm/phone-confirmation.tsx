@@ -69,19 +69,19 @@ export const PhoneConfirmation = ({ isPhoneConfirmationActive, sendData, sendCod
     return (
         <div className={`${isPhoneConfirmationActive ? "block" : "hidden"} fixed w-full h-full bg-[rgba(0,_0,_0,_0.8)] top-0 left-0 z-10 popup-transition`}>
             <div className="min-h-full flex justify-center items-center py-[30px] px-[10px] popup-transition">
-                <div className={`${isPhoneConfirmationActive ? "block" : "hidden"} relative flex flex-col items-center w-[37.5rem] min-h-[17.5rem] max-md:w-[18rem] max-md:min-h-[9rem] bg-[#343434] popup-transition`}>
-                    <div className="flex justify-between items-center py-[10px] max-md:min-h-[48px] px-[34px] w-full min-h-[68px] bg-black">
-                        <p className={`leading-cssnormal tracking-[3.2px] text-[2.5rem] max-md:text-[1.5rem] max-md:tracking-[1.8px] text-[#D9D9D9] font-medium ${handjet.className}`}>Код підтвердження</p>
+                <div className={`${isPhoneConfirmationActive ? "block" : "hidden"} relative flex flex-col items-center w-[37.5rem] min-h-[17.5rem] max-sm:w-[18rem] max-sm:min-h-[9rem] bg-[#343434] popup-transition`}>
+                    <div className="flex justify-between items-center py-[10px] max-sm:min-h-[48px] px-[34px] w-full min-h-[68px] bg-black">
+                        <p className={`leading-cssnormal tracking-[3.2px] text-[2.5rem] max-sm:text-[1.5rem] max-sm:tracking-[1.8px] text-[#D9D9D9] font-medium ${handjet.className}`}>Код підтвердження</p>
                     </div>
-                    <div className="pt-5 max-md:h-[178px]">
-                        <form action="" className="flex flex-col gap-3 max-md:items-center">
+                    <div className="pt-5 max-sm:h-[178px]">
+                        <form action="" className="flex flex-col gap-3 max-sm:items-center">
                             <input type="text" maxLength={4} inputMode="numeric" value={code} onChange={handleInputChange} className="text-[24px] text-center
-                                w-[25rem] h-[3.2rem] max-md:w-[15rem] max-md:h-[2.5rem] max-md:text-[1.25rem] rounded-[6px] bg-[#494949] outline-none border-0 tracking-[10px] text-white" />
+                                w-[25rem] h-[3.2rem] max-sm:w-[15rem] max-sm:h-[2.5rem] max-sm:text-[1.25rem] rounded-[6px] bg-[#494949] outline-none border-0 tracking-[10px] text-white" />
                             <button
                                 onClick={handleConfirmClick}
                                 className={`${buttonActive ? "bg-[#F90] cursor-pointer" : "bg-[#d9d9d9] cursor-default"} flex justify-center items-center self-center w-[20.9375rem] h-[3.125rem]
-                                rounded-[8px] outline-none border-0 transition-linear max-md:w-[12rem] max-md:h-[2.5rem] max-md:mb-0`}>
-                                <p className="text-black text-[22px] font-medium max-md:text-[1.2rem]">Підтвердити</p>
+                                rounded-[8px] outline-none border-0 transition-linear max-sm:w-[12rem] max-sm:h-[2.5rem] max-sm:mb-0`}>
+                                <p className="text-black text-[22px] font-medium max-sm:text-[1.2rem]">Підтвердити</p>
                             </button>
                         </form>
                         <p 
@@ -91,7 +91,7 @@ export const PhoneConfirmation = ({ isPhoneConfirmationActive, sendData, sendCod
                                     counterTime();
                                 }
                             }}
-                            className={`${isSendAgain ? "cursor-pointer" : "cursor-auto"} text-[#d9d9d9] text-[1rem] leading-cssnormal pt-[13px] text-center max-md:text-[0.9rem] max-md:mb-4`}>
+                            className={`${isSendAgain ? "cursor-pointer" : "cursor-auto"} text-[#d9d9d9] text-[1rem] leading-cssnormal pt-[13px] text-center max-sm:text-[0.9rem] max-sm:mb-4`}>
                             Відправити знову<br />
                             <span className={`${isSendAgain ? "hidden" : "block"}`}>(доступно через {time} секунд)</span>
                         </p>

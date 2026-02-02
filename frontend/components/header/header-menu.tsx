@@ -75,12 +75,12 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
         ""
       )}
       <nav
-        className={`max-md:bg-black max-md:fixed max-md:top-0 max-md:left-0 max-md:w-[100%] max-md:h-[100%] max-md:text-center
-        max-md:pt-20 max-md:pb-[30px] max-md:py-[10px] transition-linear ${isMenuOpen ? "max-md:translate-none" : "max-md:-translate-y-full"}`}
+        className={`max-sm:bg-black max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-[100%] max-sm:h-[100%] max-sm:text-center
+        max-sm:pt-20 max-sm:pb-[30px] max-sm:py-[10px] transition-linear ${isMenuOpen ? "max-sm:translate-none" : "max-sm:-translate-y-full"}`}
       >
         <ul
-          className="text-white flex gap-12 text-[28px] items-center font-normal tracking-[2.52px] leading-cssnormal
-          max-md:flex-col max-md:text-center"
+          className="text-white flex gap-12 text-[1.75rem] items-center font-normal tracking-[2.52px] leading-cssnormal
+          max-sm:flex-col max-sm:text-center max-lg:gap-4 max-lg:text-[1.4rem] max-lg:tracking-[1.48px]"
         >
           <li>
             <Link

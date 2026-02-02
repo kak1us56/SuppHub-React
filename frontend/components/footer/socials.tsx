@@ -12,7 +12,7 @@ export function Socials() {
   useEffect(() => mobileResize(setIsMobile), []);
 
   return (
-    <div className="flex flex-col max-md:gap-[6px] gap-[11px]">
+    <div className="flex flex-col max-sm:gap-[6px] gap-[11px]">
       <Link
         href="https://www.instagram.com/supphub.shop"
         target="_blank"
@@ -20,10 +20,10 @@ export function Socials() {
         onClick={() => sendMetrik("click", "ClickToInstagram", "Socials", isMobile ? "Mobile" : "Desktop")}
       >
         <div>
-          <Image src={instIcon} alt="Інстаграм" className="max-md:w-5" />
+          <Image src={instIcon} alt="Інстаграм" className="max-sm:w-5" />
         </div>
         <span
-          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-md:hidden"
+          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-sm:hidden"
         >
           instagram.com/supphub.shop
         </span>
@@ -35,10 +35,10 @@ export function Socials() {
         onClick={() => sendMetrik("click", "ClickToTelegram", "Socials", isMobile ? "Mobile" : "Desktop")}
       >
         <div>
-          <Image src={tgIcon} alt="Телеграм" className="max-md:w-5" />
+          <Image src={tgIcon} alt="Телеграм" className="max-sm:w-5" />
         </div>
         <span
-          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-md:hidden"
+          className="text-white font-bold leading-cssnormal tracking-[1.44px] text-[1rem] max-sm:hidden"
         >
           t.me/supphub_manager
         </span>

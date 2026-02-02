@@ -2,7 +2,7 @@ import { cardProps } from "./interfaces";
 
 // Mobile size
 export function mobileResize(setIsMobile: (active: boolean) => void) {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
 
     handleResize();
 
@@ -12,7 +12,7 @@ export function mobileResize(setIsMobile: (active: boolean) => void) {
 
 // Laptop size
 export function laptopResize(setIsLaptop: (active: boolean) => void) {
-    const handleResize = () => setIsLaptop(window.innerWidth >= 768 && window.innerWidth < 1740);
+    const handleResize = () => setIsLaptop(window.innerWidth >= 640 && window.innerWidth < 1740);
 
     handleResize();
 

@@ -18,10 +18,10 @@ export function HeaderLogo() {
     <Link href='/'>
       <div
         onClick={resetPopup}
-        className="flex items-center gap-4 max-md:gap-[5px] max-md:z-[5]"
+        className="flex items-center gap-4 max-sm:gap-[5px] max-sm:z-[5]"
       >
-        <Image className="max-md:w-[32px]" src={logoImg} alt="Логотип SuppHub" />
-        <Image className="max-md:w-[100px]" src={logoText} alt="SuppHub" />
+        <Image className="max-sm:w-[32px] max-lg:w-[42px]" src={logoImg} alt="Логотип SuppHub" />
+        <Image className="max-sm:w-[100px] max-lg:w-[130px]" src={logoText} alt="SuppHub" />
       </div>
     </Link>
   );
