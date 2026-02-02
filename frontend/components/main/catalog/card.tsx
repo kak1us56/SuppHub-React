@@ -24,7 +24,7 @@ export const Card: React.FC<cardProps> = ({ hitBool, veganBool, img, name, price
   useEffect(() => amount === 0 ? setIsActive(false) : setIsActive(true), []);
 
   return (
-    <Link href={`/products/${slug}/`}>
+    <Link href={`/products/${slug}/`} className={`${hitBool ? "order-[0]" : "order-1"}`}>
       <div
         className="relative bg-[#343434] max-md:w-[9.6rem] max-md:h-[15.5rem] max-md:rounded-[12px]
         w-[20rem] h-[28.75rem] rounded-[20px] flex flex-col"
