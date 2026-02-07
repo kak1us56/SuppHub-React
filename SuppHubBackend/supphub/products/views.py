@@ -125,7 +125,7 @@ def import_products(request):
 
 def import_promocodes(request):
     def callback(row):
-        Promocode.objects.create(code=row["code"], discount=row["discount"])
+        Promocode.objects.create(code=row["code"], discount=row["discount"], usages_amount=int(row["usages_amount"]))
     
     return handle_csv_import(request, callback)
 
