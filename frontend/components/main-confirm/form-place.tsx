@@ -186,9 +186,8 @@ export function FormPlace() {
         </div>
 
       </div>
-      <p className="text-[1rem] max-sm:text-[0.75rem] leading-cssnormal pt-[23px] max-sm:pt-[14px] max-sm:w-full pl-[11px] text-white font-normal">
-        Доставка відбувається виключно Новою Поштою <br />
-        та накладеним платежем!
+      <p className="text-[1.25rem] max-sm:text-[1rem] rounded-[20px] bg-[#5E5A53] leading-cssnormal p-4 max-md:p-2 mt-6 max-md:mt-4 max-sm:pt-[14px] max-sm:w-full pl-[11px] text-white font-normal">
+        Доставка відбувається виключно Новою Поштою та <strong>накладеним платежем</strong>!
       </p>
     </div>
   );

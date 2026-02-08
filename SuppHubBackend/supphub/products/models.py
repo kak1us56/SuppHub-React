@@ -45,7 +45,7 @@ class Promocode(models.Model):
     class Meta:
         db_table = "promocodes"
     
-    code = models.CharField(max_length=8, validators=[MinLengthValidator(8)], null=False)
+    code = models.CharField(max_length=8, validators=[MinLengthValidator(8)], unique=True, null=False)
     discount = models.PositiveIntegerField(validators=[MaxValueValidator(100), MinValueValidator(0)], null=False)
     usages_amount = models.PositiveSmallIntegerField(default=1, null=False)
 
