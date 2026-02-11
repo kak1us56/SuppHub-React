@@ -1,5 +1,6 @@
 FROM node:18-alpine AS base
 
+ARG NEXT_PUBLIC_GA_ID
 
 FROM base AS deps
 WORKDIR /app
