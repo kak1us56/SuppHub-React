@@ -15,6 +15,7 @@ type Region = {
 type City = {
   Description: string;
   Ref: string;
+  SettlementTypeDescription: string;
 };
 
 type Warehouse = {
@@ -75,7 +76,23 @@ export function FormPlace() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setCities(data.data);
+          const rawCities: City[] = data.data;
+
+          // Firstly cities then villages
+          const sortedCities = rawCities.sort((a, b) => {
+            const typeA = (a.SettlementTypeDescription || "").toLowerCase();
+            const typeB = (b.SettlementTypeDescription || "").toLowerCase();
+
+            const isCityA = typeA.includes('місто');
+            const isCityB = typeB.includes('місто');
+
+            if (isCityA && !isCityB) return -1;
+            if (!isCityA && isCityB) return 1;
+            
+            return a.Description.localeCompare(b.Description);
+          });
+
+          setCities(sortedCities);
         }
       });
   }, [selectedRegion]);
@@ -169,6 +186,18 @@ export function FormPlace() {
                 isClearable
                 placeholder="Оберіть відділення"
                 styles={customSelectStyles}
+                filterOption={(option: any, inputValue: string) => {
+                    if (!inputValue) return true;
+                    const search = inputValue.toLowerCase();
+                    const label = option.label.toLowerCase();
+                    
+                    if (label.includes(search)) return true;
+                    
+                    const number = option.data?.Number;
+                    if (number && number.toLowerCase() === search) return true;
+
+                    return false;
+                }}
                 onChange={(option) => {
                   setSelectedWarehouse(option?.value || null);
                 }}
