@@ -56,7 +56,7 @@ export const FormExtra = ({ apply_promo }: FormExtraProps) => {
                         ref={states.inputPromocodeRef}
                         value={value}
                         onChange={handleChange}
-                        maxLength={8}
+                        maxLength={10}
                         className="rounded-[5px] bg-[#494949] text-center text-[1.25rem]/[20px] max-sm:w-[10.125rem] max-sm:h-[2rem]
                         tracking-[1.4px] text-white outline-none w-[232px] h-[44px] max-sm:tracking-[1.15px] max-sm:text-[16px]/[14px]" />
                     <button
