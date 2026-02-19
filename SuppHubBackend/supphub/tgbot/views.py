@@ -74,8 +74,11 @@ def submit_order(request):
                 f"Сума: {message_data.get('fullSummMsg')} грн"
             )
 
-            res1 = requests.post(
+            requests.post(
                 f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID1, "text": message}
+            )
+            requests.post(
+                f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID2, "text": message}
             )
 
             try:
