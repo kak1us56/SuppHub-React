@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { AppProps } from "next/app";
 import "../styles/global.css";
 import { Montserrat } from "next/font/google";
@@ -59,6 +60,20 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "SuppHub",
+              "url": "https://supphub.shop",
+              "logo": "https://supphub.shop/logo-img.png"
+            })
+          }}
+        />
+      </Head>
       {gaId && (
         <>
           <Script

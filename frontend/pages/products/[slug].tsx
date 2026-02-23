@@ -72,6 +72,7 @@ export default function ProductPage({ product }: { product: cardProps | null }) 
                 <meta property="og:title" content={`${product.name} | SuppHub`} />
                 <meta property="og:description" content={seoDescription} />
                 <meta property="og:image" content={ogImage} />
+                <meta property="og:type" content="website" />
             </Head>
             <StateContext.Provider value={states}>
                 <ContactsMobilePopup />

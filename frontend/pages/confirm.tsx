@@ -34,7 +34,10 @@ export default function ConfirmPage() {
                 <meta name="keywords" content="ноотропи, вітаміни, енергія, SuppHub, бади україна, купити амінокислоти, амінокислоти" />
                 <meta property="og:title" content="SuppHub — Твій потенціал на максимум" />
                 <meta property="og:description" content="Ноотропи та вітаміни для ефективного навчання та роботи." />
-                <meta property="og:image" content="/logo-img.png" />
+                <meta property="og:image" content="https://supphub.shop/logo-img.png" />
+                <meta property="og:image:width" content="63" />
+                <meta property="og:image:height" content="62" />
+                <meta property="og:type" content="website" />
 
                 <meta name="robots" content="noindex, nofollow" />
             </Head>
