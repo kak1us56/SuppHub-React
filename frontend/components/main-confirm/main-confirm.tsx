@@ -273,21 +273,21 @@ export function MainConfirm() {
                 const result = await response.json();
 
                 if (response.ok) {
-                    inputNameRef.current.value = '';
-                    inputVornameRef.current.value = '';
-                    inputTelRef.current.value = '';
-                    regionSelectRef.current.clearValue();
-                    citySelectRef.current.clearValue();
-                    warehouseSelectRef.current.clearValue();
-                    textareaCommentRef.current.value = '';
-                    checkboxCallMeRef.current.checked = false;
+                    router.push('/confirmed');
+
+                    if (inputNameRef.current) inputNameRef.current.value = '';
+                    if (inputVornameRef.current) inputVornameRef.current.value = '';
+                    if (inputTelRef.current) inputTelRef.current.value = '';
+                    if (regionSelectRef.current) regionSelectRef.current.clearValue();
+                    if (citySelectRef.current) citySelectRef.current.clearValue();
+                    if (warehouseSelectRef.current) warehouseSelectRef.current.clearValue();
+                    if (textareaCommentRef.current) textareaCommentRef.current.value = '';
+                    if (checkboxCallMeRef.current) checkboxCallMeRef.current.checked = false;
 
                     data.forEach((product: cardProps) => {
                         localStorage.setItem(`itemAmount${product.id}`, "");
                     });
                     localStorage.setItem("itemAmountSumm", "");
-
-                    router.push('/confirmed');
                 } else {
                     router.push('/confirm');
                 }

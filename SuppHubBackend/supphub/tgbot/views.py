@@ -1,5 +1,5 @@
 import json
-
+import threading
 import requests
 from rest_framework import status
 from django.conf import settings
@@ -13,6 +13,22 @@ from sendsms.models import SMSMessage, SMSStatus
 from products.models import Product
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}"
+
+
+def send_telegram_notifications(message):
+    try:
+        requests.post(
+            f"{TELEGRAM_API_URL}/sendMessage", 
+            data={"chat_id": settings.CHAT_ID1, "text": message},
+            timeout=5 
+        )
+        requests.post(
+            f"{TELEGRAM_API_URL}/sendMessage", 
+            data={"chat_id": settings.CHAT_ID2, "text": message},
+            timeout=5
+        )
+    except Exception as e:
+        print(f"Telegram background error: {e}")
 
 
 @csrf_exempt
@@ -74,12 +90,7 @@ def submit_order(request):
                 f"Сума: {message_data.get('fullSummMsg')} грн"
             )
 
-            requests.post(
-                f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID1, "text": message}
-            )
-            requests.post(
-                f"{TELEGRAM_API_URL}/sendMessage", data={"chat_id": settings.CHAT_ID2, "text": message}
-            )
+            threading.Thread(target=send_telegram_notifications, args=(message,)).start()
 
             try:
                 phone = message_data.get('inputTelValue')

@@ -80,7 +80,7 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = ({ isBasket }) => {
       >
         <ul
           className="text-white flex gap-12 text-[1.75rem] items-center font-normal tracking-[2.52px] leading-cssnormal
-          max-sm:flex-col max-sm:text-center max-lg:gap-4 max-lg:text-[1.4rem] max-lg:tracking-[1.48px]"
+          max-sm:flex-col max-sm:text-center max-sm:gap-12 max-sm:text-[1.75rem] max-lg:gap-4 max-lg:text-[1.4rem] max-lg:tracking-[1.48px]"
         >
           <li>
             <Link
